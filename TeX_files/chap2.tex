@@ -1,0 +1,146 @@
+% !TeX spellcheck = en_US
+\textbf{28.10.2019}\\
+A floating point number is 
+\begin{align*}
+	x = \begin{cases}
+	= (-1)^{S_x}\cdot m_xb^{e_x}=(S_x,m_x,e_x) &\quad \\
+	0 \quad
+	\end{cases}
+\end{align*}
+with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ and exponent $e_x\in \{\emin,e+1,\dots,\emax\} \with \emin \approx -\emax$. The mantissa digits are $m_i\in S-\{0,1,..,b\}$ with $b:=b-1$ and mantissa length $l\in N^+$ ($b =$ base, $\emin =$ emin, $\emax =$ emax and $\N^+ = \N\setminus \set{0,1}$).
+\begin{itemize}
+    \item  Floating point format $R=R(b,l,\emin,\emax,\denorm)$
+    with
+    \begin{align*}
+    	\denorm = \begin{cases}
+    		\true &\quad\text{if denormalized FPN is allowed}\\
+    		\false &\quad\\
+    	\end{cases}
+    \end{align*}
+  \item normalized FPN $x\neq 1$: has as first mantissa digit $m_1\neq 0$ $(b=2 \implies m_1=1!)$
+  \item unnormalized FPN $x\neq0$ has $m_1=0$
+  \item Normalization of a FPN $x \neq 0$: mantissa digits to push for $k$ digits to the left ($k =$  number of leading 0-digits) and subtracting $k$ from $e_x$. $e_{x_neu}=e_x-k$.
+  \newline Normalization is only possible if $e_{xneu} = e_x-k \geqslant e$
+  \item denormalized FPN: $e_x = e$ and mantissa not normalized or can not be normalized
+  \item number line is symmetrical to zero! Here its supposed to be the line.
+  \item \begriff{\person{Wilkinson}-epsilon}
+  \begin{align*}
+  	\epsilon:=b^{1-l}=\frac{1}{b^{l-1}}
+  \end{align*}
+  is the biggest relative gap between two neighbouring normalized FPN $\sim$ the biggest relative error in solving 
+  %TODO add example!
+  \item \begriff{unit in last place} ulp:
+  \begin{align*}
+    \ulp(x) := \begin{cases}
+    	b^{e_x-l} &\quad\text{if x is normal}\\
+    	b^{e-l} &\quad\text{if x is denormalized or }0
+    \end{cases}
+  \end{align*} 
+ ``unit in the last place'' (at the mantissa of $x$. 
+  \begin{align*}
+  	x=0.m_1 m_2...m_l\cdot b^{e_x} \with m_l = b^{e_x - l}
+  \end{align*}
+  \item \begriff{successor} ($k \in \Z$)
+  \begin{align*}
+  	\succ(x) := \begin{cases}
+  		x+\ulp(x) &\quad \text{if } x\neq -b^k\\
+  		x+(\frac{\ulp(x)}{b}) &\quad \text{if } x=-b^k
+  	\end{cases}
+  \end{align*}
+  \item \begriff{predecessor} ($k\in \Z$)
+  \begin{align*}
+  	\pred(x) := \begin{cases}
+  		x-\ulp(x)& \quad\text{if } x\neqb^k\\
+  		x-(\frac{\ulp(x)}{b})& \quad\text{if } x=b^k	
+  	\end{cases}
+  \end{align*}
+  \begin{tabularx}{\textwidth}{|X|X|}
+  	\hline
+  	\textbf{$x$}   & $\digits_b(x)$\\
+  	0 & 1\\
+  	$b^0 = 1$ & \vdots \\
+  	$\vdots$ & $\vdots$ \\
+  	$b-1$ & 1\\
+  	$b^1 = [10]_b$ & 2\\
+  	$\vdots$ & $\vdots$\\
+  	$b^2 -1$ & 2\\
+  	$b^2 = [100]_b$ & 3
+  	\hline
+  \end{tabularx}
+	where we have base $b \in \N\setminus \set{0,1}$ and $\digits_b(x) = \floor{ \log_b(x)} +1$
+\newline Interval arithmetics ( Wrap-around) \from in two-part complement
+\newline exact result: $z^*=x+-* y$, $x,y\in I_n$ (Integer with n bits inclusive sign)
+\newline Here please make the signs one above the other
+\newline generated result: $z:=((z^*+z^{n-1})mod2^n)-2^{n-1}\in I_n$
+\newline for normal mantissa $m_x$ it holds: $\frac{1}{b}\leqslant m_x<1$
+\newline for normal mantissa $m_x$ it holds: $0\leqslant m_x<\frac{1}{b}$ \smallskip
+
+\begin{itemize}
+    \item 2 equivalent display possibilities for FPN $x\not = 0:$
+    \newline $x=(-1)^{S_x}\cdot m_x\cdot b^{e_x}=(-1)^{S_x}\cdot M_x\cdot b^{e_x-l}$; $M_x=m_x\cdot b^l \in N$
+    \newline Here please make $N$ as the $N$ from the natural numbers
+    \newline $b^{l-1}\leqslant M_x<b^l$
+    \newline Optionally one could also add $M_x$
+    \newline \implies $|M_x|<b^l$, $M_x\in Z$
+    \newline \implies Every FPN $x$ is an integer multiple of its ulp(x)`s.
+    \item ulp(1)=$\epsilon$, since $1=0,10...0\cdot b^1$ and $\epsilon=b^{1-l}=$ulp(1) 
+    \newline Here just the bracket is missing. Compare the actual photo.
+    \newline $x\not =0, x\in R$ \from Roster: 
+    \begin{itemize}
+        \item succ($x$)$\leqslant x(1+\epsilon)=x(1+$ulp($1$)$=x\cdot $(succ($1$))
+        \item succ($x$)$\geqslant x(1-\epsilon)=x(1-$ulp($1$)$=x\cdot $(pred($1$))
+    \end{itemize}
+    \item relative distance between 2 neighbouring FPN:
+    \newline Here comes the graph
+    \item Rounding:
+    \newline Rounding is a mapping $o:R\xrightarrow{}R $(?) with the following properties 
+    \newline (R1) $ox=x, \forall x\in R$ (projection)
+    \newline (R2) $x,y \in R: x\leqslant y \implies ox\leqslant oy$ (monotonicity)
+    \newline Here again comes the graph
+    \newline An antisymmetric rounding i guess additionally satisfies:
+    \newline (R3) $o(-x)=-ox, \forall x\in R$
+    \newline Here we just need to put R as in: real numbers
+    \item Established rounding possibilities are:
+    \begin{itemize}
+        \item \square x to nearest floating point number 
+        \newline \implies error$\leqslant \frac{1}{2}$ ulp
+        \newline stochastically calculated: "round to even" = to next FPN with (?) mantissa, i.e. end digit = 0 (binary)
+        \newline IF the value which is to be rounded lays exactly in the middle between 2 FPN (also satisfies R3): \square (-x)=-\square x
+        \item I dont know how to write this symbol
+        \newline truncation, rounding \to $0$
+        \newline $|x|\leqslant |x|$
+        \newline maximal error <1 ulp
+        \newline satisfies (R3)
+        \item I dont know how to write this symbol
+        \newline augmentation(= the, in absolute value, biggest FPN)
+        \newline |x|\leqslant |x|
+        \newline maximal error <1 ulp
+        \newline satisfies (R3)
+        \newline \triangle x: up(ward(s)), rounding \to $+\infty$
+        \newline $x\leqslant\triangle x$
+        \newline maximum error <1 ulp
+        \newline not antisymmetric
+        \newline \nablax: down(ward(s)), rounding \to $\-infty$
+        \newline $\nabla x\leqslant x$
+        \newline maximum error $< 1$ ulp
+        \newline not antisymmetric
+        \item instead of (R3) the antisymmetry holds: 
+        \newline $\nabla (-x)=-\triangle x$
+        \newline or $\triangle(-x)=-\nabla x$ (equivalent)
+        \newline Intervals:
+        \newline IR:$=\{x=[x,x]|x\leqslant x; x,x \in R\}$, i.e. set of the bounded, closed, real intervals
+        \item Floating- point intervals:
+        \newline IR$=\{x=[x,x], x\leqslant x; x,x\in R\}$ \to intervals with floating point boundaries
+        \item Interval rounding (?)the diamont sign $:R\xrightarrow{}R$, with $X=[\nabla x, \triangle x]\subseteq X=[x,x]$
+        \newline (?) has the property
+        \begin{enumerate}
+            \item (R1) (?)$X=X$, $\forall X\in R$
+            \item (R2) $X,Y\in R: X\subseteq Y \implies (?)X\leqslant (?)Y$ (Inclusions theory)
+            \item (R3) $(?)(-X)=-(?)X$, since $\triangle(-x)=-\nabla(x)$, $\nabla(-x)=-\triangle x \in R$
+            \newline Here the things written with pencil is missing
+            \newline $X+Y=[x+y,x+y]$
+            \newline $X-Y=[x-y,x-y]$
+            \newline I dont know how to write the brackets
+        \end{enumerate}
+    \end{itemize}
+\end{itemize} \bigskip
