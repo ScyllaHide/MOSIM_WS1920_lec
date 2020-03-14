@@ -15,6 +15,16 @@
 \newcommand{\Circlearrowleft}{\rotatebox{180}{$\circlearrowright$}}
 \DeclareMathOperator{\Cl}{Cl}				% conjugation class of something.
 
+% MOSIM
+\newcommand{\rndup}{\bigtriangleup}
+\newcommand{\rnddown}{\bigtriangledown} 
+\newcommand{\rndinterval}{\Diamond}
+
+%FPN
+\newcommand{\emin}{\underline{e}}
+\newcommand{\emax}{\overline{e}}
+\DeclareMathOperator{\denorm}{denorm}
+
 % get this stupid arrows:
 %\usepackage{mathabx,graphicx}  % ---> add to mathoperators
 %\def\Circlearrowleft{\ensuremath{%
@@ -75,8 +85,10 @@
 
 \chapter*{Vorwort}
 \input{./TeX_files/Vorwort}
-\chapter{Gleitkommazahlen}
+\chapter{Introduction}
 \input{./TeX_files/chap1}
+\chapter{Floating point numbers}
+\input{./TeX_files/chap2}
 
 \part*{Anhang}
 \addcontentsline{toc}{part}{Anhang}
