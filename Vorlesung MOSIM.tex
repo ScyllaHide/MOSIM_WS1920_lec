@@ -5,6 +5,7 @@
 \DeclareMathOperator{\Ad}{Ad}				% Adjoint
 \DeclareMathOperator{\PSL}{PSL} 			% projective linear group 
 \newcommand{\with}{\text{ with }}
+\newcommand{\nd}{\text{ and }}
 \renewcommand{\rhd}{\triangleright}
 \renewcommand{\lhd}{\triangleleft} 			% normal subgroups
 \DeclareMathOperator{\Set}{Set}				% Category of sets
@@ -12,18 +13,38 @@
 \DeclareMathOperator{\Grp}{Grp}				% Category of groups
 \DeclareMathOperator{\Mod}{Mod}				% Cat of moduls
 \DeclareMathOperator{\Ann}{Ann}				% annihilator
+%\DeclareMathOperator{\diam}{diam}
 \newcommand{\Circlearrowleft}{\rotatebox{180}{$\circlearrowright$}}
 \DeclareMathOperator{\Cl}{Cl}				% conjugation class of something.
 
 % MOSIM
-\newcommand{\rndup}{\bigtriangleup}
-\newcommand{\rnddown}{\bigtriangledown} 
+\newcommand{\rndup}{\Delta}
+\newcommand{\rnddown}{\nabla} 
 \newcommand{\rndinterval}{\Diamond}
+
+% leq, geq
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
 
 %FPN
 \newcommand{\emin}{\underline{e}}
 \newcommand{\emax}{\overline{e}}
+\newcommand{\maxval}[1]{\overline{#1}}
+\newcommand{\minval}[1]{\underline{#1}}
 \DeclareMathOperator{\denorm}{denorm}
+\DeclareMathOperator{\ulp}{ulp}
+\DeclareMathOperator{\pred}{pred}
+\DeclareMathOperator{\success}{succ}
+\DeclareMathOperator{\digits}{digits}
+%\DeclareMathOperator{\mid}{mid}
+
+% ceil and floor brackets
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% logical values
+\newcommand{\true}{\text{true}}
+\newcommand{\false}{\text{false}}
 
 % get this stupid arrows:
 %\usepackage{mathabx,graphicx}  % ---> add to mathoperators
@@ -100,6 +121,4 @@
 
 %\printglossary[type=\acronymtype]
 
-\printindex
-
-\end{document}
+\printindex \end{document}

@@ -10,7 +10,7 @@
 	\item IEEE 
 	\begin{itemize}
 		\item Standards: example: 754 (1985,2008,2018)
-		\item Konverenz ARITH
+		\item conference ARITH
 		\item Institute of Electrical and Electronics Engineers
 		\item Standard 1788 - for intervals/ interval arithmetic
 	\end{itemize}
@@ -86,7 +86,7 @@
 		\end{tikzpicture}
 	\end{center}
 	Interval $X=(x,x) , \rndinterval X=[\rnddown x, \rndup x]$, but then we have errors in PC ($10^{20}+13)-10^{20} \to 10^{20}-10^{20} \to 0$ instead of 13 (Here rounding - off error is missing)
-	\item Interval mathematics\\
+\subsection*{Interval mathematics}
 	$\to$ \emph{Slogan}: Interval-algorithm always possible close and mathematical correct enclosures of solutions.\\
 	If this is \emph{not} possible, errors must be reported!
 	\begin{itemize}
@@ -115,7 +115,7 @@
 	\end{align*}
 	\item Interval \person{Newton} method
 	\begin{align*}
-		x_k=(mid(x_{k-1})-\frac{f(mid(x_{k-1})}{f'(x_{k-1})})\cap x_{k-1} \quad \with x_0 = \text{ initial interval} 
+		x_k=(\mid(x_{k-1})-\frac{f(mid(x_{k-1})}{f'(x_{k-1})})\cap x_{k-1} \quad \with x_0 = \text{ initial interval} 
 	\end{align*}
 	(has quadratic convergence)
 	\newline CISC $\to$ RISC $\to$ better pipelines (RISC is today in every processor!)
