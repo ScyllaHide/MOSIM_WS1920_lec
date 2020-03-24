@@ -1,5 +1,7 @@
 \documentclass[ngerman,a4paper,order=firstname]{mathscript}
 \usepackage{mathoperators}
+\usepackage{bbm} 							% hbb one
+
 
 % % % local commands
 \DeclareMathOperator{\Ad}{Ad}				% Adjoint
@@ -18,9 +20,19 @@
 \DeclareMathOperator{\Cl}{Cl}				% conjugation class of something.
 
 % MOSIM
+% % % rounding symbols
 \newcommand{\rndup}{\Delta}
-\newcommand{\rnddown}{\nabla} 
-\newcommand{\rndinterval}{\Diamond}
+\newcommand{\rnddown}{\nabla}
+\newcommand{\rndinterval}{\diamondsuit}
+% % % rounding symbols for aritmetic, which can be filled with a math symbol!!!
+\newcommand{\rndupin}[1]{%
+	\ooalign{\Large $\Delta$\cr\hss\raisebox{0.4ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\rnddownin}[1]{%
+	\ooalign{\Large $\nabla$\cr\hss\raisebox{0.9ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\rndintervalin}[1]{%
+	\ooalign{\Large $\rndinterval$\cr\hss\raisebox{0.45 ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\compop}[1]{%
+	\ooalign{\Normal $O$\cr\hss\raisebox{0.3 ex}{\scriptsize $#1$}\hss}}% % computer operation to fill with something
 
 % leq, geq
 \renewcommand{\le}{\leqslant}
@@ -37,6 +49,8 @@
 \DeclareMathOperator{\success}{succ}
 \DeclareMathOperator{\digits}{digits}
 %\DeclareMathOperator{\mid}{mid}
+\newcommand{\one}{\mathbbm 1}				% interval 1
+\newcommand{\zero}{\mathbbm 1}				% interval 0
 
 % ceil and floor brackets
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
