@@ -174,104 +174,130 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
 \end{definition}
 % % % % % % % % % % % % % % % compling until here without problems
 
-%\newline \textbf{11.11.19}
-%\newline \begin{itemize}
-%	\item Interval arithmetics $(A,B,C,X\in IR)$
-%	\newline $A+B:=[a+b,a+b]$
-%	\newline $-B:=[-b,-b]$
-%	\newline $A-B:=[a-b,a-b]=A+(-B)$
-%	\newline $A*B:=[$min $S_x$,max $S_x]$
-%	\newline $1/B:=[1/b,1/b]$, $0\not \in B$
-%	\newline $A/B:=[$min $S_x,$ max $S_x]$ for $0\not \in B, $A\B=A*1\B$
-%	\newline For $0\in B=$int$B$: $1\B:=\frac{1}{[b,0)}\cup \frac{1}{(0,b]}$, inverse value mapping yields again $b$!
-%	\newline General division $A\B$ with $0\inB$ in exercise 3
-%	\item Transition to floating -point intervals $A,B \in IR$
-%	\newline $A(?)B=[a\nabla b,a\triangle b]$ (Here the arrow?)
-%	\newline $A$ is bad, since (?)
-%	\newline $A(?)B=[a\nalba b,a\triangle b]$
-%	\newline $A(?)B=[$min $S_{\nabla}$, max$S_{\triangle}]$ with $S_{\nabla}:=$, $S_\triangle:=$
-%	\newline $A(?)B=[$min $S_{\nabla}$, max$S_{triangle}]\subseteq A(?)(1(?)B)$
-%	\item Inclusion property:
-%	\newline $A\subseteq A^\prime, B\subseteq B^\prime \implies A\cdot B\leqslant A^\prime \cdot B^\prime $
-%	\newline $f(A)\leqslant f(A^\prime)$
-%	\newline $g(A,B)\subseteq g(A^\prime, B^\prime)$
-%	\item Overestimation 
-%	\newline $X-X=[x-x,x-x]=[-$diam$(X),+$diam$(X)]$ with diam$X=x-x$ (diameter of $X$)
-%	\newline $sin^2X+cos^2X=[(?),(?)]\ni 1$
-%	\item Implementation of interval functions
-%	\nwline Monotonicity is eventually piecewise necessary
-%	\newline $s^X=[e^x,e^x]$, $\log_b X=[\log_b x, \log_b x]$, $\square(X)=[\square(x),\square(x)]
-%	\newline to consider other (eg. trigonometric functions) functions: local minimum/maximum 
-%	\newline Here the graph is missing
-%\end{itemize} \bigskip
-%
-%\newline \textbf{12.11.19}
-%\newline \begin{itemize}
-%	\item Goal: reliable arithmetic ( and also standard-function) for usual space of numerical calculations
-%	\newline $Z\supset Z_8\supset Z_4 \supset Z_2 \gets$ formally with 2 
-%	\newline $R \supset R_10 \supset R_8 \supset R_4 \supset R_2$
-%	\newline VR (vectors) $\supset $ VR
-%	\newline MR (matrices) $\supset $ MR $\gets $ (?) R \to floating point format
-%	\newline P(R) $\supset $ IR $\supset $ IR ...
-%	\newline P(VR) $\supset $ IVR $\supset $ IVR ...
-%	\newline P(MR) $\supset $ IMR $\supset $ IMR
-%	\newline Here i dont know where to put the signs?
-%	\newline analogously C, VC, MC, P(C)$\supset $IC, P(VC)$\supset $IVC, P(MC) $\supset $ IMC
-%	\newline (Ulrich) Kuhlisch: not traditional(?) definition of arithmetic (i.e. all with help of real basic operations in R)
-%	But rather: horizontal definition of arithmetic, separately for each level/ layer (with optimal rounding) 
-%	\newline \implies so called SEMIMORPHE ARITHMETIC
-%	\newline for each unit operation $\circ\in \{+,-, *,/,\cdot\}$, where $\cdot$ is a scalar product, the result should be calculated in the following way:
-%	\newline AS IF the mathematical exact result was calculated, and then (with the (?) (?)) was rounded. ($\circ \in \{\square, \nabla, \triangle,..\}$)
-%	\newline $\forall x,y\in $"nummerical space" it has to hold $x\circ y:=\circ(x(?)y)$, where $\circ$ is an operation rounding (computer operation) and (?) is an exact operation
-%	\item Interval spaces
-%	\newline \to $IR:=\{A=[a,a]| a\leqslant a, a,a \in R\}$
-%	\newline \to $IC:=\{C=[c,c]| c\leqslant c, c,c\in C\}$, where the order relation $\leqslant$ is on $C$ in such a way defined, so that $a\leqslant b \iff $Re$(a)\leqslant $Re$(b) \land$ Im$(a)\leqslant $Im$(b)$ \smallskip
-%	\newline Subset property:
-%	\newline in $IR: A\subseteq B \iff b\leqslant b \land a\leqslant b$
-%	\newline in $IC: $ for Re and Im simultaneously \smallskip
-%	\newline Portrayal of complex intervals:
-%	\newline $+$ either: rectangles in $C$:
-%	$C=[c,c]:=\{c\in C| $Re$(c)\leqslant $Re$(c)\leqslant $$Re$(c) \land $ Im$(c)\leqslant$ Im$(c)\leqslant$ Im$(c), c,c\in C\}, c\leqslant c$
-%	\neqline $[c,c]=[(a,b),(a,b)]=$pair complex numbers
-%	\neqline $[c,c]=([a,a],[b,b])=$pair real intervals
-%	\newline Here should come the graph
-%	\newline $+$ as complex "circles" or even ellipse
-%	\item In general the result of every operation (or function) $\circ: IR\times IR\xrightarrow{} IR, \circ\in\{+,-,*,/\}$ (or with $C$ instead of $R$) must be defined in the following way:
-%	\newline $A,B\in IR ($ or $IC): A\circB:=$interval hull (So), with So$:=\{a\circb|a\in A, b\in B\}$
-%	\newline in $IR: A\circB=[$minSo,maxSo$]$ and it suffices to consider the set So$:=\{a\circ b,a\circ b,a\circ b,a\circ b\}$
-%	\item Algebraic properties (in $IR$)
-%	\newline $+,*$ are commutative and associative and there exist neutral elements: $0=[0,0], 1=[1,1]$. but in general not inverse elements.
-%	\newline $A+X=0, A+X=1$ not solvable, if diam$(A)>0$.
-%	\newline Note:
-%	\newline \to $A-A\ni 0$, but $A-A\not =0$ if diam$(A)>0$
-%	\newline \to $A/A\ni 1$, but $A/A\not =1$ if diam$(A)>0$
-%	\newline Distributive law does not hold, but the subdistributivity: $(A*(B+C))\subseteq A*B+A*C$
-%	\newline An example: 
-%	\newline $[0,1]*([1,1]+[1,1])=[0,0]=0$
-%	\newline $[0,1]*1+[0,1]*(-1)=[0,1]+[-1,0]=[-1,+1]$
-%	\newline \to $0\nsubseteq [-1,+1]$ \smallskip
-%	\newline BUT $a*(B+C)=a*B+a*C, \forall a\in R$
-%	\newline $A*(B+C)=A*C+B*C$ if $b*c\geqslant 0, \forall b\in B, c\in C$
-%	\item Algebraic properties in $IC$
-%	\newline Associative law does not hold
-%	\newline An example:
-%	\newline $A=[2,4]+i[0,0], B=[1,1]+i[1,1]=C$
-%	\newline $(A\cdot B)\cdot C=([2,4]+i[2,4])\cdot C=[-2,2]+i[4,8]$
-%	\newline $A\cdot (B\cdot C)=A\cdot ([0,0]+i[2,2])=[0,0]+i[4,8]$
-%	\newline \implies $[-2,2]+i[4,8]\not =[0,0]+i[4,8]$
-%	\newline Here if you can do an arrow from above to below with in-equal would be good.
-%	\newline Inclusion property: $A\subseteq A^\prime , B\subseteq B^\prime \implies A\circ B\subseteq A^\prime \circ B^\prime$
-%	\newline for functions: $A\subseteq A^\prime \implies f(A)\subseteq f(A^\prime)$
-%	\newline or $A_i\subseteq A_i^\prime \forall i \implies f(A_1,..,A_n)\subseteqf(A_1^\prime,..,A_n^\prime)$\smallskip
-%	\newline In composition of operations and functions to mathematical formulas and calculation rules, this property will remain valid. (?) I dont understand this next sentence: Es werden Einschließungen der Lösung berecht?
-%	
-%	\newline An example: $(X-2)^2-4$ for $X=[1,4]$
-%	\newline $(X-2)^2-4=[-1,2]^2-4=[0,4]-4=[-4,0]$
-%	\newline $(X-2)\cdot(X-2)-4=[-1,2]*[-1,2]-4=[-2,3]-4=[-6,0]$
-%	\newline $X*(X-4)=[1,4]*[-3,0]=[-12,0]$
-%	\newline $X*X-X*4=[1,(?)]-[4,16]=[-15,12]$
-%	\newline \to $[-4,0]\subseteq [-6,0] \subseteq [-12,0] \subseteq [-15,12]$
-%\end{itemize} \bigskip 
+\textbf{11.11.19}
+\begin{itemize}
+	\item Interval arithmetics $(A,B,C,X\in IR)$
+	\begin{itemize}
+		\item $A+B:=[\minval{a}+\minval{b},\maxval{a}+\maxval{b}]$
+		\item $-B:=[-\maxval{b},-\minval{b}]$
+		\item $A-B:=[\minval{a}-\maxval{b},\maxval{a}-\minval{b}]=A+(-B)$
+		\item $A*B:=[\min S_x,\max S_x]$
+		\item $\sfrac{\one}{B}:=[\sfrac{\one}{b},\sfrac{\one}{b}] \with \zero\notin B$ ($\one \nd \zero$ are the neutral elements for $\cdot \nd +$)
+		\item $\sfrac{A}{B}:=[\min S_x, \max S_x]$ for $0\not \in B, \sfrac{A}{B}=\sfrac{A \cdot \one}{B}$
+		\item For $0\in B=\int B: \sfrac{\one}{B}:=\sfrac{1}{[b,0)}\cup \sfrac{1}{(0,b]}$, inverse value mapping yields again $B$!
+		\item General division $\sfrac{A}{B}$ with $\zero\in B$ in \emph{exercise} 3.
+	\end{itemize}
+	\item Transition to floating-point intervals $A,B \in IR$
+	\begin{itemize}
+		\item $A\rndintervalin{+}B=[\minval{a} \rndupin{+} \minval{b},\maxval{a}\rnddownin{+} \maxval{b}]$, this means $- \maxval{a} \rndupin{+} - \maxval{b}$, but in general, this is bas, since continuous changing between rounding modes necessary
+		\item $A\rndintervalin{-}B=[\minval{a}\rndupin{-} \maxval{b},\maxval{a}\rnddownin{-} \minval{b}]$
+		\item $A\rndintervalin{\cdot}B=[\min S_{\rndupin{+}}, \max S_{\rnddownin{+}}]$ with $S_{\rnddownin{\cdot}}$ and $S_{\rndupin{\cdot}}$ are 8 real directed rounded multiplications
+		\item $A\rndintervalin{\setminus}B=[\min S_{\rndupin{\setminus}}, \max S_{\rnddownin{\setminus}}]\subseteq A\rndintervalin{\cdot}(\one \rndintervalin{\setminus}B)$
+		\item Inclusion property:
+		\begin{itemize}
+			\item $A\subseteq A', B\subseteq B' \implies A\cdot B\le A' \cdot B'$
+			\item $f(A)\le f(A')$, $g(A,B)\subseteq g(A', B')$
+		\end{itemize}
+		\item Overestimation:
+		\begin{itemize}
+			\item $X-X=[x-x,x-x]=[-\diam(X),+\diam(X)] \with \diam X=\maxval{x}-\minval{x}$ (diameter of $X$)
+			\item $\sin^2 x + cos^2 x=[\minval{f},\maxval{f}]\ni \one$
+		\end{itemize} 
+		\item Implementation of interval functions, Monotonicity is eventually piecewise necessary\\
+		some examples: $e^X=[e^{\minval{x}},e^{\maxval{x}}]$, $\log_b x=[\log_b \minval{x}, \log_b \maxval{x}]$, $\square(x)=[\square(\minval{x}),\square(\maxval{x})]$ and other (e.g. trigonometric functions) functions: local minimums /maximums
+		%TODO graph
+	\end{itemize}
+\end{itemize}
+\textbf{12.11.19}\\
+
+Our goal is a reliable arithmetic (and also standard-function) for usual space of numerical computation.
+
+\begin{itemize}
+	\item $\Z\supset \Z_8\supset \Z_4 \supset \Z_2 \gets$ formally with 2 with operations $+,-, \cdot, /$ and division with reminder
+	\item $\R \supset R_10 \supset R_8 \supset R_4 \supset R_2$ with operations $+,-, \cdot, /$
+	\item $V\R$ (vectors) $\supset VR$ with operations $+,-$, scalar multiplication/ division, scalar product ($V\R \times V\R \to V\R$)
+	\item $M\R$ (matrices) $\supset  MR$ with operations $+,-$, scalar multiplication/ division, matrix product ($V \cdot M$)
+	\item $\powerset(\R) \supset I\R \supset IR \dots$
+	\item $\powerset(V\R) \supset  IV\R \supset IVR \dots$
+	\item $\powerset(M\R) \supset  IM\R \supset IMR \dots$
+	\item and analogous: $\C, V\C, M\C, \powerset(\C) \supset I\C, P(VC) \supset IV\C, \powerset(M\C) \supset  IM\C$
+	\item \person{(Ulrich) Kuhlisch}: non traditional definition of arithmetic (i.e. all with help of real basic operations in $\R$)\\
+	But rather: horizontal definition of arithmetic, separately for each plane/ layer (with optimal rounding), this is called \begriff{semimorphic arithmetic}, for each unit operation $O \in \set{+,-, \cdot,/,\scaProd{\cdot}{\cdot}}$, where $\scaProd{\cdot}{\cdot}$ is a scalar product.\\
+	The result should be calculated in the following way: as if the mathematical exact result was calculated, and then (with the actual rounding mode ) was rounded. ($O \in \set{\square, \sqcap, \sqcup, \rndup, \rnddown, \dots}$).\\
+	$\forall x,y\in N$ (where $N$ is the \begriff{nummerical space}) it has to hold $x\compop{\cdot} y:= O(x \bullet y)$, where $O$ is an operation rounding (computer operation) and $\bullet$ is an exact operation.
+	%TODO find out whats the error here?!
+\end{itemize}
+\subsection*{Interval spaces}
+	\begin{itemize}
+		\item $I\R:=\set{A=[\minval{a},\maxval{a}]\mid \minval{a}\le \maxval{a}; \minval{a},\maxval{a} \in \R}$ with $A = [\minval{a},\maxval{a}] = \set{a \in \R \mid \minval{a} \le a \le \maxval{a}}$
+		\item $I\C:=\set{C=[\minval{c},\maxval{c}]\mid \minval{c}\le \maxval{c}; \minval{c},\maxval{c}\in \C}$ where the order relation $\le$ on $\C$ is defined by $a\le b \iff \Re(a)\le \Re(b) \land \Im(a)\le \Im(b)$
+		\item subset properties:
+		\begin{itemize}
+			\item in $I\R\colon A\subseteq B \iff \minval{b}\le \minval{a} \land \maxval{a}\le \maxval{b}$
+			\item in $I\C: $ for $\Re$ and $\Im$ simultaneous
+		\end{itemize}
+	\item representation of complex intervals:
+	\begin{itemize}
+		\item $+$ either: rectangles in $C$:
+		$C=[\minval{c},\maxval{c}]:=\{c\in \C\mid \Re(\minval{c})\le \Re(c)\le \Re(\maxval{c}) \land \Im(\minval{c})\le \Im(c)\le \Im(\maxval{c}) \with \minval{c},\maxval{c}\in C\}, \minval{c}\leqslant \maxval{c}$
+		\begin{align*}
+					[\minval{c},\maxval{c}&=[(\minval{a},\minval{b}),(\maxval{a},\maxval{b})]=\text{ pair complex intervals }\\
+			&=([\minval{a},\maxval{a}],[\minval{a},\maxval{b}])=\text{ pair real intervals }
+		\end{align*}
+		%TODO graph here to do!!!
+		\item $+$ as complex "circles" or even ellipse
+		\item In general the result of every operation (or function)
+		\begin{align*}
+			O: I\R\times I\R \to I\R\with O\in\set{+,-,\cdot,/}
+		\end{align*}
+		(or with $\C$ instead of $\R$) must be defined in the following way:\\ 
+		$A,B\in I\R$ (or $I\C$): $A O B:=$ interval hull ($S_O$), with $S_O:=\set{a O b \mid a\in A, b\in B}$ and in $I\R$ we define $A O B=[\min S_O, \max S_O]$ and it suffices to consider the set $S_O:=\set{\minval{a} O \maxval{b}, \minval{a} O \maxval{b},\maxval{a} O \minval{b},\maxval{a} O \maxval{b}}$
+	\end{itemize}
+	\item Algebraic properties (in $I\R$)
+	\begin{itemize}
+		\item $+,\cdot$ are commutative, associative and there exist neutral elements: $\zero=[0,0], \one=[1,1]$. but in general not inverse elements! such that holds:
+		\begin{itemize}
+			\item $A+X=0, A+X=1$ not solvable, if $\diam(A)>0$.
+			\item Note: $A-A \ni \zero$, but $A-A \neq \zero$ if $\diam(A)>0$ and $A\setminus A\ni 1$, but $A \setminus A\neq \one$ if $\diam(A)>0$\\
+			Distributive law does not hold, but the subdistributivity: $(A\cdot(B+C))\subseteq A\cdot B+A\cdot C$
+			\begin{*example}
+				\begin{align*}
+					[0,1]\cdot([1,1]+[1,1])&=[0,0]=0\\
+					[0,1]\cdot \one+[0,1]\cdot(-\one)&=[0,1]+[-1,0]=[-1,+1]\quad \zero\nsubseteq [-1,+1]
+					\intertext{but}
+					a\cdot(B+C)&=a\cdot B+a\cdot C\quad \forall a\in \R\\
+					A\cdot(B+C)&=A\cdot C+B\cdot C \text{ if } b\cdot c\ge \zero, \forall b\in B \nd c\in C
+				\end{align*}
+			\end{*example}
+		\end{itemize}
+	\end{itemize}
+	\item Algebraic properties in $I\C$:
+	\begin{itemize}
+		\item Associative law does not hold!
+		\begin{*example}
+			\begin{align*}
+				A=[2,4]+i[0,0], B=[1,1]+\ii[1,1]=C\\
+				(A\cdot B)\cdot C =([2,4]+\ii[2,4])\cdot C=[-2,2]+\ii[4,8]\\ A\cdot (B\cdot C)=A\cdot ([0,0]+\ii[2,2])=[0,0]+\ii[4,8]\\
+				\implies [-2,2]+i[4,8]\neq[0,0]+i[4,8]
+			\end{align*}
+		\end{*example}
+		\item Inclusion property:
+		\begin{itemize}
+			\item $A\subseteq A' , B\subseteq B' \implies A O B\subseteq A' O B'$
+			\item for functions: $A\subseteq A' \implies f(A)\subseteq f(A')$ or $A_i\subseteq A'_i \forall i \implies f(A_1,..,A_n)\subseteq f(A'_1,\dots,A'_n)$
+		\end{itemize}
+	\item In composition of operations and functions to mathematical formulas and calculation rules, this property will remain valid. Since only inclusions for the solution are calculated.
+	\begin{*example} Calculate $(X-2)^2-4$ for $X=[1,4]$
+		\begin{align*} %TODO check which operations have which symbols for u!
+			(X-2)^2-4&=[-1,2]^2-4=[0,4]-4=[-4,0]\\
+			(X-2) O (X-2)-4&=[-1,2]\cdot[-1,2]-4=[-2,3]-4=[-6,0]\\
+			X*(X-4)&=[1,4]\cdot[-3,0]=[-12,0]\\
+			X*X-X*4&=[1,16]-[4,16]=[-15,12]\\
+			\implies [-4,0]\subseteq [-6,0] \subseteq [-12,0] \subseteq [-15,12]
+		\end{align*}
+	\end{*example}
+	\end{itemize}
+\end{itemize} 
 %
 %\newline \textbf{18.11.19}
 %\begin{itemize}
