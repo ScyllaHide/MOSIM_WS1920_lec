@@ -1,0 +1,29 @@
+\documentclass[]{article}
+\usepackage{amsmath,amsfonts}
+%\usepackage{arev}
+\newcommand{\rndinterval}{\diamondsuit}
+
+%\newcommand*{\Deltasym}{{\large \Diamond}\kern-0.55em\raisebox{1.4ex}{\tiny \setminus}}
+\newcommand{\rndupin}[1]{%
+	\ooalign{\Large $\Delta$\cr\hss\raisebox{0.4ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\rnddownin}[1]{%
+	\ooalign{\Large $\nabla$\cr\hss\raisebox{0.9ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\rndintervalin}[1]{%
+	\ooalign{\Large $\rndinterval$\cr\hss\raisebox{0.45 ex}{\scriptsize $#1$}\hss}}%
+\newcommand{\compop}[1]{%
+	\ooalign{\Large O\cr\hss\raisebox{0.45 ex}{\scriptsize $#1$}\hss}}%
+%\newcommand*{\xV}{{\large V}\kern-0.55em\raisebox{1.4ex}{\tiny x}}
+\newcommand{\xV}{%
+	\ooalign{\Large $V$\cr\hss\raisebox{1.4ex}{\scriptsize $x$}\hss}}%
+% % % % a test document, to find working advanced commands.
+
+\begin{document}
+
+\section{Test}
+%$\Deltasym$
+$\rndupin{+}$ $\rndupin{-}$ $\rndupin{\setminus}$
+$\rnddownin{+}$ $\rnddownin{-}$ $\rnddownin{\setminus}$
+$\rndintervalin{+}$ $\rndintervalin{-}$ $\rndintervalin{\setminus}$
+$\compop{+}$
+$\xV$
+\end{document}
