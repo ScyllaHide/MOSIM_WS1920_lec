@@ -1,0 +1,106 @@
+\section{numerical quadrature Quadratur and integration}
+\subsection{Interpolation quadrature formulas}
+	\begin{*notation}
+		We will will make a few convinient notations
+		\begin{itemize}
+			\item $\powerset_n=$ set of polynomials of degree $\le n$
+			\item $[n]$ for the set $\set{0,1,\dots,n}$
+			\item the natural numbers $\N$ always include the 0
+			\item We will use a few abbreviations: interpolation \text polynomial with ``Ipolpoly'', Newton-Cotes formula as ``NCF'' \todo[inline]{more please add here!}
+		\end{itemize}
+	\end{*notation}
+We have: $(n+1)$ \emph{base points} (Stützstellen) $(x_i,y_i)$, $i \in \N_0$ with abscizzse canonical order on $(x_i,y_i)$ base points. Values are represented by function $f\colon y_i=f(x_i)$.\\
+We need a polynomial $p(x) \in \powerset_n \with p(x_i) = y_i$ for all $i \in \N_0$.
+\begin{*definition}[\person{Lagrange}-\person{Newton} Interpolation polynomial]
+	There $\exists!$ solution $p \in \powerset_n$, for $j \in [n], l_j \in \powerset_n$ and we define $l_j\colon \R \to \R$
+	\begin{align*}
+	l_j(x_j) &= \prod_{\stackrel{i=0}{i\neq j}}^n \frac{(x-x_i)}{x_j-x_i} = \frac{(x-x_0)(x-x_1)\cdots(x-x_{j-1}(x-x_{j+1}))\cdots (x-x_n)}{(x_j-x_0)(x_j-x_1)\cdots(x_j-x_{j-1}(x_j-x_{j+1}))\cdots (x_j-x_n)}\\
+	l_j(x_i) &= \delta_{ij} \quad \forall j \in [n]\\
+	p(x) &:= \sum_{j=0}^n y_j \cdot l_j(x) \in \powerset_n \nd p(x_i) = y_i l_i(x_i) = y_i
+	\end{align*}
+	is the \begriff{interpolation polynomial}
+\end{*definition}
+Assumption: $p,q \in \powerset_n$ and $p(x_i) = q(x_i)= y_i \forall i \in [n]$, then we have
+\begin{align*}
+	r = p-q \in \powerset_n \nd r(x_i) = p(x_i) = p(x_i)-q(x_i) \quad \forall i \in [n]
+\end{align*}
+and this repsentation is unique. (Why?)
+\begin{*definition}[weight function]
+	$f\in \CC[a,b]$ Integrand, $\omega \in \CC[a,b]$ weight function with $\omega(x) \ge 0$, $0 < \int_a^b \omega(x) \d x < \infty$ häufig $\omega(x) \equiv 1$. If $f$ has $n+1$ base points with $a \le x_0 <\dots < x_n \le b$. We know, that we can set
+	\begin{align*}
+	I(p_n) = \int_a^b p_n(x)\cdot \omega(x)\d x \approx I(f)
+	\end{align*}
+	as approximation calculated with $p_n \in \powerset_n$.
+\end{*definition}
+		The Ipolpoly for the stützstellen $x_j, f(x_j)$, $j  \in [n]$
+		\begin{align*}
+			p_n(x) = \sum_{j=0}^n f(x_j)\cdot l_j(x)
+		\end{align*}
+\begin{*definition}[quadrature formula]
+	The quadrature formula is defined by
+	\begin{align*}
+	Q_n(f) &:= I(p_n) = \int_a^b\brackets{\sum_{j=0}^n f(x_j)\cdot l_j(x)}\omega(x)\d x\\
+	&= \sum_{j=0}^n\brackets{f(x_j)\int_a^b l_j(x)\omega(x)\d x} = \sum_{j=0}^n \omega_j \cdot f(x_j)
+	\end{align*}
+	with \emph{weights}
+	\begin{align*}
+	\ww_j := \int_a^b l_j(x)\cdot \ww(x)\d x
+	\end{align*}
+\end{*definition}
+		$Q_n(f)$ is the weighted sum of the function values for the base point value with fixed weights $\ww_j$. The weights only dependon the base points, the intervall bounds $a,b$ and the weight function $\ww$.
+\begin{*definition}[Error]
+	The errors for a quadrature formula is defined by $f(x) = p_n (x) + e_n(x)$ with $p_n, e_n \in \powerset_n$, $e \equiv 0$, if $f \in \powerset_n$. If $f \in \CC^{n+1}[a,b]$, then
+	\begin{align*}
+		e_n(x) &= \frac{f^{n+1}(\xi)}{(n+1)!}W_n(x) \with W_n(x) = \prod_{i\in [n]} (x-x_i)\quad \xi \in [a,b]
+		\intertext{and}
+		I(f) &= \int_a^b f(x)\ww(x)\d x = Q_n(f) + E_n(f) \with\\
+		Q_n(f) &= \int_a^b p_n(x)\ww(x)\d x \nd E_n(f) = \int_a^b e_n(x)\ww(x) \d x = \int_a^b \frac{f^{n+1}(\xi)}{(n+1)!}W_n(x)
+	\end{align*}
+\end{*definition}
+\begin{*definition}[Degree of accuracy]
+	A quadrature formula $Q(f)$ has a \begriff{Degree of accuracy} $k$ if\begin{align*}
+	I(f) = Q(f) \quad \forall f \in \powerset_n \nd \exists g \in \powerset_{k+1}\colon E(g) \neq 0
+	\end{align*}
+	Equivalent is: With $E(f) := I(f) - Q(f)$ holds
+	\begin{align*}
+	E(1) = E(x) = E(x^2) = \dots = ...
+	\end{align*}
+\end{*definition}
+\subparagraph{Newton-Cotes formulas (overview)}
+		\todo[inline]{add table here ...}
+\begin{*remark}
+	For $n \ge 8$ we get negative weights, numerical instability (Auslöschung). The Newton-Cotes formulas will be used in general with orders $n=1,2$ (\person{Simpson}!) or order 4. So we use also \emph{summed variants} (split interval and use different orders). Open NCF use midpoints with sub intervals (von $[a,b]$) $\to$ $n$ base points.
+\end{*remark}
+%\begin{*example}[\person{Runge}]
+%	\input{tikz/runge} % tikz picture does compile very long!
+%\end{*example}
+\begin{*remark}
+	\person{Tchebychev} has improve this, compare Tschebychev polynomials.
+	There exists a MATLAB package named \texttt{chebfun} by \person{Nick Trefethen}. \footnote[1]{\url{https://www.chebfun.org/}}
+\end{*remark}
+How do we calculate this now?
+\subparagraph{Calculation of the factors of the NCF-remainders}
+\begin{*example}
+	We will take a look at two ``rules'' to understand the \textit{modus operandi}
+	\begin{itemize}
+		\item We have $I = Q+E$ with
+		\begin{align*}
+			Q &= (b-a)\sum_{i=0}^n \ww_i \cdot f(x_i)\\
+			E &= c(b-a)^{k+2}\cdot f^{k+1}(\xi) \with k = 2 \floor{n/2} +1
+		\end{align*}
+		for Trapoid rule $(n=k=1)$:
+		\begin{align*}
+			Q &= 1/2 (f(a) + f(b)(b-1)\\
+			E &= c(b-a)^3\cdot f''(\xi)\\
+			Q(f) &= I(f)\forall f \in \powerset_1, Q(f) + E(f) \forall f \in \powerset_2, \text{ since } f'' \text{const}\\
+			\intertext{set $f = x^2/2 \nd f' = 1$}
+			\int_a^b x^2/2 &= \dots = 1/6(b-a)(b^2 +ab + a^2)\\
+			Q &= 1/4(b-a)(b^2 + a^2)\\
+			E &= c(b-a)(b-a^2) = c(b-a)(b^2 - 2)
+		\end{align*}
+		\item Simpson rule $(n=2, k = 3)$ \todo[inline]{get from numerics 1}
+	\end{itemize}	
+\end{*example}
+\subsection{Extrapolation methods (\person{Richardson} Extrapolation $\to$ \person{Romberg}-integration)}
+\subsection{\person{Gauss}-method}
+\end{enumerate}

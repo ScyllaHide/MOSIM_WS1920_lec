@@ -18,6 +18,8 @@
 %\DeclareMathOperator{\diam}{diam}
 \newcommand{\Circlearrowleft}{\rotatebox{180}{$\circlearrowright$}}
 \DeclareMathOperator{\Cl}{Cl}				% conjugation class of something.
+\newcommand{\rad}{rad}						%radius operator
+
 
 % MOSIM
 % % % rounding symbols
@@ -32,7 +34,7 @@
 \newcommand{\rndintervalin}[1]{%
 	\ooalign{\Large $\rndinterval$\cr\hss\raisebox{0.45 ex}{\scriptsize $#1$}\hss}}%
 \newcommand{\compop}[1]{%
-	\ooalign{\Normal $O$\cr\hss\raisebox{0.3 ex}{\scriptsize $#1$}\hss}}% % computer operation to fill with something
+	\ooalign{\Large $O$\cr\hss\raisebox{0.3 ex}{\scriptsize $#1$}\hss}}% % computer operation to fill with something
 
 % leq, geq
 \renewcommand{\le}{\leqslant}
@@ -48,6 +50,8 @@
 \DeclareMathOperator{\pred}{pred}
 \DeclareMathOperator{\success}{succ}
 \DeclareMathOperator{\digits}{digits}
+\newcommand{\ww}{\omega}
+\newcommand{\CC}{\mathcal C}
 %\DeclareMathOperator{\mid}{mid}
 \newcommand{\one}{\mathbbm 1}				% interval 1
 \newcommand{\zero}{\mathbbm 1}				% interval 0
@@ -79,7 +83,7 @@
 %	$\CircleArrowleft \CircleArrowright $
 
 % % % local packages
-\usepackage{braids}
+%\usepackage{braids}
 
 \newlist{remarkenum}{enumerate}{1}
 \setlist[remarkenum]{label=(\alph*),ref=\theremark~(\alph*)}
@@ -118,12 +122,16 @@
 \pagenumbering{arabic}
 \pagestyle{fancy}
 
-\chapter*{Vorwort}
-\input{./TeX_files/Vorwort}
-\chapter{Introduction}
-\input{./TeX_files/chap1}
-\chapter{Floating point numbers}
-\input{./TeX_files/chap2}
+%\chapter*{Vorwort}
+%\input{./TeX_files/Vorwort}
+%\chapter{Introduction}
+%\input{./TeX_files/chap1}
+%\chapter{Floating point numbers}
+%\input{./TeX_files/chap2}
+%\chapter{Boolean Algebra}
+%\input{./TeX_files/chap3}
+\chapter{Summer term 2020}
+\input{./TeX_files/chap4}
 
 \part*{Anhang}
 \addcontentsline{toc}{part}{Anhang}

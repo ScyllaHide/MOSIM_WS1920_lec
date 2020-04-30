@@ -1,0 +1,40 @@
+	$f:\R\to\R$, $f(x)=\frac{1}{1+25x^2}$ \\
+	equidistant base points $x_0,...,x_n$, $p\in\Pi_n$ as Ipolpoly
+	\begin{center}
+		\begin{tabular}{l|p{8cm}}
+			\textbf{base points} & \textbf{interpolated polynomial} \\
+			\hline
+			2 & $1-\frac{25x^2}{26}$ \\
+			\hline
+			4 & $3,31565x^4 - 4,27719x^2 + 1$ \\
+			\hline
+			8 & $53,6893x^8 - 102,815x^6 + 61,3672x^4 - 13,203x^2 + 1$ \\
+			\hline
+			16 & $15403,1x^{16} - 49713,5x^{14} + 63743,8x^{12} - 41870x^{10} + 15206x^8 - 3100,35x^6 + 351,984x^4 - 22,7759x^2 + 1$
+		\end{tabular}
+	\end{center}
+	\begin{center}\begin{tikzpicture}
+		\begin{axis}[
+		xmin=-1, xmax=1, xlabel=$x$,
+		ymin=-1.5, ymax=3, ylabel=$y$,
+		samples=1200,
+		axis y line=middle,
+		axis x line=middle,
+		width=0.9\textwidth,
+		height=0.5\textheight,
+		restrict x to domain=-1:1,
+		restrict y to domain=-1.5:2
+		]
+		\addplot+[mark=none, line width=1mm] {1/(1+25*x^2)};
+		\addlegendentry{Runge-function}
+		\addplot+[mark=none] {1-(25*x^2)/(26)};
+		\addlegendentry{interpolation 2 base points}
+		\addplot+[mark=none, color=darkgreen] {3.31565*x^4 - 4.27719*x^2 + 1};
+		\addlegendentry{interpolation 4 base points}
+		\addplot+[mark=none, color=black] {53.6893*x^8 - 102.815*x^6 + 61.3672*x^4 - 13.203*x^2 + 1};
+		\addlegendentry{interpolation 8 base points}
+		\addplot+[mark=none, color=lime] {15403.1*x^16 - 49713.5*x^14 + 63743.8*x^12 - 41870*x^10 + 15206*x^8 - 3100.35*x^6 + 351.984*x^4 - 22.7759*x^2 + 1};
+		\addlegendentry{interpolation 16 base points}
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}
