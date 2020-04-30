@@ -1,0 +1,849 @@
+%TODO still to reformat and fill ?
+\begin{itemize}
+    \item $n$ FA work parallel \\
+    reduce $3-n$ bit numbers to $2$ numbers \\
+    C contains all (?)-bits, S all sum-bits
+    \item for final sums $\sigma$ add $S+2C$ \\
+    Here I dont know how to do the sums + the two graphs
+\end{itemize} \smallskip
+
+$T(n)=T_{walace}+T_{CLA}=\O(\log n)$ \\
+addition of $n$ numbers requires $(n-2)$ CSA
+
+\begin{itemize}
+    \item MUltiplication ($n\times n$ bit) \\
+    (?): with little HW
+    \begin{itemize}
+        \item A Carry-Ripple-Adder: $T=O(n^2)$
+        \item A Carry-Skip/Select-Adder: $T=O(n\cdot \sqrt{n})$
+        \item A CLA (Binary tree): $T=O(n\cdot \log n)$
+        \item A CLA (Carry-Safe-Adder): $T\approx (n-2)+2n\approx 3n=O(n)$
+    \end{itemize}
+    Otherwise with a lot of HW \\
+    \begin{itemize}
+        \item $(n-2)$ CSA and $1$ CLA
+        \item for individual multiplications ($1$-dimensional layout): $T_1=O(n+\log n)=O(n) \rightarrow$ with (?) \\
+        $T_p=T_1/$ number of pipeline-steps $=O(n)/O(n)=O(1)$
+        \item Wallace-Tree-Layout: $T_1=\log_{\frac{3}{2}} n+2\log_2 \approx O(\log n)$ \\
+        $\rightarrow $ with Pipeline: $T_p=T_1/O(\log n)=O(1)$ \\
+        ((?) = number of pipeline-steps $\approx O(\log n)$)
+    \end{itemize}
+   
+    \item Division  \\
+    $q:=(?) (a/b)$ with rest $r$$\to$do{missing}, with assumption $a>0, b>0$. \\
+    For the rest it holds: $q\cdot b+r=a$ \\
+    Iterative division generates $n$ "partial remainders" started with $r_0:=a$ and ended in $q:[q_{n-1} ... q_1 q_0]$ and final rest $r:=r_n$ after $n$ steps/iterations. \\
+    Here comes the graph \\
+    \\
+    \item (?) Division:$\todo{missing}
+    Init: $a \to A, b \to B, o \to P$ (possible to calculate and to save b). \\
+    For $i=1,..,n$:
+    \begin{enumerate}
+        \item $LShift_1(R)$ (all $2n+1$ bit)
+        \item $P:=P-B$
+        \item If $P<0$, set low-rder position of A to O \\
+        otherwise to $1$ ($q_{n-1}:=p_n$)
+        \item If $P<0$ restore old $P:=P+B$
+    \end{enumerate}
+    After $n$ steps A contains $q$ and P contains $r=r_n$.
+    \item Nonrestoring Division: \\
+    init: (?) above \\
+    For $i=1,..,n$ \\
+    If $P<0$ \\
+    \begin{enumerate}
+        \item $L-Shift(R): (2n+1$ bit$)$
+        \item $P:=P+B$
+    \end{enumerate}
+    Else $(P\ge 0)$
+    \begin{enumerate}
+        \item $L-Shift(R):$
+        \item $P:=P-B$
+    \end{enumerate}
+    End if \\
+    3)Set Quotient digits:
+\[
+	q_{n-1}:
+	\begin{cases}
+	0, & \text{if } P<1\\
+	1 & \text{if } P\ge 0
+	\end{cases}
+\]
+After $n$ steps: \\
+4) if $(P<0)$, restore remainder by $P:=P+B$, making $P\ge 0 $ \\
+
+\item Example: $n=8$, \\
+$a=211=0.11010011\cdot 2^8$, $q=01000110=70$ \\
+$b=3=0.00000011\cdot 2^8$, $r=00000001=1$ \\
+
+Here comes the drawing. \\
+Resoring & nonrestoring division are equivalent: \\
+step k: $q_{n-k}$ is based on sign of $2\cdot r_{k-1}-2^n\cdot b$ in restoring devision
+\begin{enumerate}
+    \item if $2r_{k-1}-2^n\cdot b \ge 0:$ both algorithms do the same new partial remainder $r_k:=2r_{k-1}-2^n\cdot b$, $q_{n-k}:=1$
+    \item if $2r_{k-1}-2^n\cdot b < 0:$ restoring division $\to$  $r_k:=2r_{k-1}$ \\
+    Here the arrow is missing \\
+    step $k+1: q_{n-(k+1)}$ is based on sign of \\
+    $2r_k+2^nb=4r_{k-1}-2^nb$ \\
+    \\
+    non restoring division $\to$ we keep the negative partial remainder $r_k:=2r_{k-1}-2^n\cdot b (<0)$ \\
+    Here the arrow is missing  \\
+    step $k+1: q_{n-(k+1)}$ is based on sign of \\
+    $2r_k+2^nb=2\cdot (2r_{k-2}-2^n\cdot b) + 2^nb=4r_{k-1}-2^nb$ \\
+   
+    $\implies$ both algorithms do the same \\
+    $\to$ produce same quotient digits \\
+    $\to$ but different sequence of partial remainders
+\end{enumerate}
+\item An example: restoring division \\
+$n=4, A=14=1110, B=3=0011$ \\
+\todo{Here comes the table}
+\item An example: nonrestoring division \\
+$n=4, A=14=1110, B=3=00011, -B=11101$ \\
+\todo{Here comes the table}
+\item Redundant number display: \\
+Base $\beta\ge 2, \beta \in N$ \\
+A number representation-system is redundant if the digit set S contains more than $\beta$ digits. We assume that any digit set S contains $0$ and its digits are continuous (no holes): \\
+$S:=\{d,d+1,..,d\}$, where $d\le 0\le d$ \\
+In practice we only consider digit sets S with $d\ge 1-\beta$ and $d\le \beta-1$ \\
+A symmetric digit sets satisfies $d=-d$ \\
+A minimally redundant digit set S contains exactly $\beta -1$ digits \\
+A minimally redundant digit set S \\
+$\to$ for $\beta$ even, $S:=\set{-\beta/2, \beta/2+1,..,\beta/2}$ \\
+$\to$ for $\beta$ odd, $S:=\set{-(\beta+1)/2, ,..,(\beta+1)/2}$ \\
+
+\item SRT-division ((?) \todo{missing} \person{Robertson}, \person{Tocher}, 1958) $[a/b]$ \\
+class of division algorithms \\
+- normalise divisor $b$ at the beginning (with $L-Shift_k$) \\
+- requirement for redundant symmetric digit set for quotient digits $[q_{n-1}q_{n-2} ... q_0]$ \\
+- quotient digit selection $q_{n-1}$, based on only a feq leading digits if partial remainder $r_{i-1}$ and of the divisor $b$ \\
+$\implies$ use of a ($2-$dim) lookup table is possible \\
+- partial remainders $r_i$ are represented in a redundant number system, e.g. as $2n-$bit, $#s$ (useful for CSA)\\
+
+Note: $r_i=\beta\cdot r_{i-1}-q_{n-i}\cdot b$
+\item single radix $2$, SRT-division: \\
+-$a/b\to$ (?), assuming $b\not =0$ \\
+-$a,b$ floating point, $#s$, binary point just left to registers $P/A$ and $B$.\\
+1) determine the number of leading $k$ zeros in B ($n$ digits), $L-Shift_k(B), L-Shift_k(R), $ (R=P|A) \\
+Note: $0\le k\le n-1 $ (since $b\not =0$) \\
+$\implies$ leading bit of P is $0$ $\implies$ $|r_0|\le 1/2$ \\
+
+2) For $i=1,..,n$ \\
+a) If 3 leading bits are the same $(000 $ or $111)$, set $q_{n-1}:=0, L-Shift_1(R)$ \\
+b) If 3 leading bits are NOT all the same and $P<0$, $(000 $ or $111)$, set $q_{n-1}:=(-1)=1, L-Shift_1(R), P:=P+B$ \\
+c) If 3 leading bits are NOT all the same and $P\ge 0$, $(000 $ or $111)$, set $q_{n-1}:=1, L-Shift_1(R) $ and $P:=P-B$.\\
+
+3) If the final remainder $P<0$, restore it $:P:=P+B$ and correct the quotient: $q=q-1$ (substract of $1$ in the last position $a_0$)\\
+
+4) One obtains $r_n$ with $AR-Shift_k(P)$ \\
+\implies In the SRT -Division: $|\text{remainder}|\le 1/2$ in every step \\
+$\beta=2^m, S=\{-2^{m-1},..,+2^{m-1}\}$ \\
+
+\item An example: $\beta=4, S=\{-2,-1,0,1,2\}\to$ SRT $4$ division, compute $2$ bits of quotient per iteration minimally redundant symmetric digit set \\
+
+$\frac{r_{i+1}}{b}=4\cdot \frac{r_i}{b}-q_i$, basis $=4$. \\
+
+I dont understand the things with pencil? \\
+
+(1) If $|r_i/b|\le 1\implies |\frac{r_{i+1}}{b}|\le 2 \implies |\frac{r_{i+2}}{b}|\le 6$ \\
+requires an extra bit for rem. per iteration, remainder becomes larger and larger \\
+\implies connection of quotient via successive bit is generally impossible  \\
+
+(2) If $|r_i/b|\le 3/4 \implies |\frac{r_{i+1}}{b}|\le 1 \implies$ case (1) \\
+
+(3) If $|r_i/b|\le 1/2 \implies $  \\
+
+\[
+	4\cdot \frac{r_i}{b} \in
+	\begin{cases}
+	(\frac{3}{2},2] \implies q_{k-(i+1)}=2\\
+	(\frac{1}{2},\frac{3}{2}) \implies q=1\\
+	(-\frac{1}{2},\frac{1}{2}) \implies q=0\\
+	(-\frac{3}{2},-\frac{1}{2}) \implies q=-1\\
+	[-2,-\frac{3}{2}) \implies q=-2\\
+	\end{cases}
+\]
+
+To ensure $|\frac{r_{i+1}}{b}|\le \frac{1}{2}$ \\
+$\implies$ case (2) to severe. \\
+
+Here the drawing is missing. \\
+\\
+
+\item SRT-8-Division, i.e. $\beta=8$, (?) $\to$ todo{missing} $\alpha=4, $ i.e. $S=\{-4,-3,..,3,4\}$ \\
+$\implies$ best choice: $|\frac{r_i}{b}|\le \frac{4}{7} \implies |\frac{r_{i+1}}{b}|\le |\frac{32}{7}-4|=\frac{4}{7}$
+
+
+\item P-D-Diagrams (partial remainder-divisor) \\
+\todo{Here the graphs are missing}
+\item Speeding up division vie SRT
+	\begin{itemize}
+		\item increase radix (use groups of digits!)
+		\item compute only approximation $r_i$ or $r_i$, to be used in table look up process
+		\item represent $r_i$ as $r_{i,c}$ and $r_{i,s}$ and (Here the thing under $r_{i,c}$ is missing)
+		\item use CSSA to compute new partial remainder 
+		$r_i=\beta\cdot r_{i-1} -q_{n-i}\cdot b$ \todo{Here the thing under $\beta\cdot r_{i-1}$ is missing}
+		\item use short CPA (eg CLA) ro compute approx. remainder $r_i=r_{i,c}+r_{i,s}$
+	\end{itemize}
+\end{itemize}
+
+\section*{3.2.2020}
+\begin{itemize}
+    \item SRT-4-Division: \\
+    Assume $r=5$ bits, $b=4$ bits are used for quotient digit selection. \\
+    In general we could compute the largest diameter of any uncertainly interval and compare it with the length of the overlap regions ($1/12$ in our case). \\
+   
+    $r: 6$ bits (including sign), $|r|\in [\frac{k}{32},\frac{k+1}{32})$, for $k=0,1,..,32$, $(0,_ _ _ _ _), 1/32 $ is min\\
+   
+    $b: 4$ bits (normalized), $b\in [\frac{m-1}{16},\frac{m}{16})$, for $m=9,..,16$ $(0,1, _ _ _ _), 1/16 $\\
+   
+    $\implies$ $|\frac{r}{b}|\in (\frac{k}{2m},\frac{k+1}{2(m-1)})=:I_{k,m}$, $\forall k\in\{0,..,31\}$, $\forall m\in\{9,..,16\}$ \\
+   
+    diam$(I_{k,m})=\frac{k+1}{2(m-1)}-\frac{k}{2m}=\frac{1}{2}(\frac{m(k+1)-(m-1)k}{m(m-1)})=\frac{m+k}{2m(m-1)}$ \\
+   
+    Maximal diameter attained for $m=9$, $k=31$ \\
+    $\max diam(I_{k,m})=diam(I_{31,9})=\frac{9+31}{2\cdot 9\cdot 8}=\frac{40}{144}=\frac{5}{18}$ \\
+   
+    each overlap region has length $\frac{1}{12}$ \\
+    the one with largest values $[1/3,5/12]$ \\
+   
+    Since $b$ is normalised: $\frac{1}{2}\le \frac{1}{1}=1$ \\
+    Also, $|\frac{r}{b}|\le \frac{2}{3}$
+    \begin{itemize}
+        \item if $b=\frac{1}{2} \implies |r|=\frac{1}{3}$
+        \item in any case $(forall b\in [\frac{1}{2},1))\implies |r|\le \frac{2}{3}$
+    \end{itemize}
+   
+    If $b=\frac{1}{2} \implies m=9 \implies |r|\le \frac{1}{7}<\frac{11}{32} \implies k=10 \from$ largest possible $k$ \\
+    $\implies$ $\max \diam (I_{k,m})=\diam(I_{10,9})=\frac{19}{144}>\frac{1}{12}$, but far from any overlap region \\
+    Overlap region $[\frac{1}{3},\frac{5}{12}]:$ assume: $|\frac{r}{b}|\le \frac{5}{12}$ \\
+    $\implies$ $|r|\le \frac{5}{12}\cdot b\in [\frac{5}{24},\frac{5}{12})$ \\
+    Smallest $b(=\frac{1}{2}), m=9 \implies |r|\le \frac{5}{24}<\frac{7}{32} \implies$ largest $k=6$ \\
+    $\diam(I_{6,9})=\frac{15}{144}=\frac{5}{48}(>\frac{1}{12})$ \\
+   
+    Uncertainty interval $(I_{6,9})$ \\
+    $\frac{6}{32}\cdot \frac{16}{9}=\frac{1}{3}<\frac{r}{b}>\frac{7}{16}=\frac{7}{32}\cdot \frac{1}{1}(>\frac{5}{12}!)$ \\
+    For $k=6, m=10 (b=0.1001) (I_{6,10})$ \\
+    $\frac{6}{32}\cdot \frac{16}{10}=\frac{3}{10}<\frac{r}{b}<\frac{7}{18}=\frac{7}{32}\cdot \frac{7}{32}\cdot \frac{16}{9}(<\frac{5}{12}!)$ \\
+   
+    $\implies$ try $k=7: \frac{7}{31}\le |r| <\frac{1}{4}, b=\frac{12}{5}\cdot |r| \implies \frac{21}{40}\le b<\frac{3}{5}$ \\
+    $\implies$ $m=9$ or $10$ \\
+   
+    for $k=7,m=9, (I_{7,9}): \frac{7}{32}\cdot \frac{16}{9}=\frac{7}{18}<\frac{r}{b}<\frac{1}{2}=\frac{1}{4}\cdot \frac{2}{1}$ \\
+    $\diam(I_{7,9})=\frac{16}{144}=\frac{1}{9}>\frac{1}{12}$, but OK!\\
+    \\
+    for $k=7,m=10, (I_{7,10}): \frac{7}{32}\cdot \frac{8}{5}=\frac{7}{20}<\frac{r}{b}<\frac{4}{9}=\frac{1}{4}\cdot \frac{16}{9}>\frac{5}{12}$ \\
+    $\diam(I_{7,10})=\frac{17}{180}>\frac{1}{12}$, but OK!\\
+    \\
+    for $k=7,m=11, (I_{7,11}): \frac{7}{22}<\frac{r}{b}<\frac{2}{5}<\frac{5}{12}$ \\
+    $\diam(I_{7,11})=\frac{18}{220}<\frac{1}{12}$, so, always OK!\\
+    \\
+    for $m\ge 11 \implies \diam(I_{7,m})<\frac{1}{12}$ always \\
+   
+    Other cases are less critical! \\
+    For $6$ bits of $r$ and $3$ bits of $b$ (leading bit always $=1$), we need a table with $2^6\times 2^3=64\times 8=512$ entries (of (?))\\
+   
+    \item example \\
+    $r=+0.0011$ \\
+    $b=+0.1001$ \\
+    $\implies$ $0.0011\le r< 0.001 \iff \frac{3}{16}\le r< \frac{1}{4}$ \\
+    $\implies$ $0.1001\le b< 0.101 \iff \frac{9}{16}\le b< \frac{5}{8}$ \\
+   
+    $\implies \frac{3}{16}\cdot \frac{8}{5}=\frac{3}{10}< \fracr{}{b}<\frac{4}{9}=\frac{1}{4}\cdot \frac{16}{9}$ \\
+   
+    \todo{Here the arrows are missing}
+    \\
+    $\implies $ overlap region $[\frac{1}{3}, \frac{5}{12}]\subset [\frac{3}{10}, \frac{4}{9}]$ \\
+   
+    We cannot decide wheather to use $q_{n-1}=+1$ or $+2$ \\
+   
+    Assume $r=6$ bit , $b=$ bit \\
+    \todo{Here the arrows are missing}
+    \begin{enumerate}
+        \item $r=0.00110: \frac{3}{16}<r<\frac{7}{12}$ \\
+        $\frac{3}{16}\cdot \frac{8}{5}=\frac{3}{10}<\frac{r}{b}<\frac{7}{18}=\frac{7}{32}]cdot \frac{16}{9}$
+        \item $r=0.00111: \frac{7}{32}\le r<\frac{1}{4}$ \\
+        $\frac{7}{32}\cdot \frac{5}{8}=\frac{7}{10}<\frac{r}{b}<\frac{4}{9}=\frac{1}{4}\cdot \frac{16}{9}$ \todo{Here the arrows are missing} 
+    \end{enumerate}
+    \item radix $\beta$ SRT-division \\
+    Given $\beta\in N$ (even radix, usually a power of $2$) and given $s\in N$ (largest absolute value of any digit) and digit set $S:=\{-s,-s+1,..,s-1,s\}$ (symmetric (?)) \\
+   
+    Assume $\beta/2\le s\le \beta-1$ \\
+   
+    If we use $|\frac{r_i}{b}|\le x$, then $|\frac{r_{i+1}}{b}|\le \beta \cdot |\frac{r_i}{b}|-s\le \beta \cdot x-s=x$ \\
+    \implies $s=(\beta-1)\cdot x \implies x=\frac{s}{\beta-1}$ (constant bounded) \\
+   
+    \todo{Here the arrows are missing}.
+    This is also our measure of redundency. \\
+    It is contained in $(\frac{1}{2},1]$ \\
+    for minimal $s=\frac{1}{2}: |\frac{r_i}{b}|\le \frac{\beta}{2(\beta-1)} \implies $ small overlap! \\
+    $\beta=4: |\frac{r_i}{b}|\le \frac{4}{2\cdot 3}=\frac{2}{3}$ \\
+    $\beta=8: |\frac{r_i}{b}|\le \frac{4}{7}$
+    for maximal $s=\beta-1: |\frac{r_i}{b}|\le 1\implies$ large overlap!
+\end{itemize}
+
+\section*{04.02.2020} \\
+Interval $[\frac{-s}{\beta-1}, \frac{+s}{\beta-1}], $length $l=\frac{2s}{\beta-1}$ \\
+can be exactly covered with $2\beta$ digits $\implies$ every digit covers a length $\frac{l}{\beta}=\frac{2s}{\beta(\beta-1)}=L$ \\
+With $(2s+1)=d$ digits a length of $(2s+1)$ can be covered, i.e. a length of $(2s+1-\beta)\cdot L=(2s+1)\cdot L-l$ remains for overlap area, which is divided in $2s$ areas. \\
+
+$(2s+1)\cdot L=(2s+1)\cdot L-l=d\cdot L-l=d\cdot \frac{l}{\beta}-l=\frac{d-\beta}{\beta}\cdot l=\frac{2s+1-\beta}{\beta}\cdot \frac{2s}{\beta-1}$ \\
+
+With that every overlapping has an area of $\frac{2s+1\beta}{\beta(\beta-1)}$ \\
+minimal redundance: $s=\frac{\beta}{2}, d=\beta+1$ \\
+$|\frac{r_i}{b}|\le \frac{\beta}{2(\beta-1)}\implies l=\frac{\beta}{\beta-1}$, i.e. can be covered with exactly $\beta$ digits. \\
+
+Every digit covers $L=\frac{1}{\beta-1}$ \\
+An additional digit can be divided on (?) \\
+
+Here the tableau is missing. \\
+\\
+Maximal redundance: $s=\beta-1, d=(2\cdot \beta)-1$\\
+$|\frac{r_i}{\beta}|\le 1 \implies I=[-1,+1], l=2$ \\
+exactly $\beta$ digits cover $I$ $\implies$ $L=\frac{l}{\beta}=\frac{2}{\beta}$ \\
+
+With $\beta-1$ extra digits one can distribute $\frac{2(\beta-1)}{\beta}$on $2(\beta-1)=d-1$ $\implies$ every overlapping area has length of $\frac{1}{\beta}$.
+\todo{Here the tableau is missing}
+\begin{itemize}
+    \item division through iterative methods:
+    \begin{itemize}
+        \item Building the inverse $\frac{1}{b}$ with $\frac{1}{2}\le b<1 $(normalised mantissa)
+        \item We are searching for: $\frac{1}{b}\in (1,2]$
+        \item $f(x)=\frac{1}{x}-b=0$ has a solution $x=\frac{1}{b}$ \\
+        Over $x$ there needs to be a dash .
+       
+        \item Display of $b=[b_{n-1},b_{n-2},...,b_1,b_0]_2$ \\
+        We change in $W(b)=\sum_{i=0}^{n-1} b_i\cdot 2^{i-(n-1)} \in [0,2-2^{n-1}]$ \\
+        $0=f(x)=f(x)+(x-x)\cdot f^\prime (x)$ (here the dashes are missing. ) \\
+       
+        Fixed-point equality (Newton):
+        $x=x-\frac{f(x))}{f^\prime(x)}\implies$ Newton-iteration :\\
+        $x_{i+1}=x_i-\frac{f(x_i))}{f^\prime(x_i)}=x_i-\frac{\frac{1}{x_i}-b}{-\frac{1}{b^2}}=x_i+x_i^2(\frac{1}{x_i}-b)$\\
+        $=2x_i-b\cdot x_i^2=(2-bx_i)\cdot x_i\implies $ e multiplications + 1 addition/subtraction. \\
+       
+        In every iteration the result is calculated with $3-$times the length (given $x_i$), always truncated, so that one stays at the same side of the solution $\to$ $x_{i+1}>x_i$. \\
+       
+        - error: $\varepsilon_i=\frac{1}{b}-x_i$ \\
+        $\varepsilon_{i+1}=\frac{1}{b}-x_{i+1}=\frac{1}{b}-2x_i+bx_i^2=b(\frac{1}{b}-x_i)^2=b\cdot \varepsilon_i^2<\varepsilon_i^2$ \\
+        $\implies$ quadratic convergence. \\
+        \\
+        - For example, for $n=64: 8$ bit inverse from the tableau, then $3$ Newton -iterations $\implies$ $\varepsilon<(((2^{-8})^2)^2)^2=2^{-64}$.
+    \end{itemize}
+\end{itemize}
+
+\section*{WALTER STUFF}
+Time delays of the logic gates and electronic circuits \\
+tu:= logic gate time unit\\
+$0$ tu for NOT ($\not$, -)\\
+$1$ tu for AND ($\cdot$), OR (+), NAND(?), NOR(?) \todo{lots of signs}\\
+$2$ tu for XOR(?), HA (half adder) \\
+$4$ tu for FA(full adder), but only 3tu for carry! \\
+$3$ tu per bit position in carry-ripple +1 tu (to finish final sum bit) \\
+$1$ fatu:= 4tu (or 3 tu) = 1 full-adder time unit computing $S_i$ takes $4$ tu\\
+
+$c_{i+1}$ takes $3$ tu: $c_{i+1}=a\cdot (b+c)+b\cdot c$ \\
+Here the drawing is missing. \\
+
+In 2`s complement addition \\
+
+Overflow can be detected by remembering? the carry into the leading (sign) bit part? and company? it to the final carry-out overflow occurs $\iff c_n\not = c_{n-1}$ \\
+
+Example: $n=4:$ \\
+$0110=+\varepsilon $
+$+0110=+\varepsilon$
+
+Here I dont know how to write the line, so its better that you write the things. \\
+
+Computed result is: \\
+too small by $2^n$ (positive overflow), too large by $2^n$ (negative overflow) (?Here I dont know if the power is $n$ or $h$?) \\
+When wrap-around occurs! \\
+
+$c_{i+1}=G_{0,i}+P_{0,i}\cdot c_0$ \\
+
+$G_{0,i}=q_i+p_iq_{i-1}+p_2p_{i-1}q_{i-2}+..+p_io_{i-1}...p_1p_0$ \\
+$P_{0,i}=p_ip_{i-1}...p_1p_0$, where $p_i=a_i+b_i \forall i$ \\
+
+$n=4: (i=3): $ \\
+Here the drawing is missing. \\
+
+Roughly speaking, the propagate bit $P_{i,k}$ of a group of $n=k-i+1$ bits can be computer in the same time as it takes one FA to produce s and c ((?) $4$ tu) for all $n\le 8$. \\
+
+Carry-Skip Adder: \\
+Build only carry-ripple cicuit? (for groups of bits) with extra hardware to compute propagat bits $P_{i,k}$ for these groups. \\
+
+In order to compute the generate bits $G_{i,k}$ for these groups, we use the C-Ripple circuit(?) where $c_{ik}=?$ is always assumed ($c_{ik}=? \implies c_{out}=G_{i,k}$). \\
+Carry-Skip-Adders: irregular (?)\todo{missing} \\
+use $k$ groups of lengths $l_k,l_{k-1},..,l_2,l_1$ \\
+Example: $n=16:$ \\
+
+Here the drawing is missing. \\
+
+minimal $_{n-16, irr.(?)}=7$ fatu \\
+
+Optimal "regular" design for $n=16:$ \\
+$l_{opt}=\sqrt{\frac{n}{2}}=sqrt{8} \implies $ either $l=2$ or $3$ \\
+$k_{opt}=\sqrt{2n}=sqrt{32} \implies $ either $k=5$ or $6$  \\
+\\
+$k=5$ groups: + drawing \\
+$T=10 fatu$ \\
+\\
+$k=6$ groups: + drawing \\
+$T=8$ fatu$=2\cdot l +k-2=2\cdot 2+6-2$ \\
+\\
+
+Optimal design of irregular comp-skip adder: \\
+Here the tableau is missing. \\
+
+\\
+Carry-Select adders: \\
+regular design: $k$ groups of $l$ bits each $[n=l\cdot k]$ \\
+$T=l+(k-1)$, the words under the equality are missing. \\
+
+irregular design: $k$ groups of lengths $l_kl_{k-1}...l_1;$ \\
+should use: $[l_1+k-2][l_1+k-3]...[l_1+1][l_1][l_1]$ \\
+
+$T=l_1+k-1$ where $k$ is less than in the regular design! \\
+$T=O(\sqrt{n})$\\
+
+Here the tableau is missing. \\
+
+Shifting: $n-$ bit $#s$: \\
+$LShift_1(a)$ + drawing
+$LShift_k(a)$, $1\le k<n$ + drawing \\
+$RShift_k(a)$ + drawing \\
+
+arithmetic right shift: duplicates leading (sign) bit \\
+$ARShift_1(a)$ +drawing \\
+\\
+$\sum_{i=1}^{n-1} a_i \cdot 2^{i-1}-a_{n-i}2^{n-1}=\sum_{i=1}^{n-2} a_i \cdot 2^{i-1}-a_{n-i}2^{n-(?)}=\sum_{i=1}^{n-2} a_i \cdot 2^{i-1}-a_{n-i}2^{n-2}=2$`s complement ..(?)\todo{missing} \\
+
+\\
+$1111= -1$ \\
+$\to$ $1111=-1=\frac{-1}{2}$ \todo{Here the sign is missing} \\
+$1110= -2$ \\
+$\to$ $1111=-1=\frac{-2}{2}$ \todo{Here the sign is missing} \\
+$1101= -3$ \\
+$\to$ $1110=-2=\frac{-3}{2}$ \todo{Here the sign is missing} \\
+$1100= -4$ \\
+$\to$ $1110=-2=\frac{-4}{2}$ \todo{Here the sign is missing}
+Multiplication of $2 n-$ bit (?)\todo{missing}: \\
+$a*b$\to$ r$ via repeated summation of partial products $a_i\cdot b:$ \\
+$r;+\sum_{i=0}^{n-1} a_i\cdot 2^i\cdot b$ , here the drawing is missing. \\
+
+Double-length register $R=P|A$ (here the box arounf $R$ is missing + drawing. \\
+
+Algorithm: initially, set $B:=b, A:=a $ and $P:=0$ (including $c:=0$) \\
+$P_0 n $steps: \\
+\begin{enumerate}
+    \item $P:=P+a_0\cdot B; ARShift_1(R)$
+    \item $P:=P+a_1\cdot B; ARShift_1(R)$
+    \item
+    \item $P:=P+a_n\cdot B; ARShift_1(R)$
+\end{enumerate}
+(*) Here i dont know how to write the 3 dots in the enumeration. \\
+
+After $n$ steps, $R=P|A$ (here the box is missing) contains the full double-length product $r=a*b [2n$ bits$]$. P contains approx. product and A (?) exact corresponding error [$\to$ floating -point] \\
+\implies $T(n)=O_{CLA}(n\cdot \log n)$ or $O(n\cdot \sqrt{n})$ (The words under are missing.
+\\
+\\
+
+Possible arguments:
+\begin{enumerate}
+    \item if we have groups of $k$ (?) in a, then immediatelly do $ARShift_k(R)$
+    \item if we have any group of $k$ ibes ub am then $a= ... 01111 ...10....$ (The bracket under is missing) \\
+    $\sum_{i=j}^l 2^i=2^{l+1}-a^j=2^{j+k}+-2^j$ \\
+    \implies replace $k$ additions by $1+$ and $1-$.
+\end{enumerate}
+
+Booth recoding: recode the multiplier a\\
+In the $i-$th step:
+\begin{enumerate}
+    \item $a_i=0$ and $a_{i-1}=0$: do nothing (only (?))
+    \item $a_i=0$ and $a_{i-1}=1$: $P:=P+B$
+    \item $a_i=1$ and $a_{i-1}=0$: $P:=P-B$
+    \item $a_i=1$ and $a_{i-1}=1$: do nothing (only (?))
+\end{enumerate}
+
+For the first step, set $a_{-1}=0$. \\
+Booth recoding is like adding $B\cdot (a_{i-1}-a_i)\cdot (?)$ in the $i-$th step. \\
+\implies Less work only if $k\ge 3$, but that is not the main goal!\\
+\bigskip
+
+\section*{NEWPAGE}
+
+$\sum_{i=0}^{n-1} B(a_{i-1}-a_i)\cdot a^i=B[(a_{n-2}-a_{n-1})2^{n-1}+(a_{n-3}-a_{n-2})2^{n-2}+ (a_{n-4}-a_{n-3})2^{n-3}+ ... + (a_{0}-a_{1})2^{1}+(a_{-1}-a_{0})2^{0}$ \\
+(Here you just need to do it in scales.. \\
+
+$=B\cdot [a_{-1}+a_0\cdot 2^0+a_1\cdot 2^1+a_2\cdot 2^2+...+a_{n-2}\cdot 2^{n-2}-a_{n-i}\cdot 2^{n-1}=B*A$, where $i$ is a sign bit.\\
+(Here the bracket under is missing) \\
+
+Booth recoding might lead to less or the same or more effort to compute the product:  \\
+Example: $a=[01010101]_2$ with (?) algorithm $4+$ \\
+Booth: $a=[11111111]_2$ with Booth: $4+ & 4-$. \\
+$1:=-1$
+(Here the dashes above the ones are missing. \\
+\implies General 2`s complement multiplicated with a and b of arbitrary sign!! \\
+
+Need:
+\begin{itemize}
+    \item $ARShift_1$
+    \item store the most recently shifted -out bit of a [$\to$ $a_{-1}$]
+    \item use 2`s complement adder [for $P+B & P-B$]
+    \item ignore (throw away) $c_{out}$[eliminate extra]
+\end{itemize}
+
+Example: $n=4:$ multiply $(-6)\cdot (-5)$, where $a:=-6, b:=-5$ \\
+$b=-5=1011_2$\\
+$a=-6=1010_2$\\
+$-b=+5=0101_2$ \\
+Here the tableau is missing. \\
+\bigskip
+
+\section*{NEWPAGE}
+Booth recoding uses signes bits, i.e. the digit set $D:=\{-1,0,+1\}$. \\
+To reduce the # of iterations, i.e. higher radix (basis), e.g. $2^2=4$ or $2^3=8$. \\
+
+Minimal Symmetric digit sets are: \\
+$S=\{-2^{k-1},-2^{k-1}+1,..,0,..,+2^{k-1}\}$ when using radix $2^k$, i.e. $k-$bit groups. \\
+This reduces the # of iterations to $\frac{n}{k}$. Here the sign is missing. \\
+
+Example: If we use $k=1$ bits at a time, we will need $\frac{n}{2}$ (the sign is missing) iterations using $S=\{-2,-1,0,1,2\}$. This radix $4$ Booth recoding also requires last shifted -out bit: \\
+(Here the tableau is missing. \\
+
+Radix $4=2^2$ only requires $LShift_1$ (for $+-2B$) (The signs are supposed to be one over another), and `s complement of $B$ ($B$ (with dash) for negative (?)). \\
+
+Table of multiples of $B$:\\
+Here the tableau is missing. \\
+
+Precomputing multiples of $B$ typically requires only $2$ (or maybe $3$) operations ($LShifts & $ addiion). Larger radixes are not very useful ([normally $2^2$ or (?)]). \bigskip
+
+\section*{NEWPAGE}
+
+How to add many $(k), n-$digit #s: +drawing: \\
+
+Using $n$ FAs, we can add $2($ or $3) n-$digits #s $D_1=[d_{n-1}^1d_{n-2}^1...d_{1}^1d_{0}^1]_2$ and $D_2=[d_{n-1}^2d_{n-2}^2...d_{1}^2d_{0}^2]_2$ in the first FA-cycle $(T=1$ fatu$)$ and then $1$ additional $D_i=[d_{n-1}^id_{n-2}^i...d_{1}^id_{0}^i]_2$ in every FA-cycle until the last # $D_k$ has been added (after $(k-1)$ or $(k-2)$ fatu).  \\
+
+To finish all carry propagation requires an extra $(n-1)$ fatu, so we need a total of $T(n,k)=n+k-2$ fatu, instead of (or $n+k-3$) \\
+$O(n\cdot k)$ fatu if carries are (?) every time! \\
+
+Here the 2 drawings is missing. \\
+\bigskip
+
+\section*{NEWPAGE}
+Wallace Tree: + drawing \\
+
+Wallace Tree: (radix $2$) \\
+$T(n):=T_{Wallace}(n)+T_{CLA}(2)=O(\log_{\frac{3}{2}} n+\log_2 n)=O(\log n)$ + drawing
+\bigskip
+
+\section*{NEWPAGE}
+Multiplication ($n$ bit \times $n$ bit)\\
+Iterative:\\
+with little HW: \\
+\begin{itemize}
+    \item $1 CRippleA: T=O(n^2)$
+    \item  $1 CSkipA|CSelectA: T=O(n\cdot \sqrt{n})$
+    \item $1$ CLA (binary tree): $T=O(n\cdot \log n)$
+    \item $1$ CSA (carry (?) adder): $T\approx (n-2)+(2n)\approx 2n=O(n)$\\
+    Here the words under the approximation are mising.
+\end{itemize}
+
+With substantially more HW: use $(n-2)$ CSA plus $1$ CLA. \\
+$\to$ for single multiplication: $(n-2)$ CSA + $1$ CLA \\
+(one-dimensional layout) $T_1=O(n+\log n)=O(n)$\\
+\\
+$\to$ pipelined:  $T_p=\frac{T_1}{\text{# pipeline stages}}=\frac{O(n)}{O(n)}=O(1)$, (Here the bracket under is missing) \\
+
+Wallace tree layout: \\
+$\to$ (?) : $-(n-2)$ CSA $+1$ CLA:  $T_1\spprox \log_{\frac{3}{2}} n+2\cdot \log_{2} n=O(\log n)$ \\
+$\to$ pipelined: $T_p\frac{T_1}{O(\log n)}=O(1)$ \\
+Speedup \approx # of pipeline stages: $O(\log n)$. \bigskip
+
+\section*{NEWPAGE}
+Division: $q:=(?)(a/b)$ with remainder $r$ where we assume $a\ge 0 $ and $b>0$. Result must satusfy $a=q\cdot b+r$. Iterative division produces $n$ partial remainders starting with $r_0:=a$ and resulting in $q:=[q_{n-1}q_{n-2}...q_{1}q_{0}]$ and "find" remainder $r:=r_n$ in $n$ steps (iterations). + drawing. \\
+
+Restoring division: \\
+Initialisation: $a$\to$ A, b$\to$ B$ possible precompute (?) $0$\to$ P$ \\
+
+For $i=1,2,..,n:$ \\
+\begin{enumerate}
+    \item $LShift_1(R) $[all $2n+1$ bits]
+    \item $P:=P-B$
+    \item If $P<0$, set (?) position of $A$ to (?), otherwise to $1$ [i.e. $q_{n-i}:=p_n$] (?) (Over $p$ a dash is missing).
+    \item If $P<0$, restore old $P:=P+B$.
+\end{enumerate}
+After $n$ steps, A contains q and P contains (?). \\
+
+Nonresting Division: samo init-phase. \\
+For $i=1,2,..,n:$ \\
+If $P<0$:
+\begin{enumerate}
+    \item $LShift(R)$ [$2n+1$ bits]
+    \item $P:=P+B$
+\end{enumerate}
+Else ($P\ge 0$):
+\begin{enumerate}
+    \item $LShift(R)$
+    \item $P:=P-B$
+\end{enumerate}
+EndIf.\\
+(Here the 1 and 2 have to be with signs + and -).\\
+
+3. Set quotient digit
+$$
+q_{n-i}:=
+\begin{cases}
+0, & \text{for } 0>P\\
+1,  & \text{for } P\ge 0
+\end{cases}
+$$
+After $n$ steps, \\
+4. If $(P<0)$, restore temainder by $P:P+B$, (?) making $P\ge 0$. \bigskip
+
+\section*{NEWPAGE} \\
+
+Why are restoring and (?) division equivalent: \\
+In step $k$, $q_{n-k}$ is based on sign of $2r_{k-1}-2^n\cdot b$ in restoring division. \\
+I. If $2r_{k-1}-2^n\cdot b \ge 0$, both algorithms do the same: new partiel remainder $r_k:=2r_{k-1}-2^n\cdot b$ and $q_{n-k}:=1$. \\
+II. If $2r_{k-1}-2^n\cdot b < 0$, restoring div. sets $r_k:=2r_{k-1}$ and in step $k+1$, $q_{n-(k+1)}$ is based on sign of $2\cdot r_k-2^n\cdot b=4\cdot r_{k-1}-2^n\cdot b$, whereas in nonrestoring division, we keep the negative partial remainder $r_k=2r_{k-1}-2^n\cdot b[<0]$ and in step $(k+1, q_{n-(k+1)}$ is based on sign of $2\cdot r_k+2^n\cdot b=2\cdot (2r_{k-1}-2^n\cdot b)+1^n\cdot b=4\cdot r_{k-1}-2^n\cdot b$, so both algorithms do the same thing, i.e. produce the same quotient digits, but possibly a different (?) of partial rem.(?). If after $n$ steps (in nonrestoring division) $r_n<0$, then restore it to $r_n+2^n\cdot [\ge 0]$. \\
+
+Example: $n=4:$ restoring division: + tableau. \\
+\bigskip
+
+\section*{NEWPAGE} \\
+drawing \\
+
+$q= 01000110=70$ \\
+$r= 00000001=1$ \\
+$a=211=0.11010011\cdot 2^8$ \\
+$b=3=0.00000011\cdot 2^8$ \\
+Maybe you could do these so the digits fall in the same column?\\
+
+\\
+
+Redundant number representation\\
+radix(=base): $\beta\ge 2, \beta\in N$. \\
+
+A number representing system is redundant if the digit set $S$ contains more than $\beta$ digits. We assume that (?) digit set $S$ contains (?) and its digits are (?) (no holes): \\
+
+$S=\{d,d+1,..,d\}$ where $d\le 0\le (?)$ \\
+
+In practise we only consider digit sets $S$ with $d\ge 1-\beta$ and $d\le \beta-1$ (here a dash over d is missing). \\
+
+A symmetric digit set satisfies $d=-d$ (dashes are missing). \\
+
+A minimally readundant digit set S contains exactly $\beta+1$ digits. \\
+
+A minimally redundant symmetric digit set (?): \\
+- for $\beta$ even is $S=\{-\frac{\beta}{2},-\frac{\beta}{2}+1,...,+\frac{\beta}{2}\}$ \\
+- for $\beta$ odd is $S=\{-\frac{\beta+1}{2},...,+\frac{\beta+1}{2}\}$ \\
+
+Example: "signed bits": $S=\{-1,0,1\}$\\
+minimum (?) summetric radix $4$: $S=\{-2,-1,0,1,2\}$. \bigskip
+
+\section*{NEWPAGE}
+SRT Division: (?) independently\\
+by D. (?) \\
+
+SRT is a class of division algorithms characterized by: \\
+\begin{itemize}
+    \item divisor $b$ is initially "normalized" (by $LShift_k$)
+    \item requirement for redundant symmetric digit set for quotient digits $q_{n-i} [q_{n-1}q_{n-2}...q_{0}]$
+    \item quotient digit selecton based on only a few leading digits of partial remainder $r_{i-1}$ and of the divisor $b$. \\
+    \implies use of a ($2-$ dimension) lookup table is possible!\\
+    \item partial remainders $(r_i)$ are represented in a redundant number system, e.g. as $2 n-$ bit #s (useful for CSA). \\
+\end{itemize}
+
+Simple radix $2$ SRT division: $\frac{a}{b}-(?)$ \\
+Assume $b\not = 0$ \\
+Think of $a$ and $b$ as floating-point numbers with the binary point just to the left of (?) P|A (box is missing) and B. \\
+
+1. Determine number of leading zeros $k$ in B ($n$ bit) and $LShift_k(B)$, $LShift_k(R)$, [R=P|A].\\
+
+Note: $0\le k\le n-1$ (since $b\not =0$) \implies leading bit of P in (?) \implies $|r_0|\le \frac{1}{2}$. \\
+
+2. For $i=1,,.,n$:\\
+\begin{itemize}
+    \item If leading $3$ bits of P are all equal (or (?)), set $q_{n-i}:=0$ and $LShift_1(R)$.
+    \item If leading $3$ bits of P are not all equal and $P<0$, set $q_{n-i}:=-1=T$ and $LShift_1(R)$ and $P:=P+B$.
+    \item If leading $3$ bits of P are not all equal and $P\ge 0$, set $q_{n-i}:=+1$ and $LShift_1(R)$ and $P:=P-B$.
+\end{itemize}
+
+3. If final remainder $P<0$, restore it: $P:=P+B$ and correct the quotient $q:=q-1$. (here the bracket underneath is missing). \\
+[substraction of $1$ in last position $a_0$]. \\
+
+4. $r_n$ is obtained $ARShift_k(P)$ (?). \bigskip
+
+\section*{NEWPAGE} \\
+Analysis of algorithms: \\
+Via initial $LShift_k(B)$, the value stored in B (as floating point number) has $|B|\ge \frac{1}{2}$ and $|B|<1$. \\
+
+Initial remainder $r_0:=LShift_k(R)$ satisfies $-\frac{1}{2}\le r_o\le \frac{1}{2}$. \\
+(Here the thing above R is missing). \\
+
+In steps: \\
+Wuotient-digit selection:
+$$
+X(m,n)=
+\begin{cases}
+1, & \text{if } \frac{1}{4}\le r+{i-1}<\frac{1}{2}\\
+0, & \text{if } -\frac{1}{4}\le r_{i-1}<\frac{1}{4}\\
+-1, & \text{if } [-\frac{1}{2}\le] r_{i-1}<-\frac{1}{4}
+\end{cases}
+$$
+
+New remainder $r_i:=2\cdot r_{i-1}-q_{n-i}\cdot b$ remains bounded: \\
+(The arrow under 2 is missing). \\
+
+$-\frac{1}{2}\le r_i< \frac{1}{2}$ \\
+because: If $q_{n-i}=1(r_{i-1}\ge+\frac{1}{4})\implies$ \\
+$r_i\le 2\cdot [\frac{1}{4},\frac{1}{2})-[\frac{1}{2},1)=[-\frac{1}{2},\frac{1}{2})$ \\
+$q_{n-i}=0:$ obvious! \\
+If $q_{n-i}=-1(r_{i-1}<-\frac{1}{4})\implies r_i\in[-\frac{1}{2},\frac{1}{2})$ \\
+
+So SRT div. keeps $|\text{remainder}|\le \frac{1}{2}$, but only does work with $r\ge \frac{1}{4}$ or $r<-\frac{1}{4}$. \\
+(The bracket under is missing). \\
+
+\implies P only required $n$ bits so eliminate extra leading bit in P (and B). \\
+(?) steps 2.a) and 2.b) only (?) bits are tested. \\
+
+P-D-diagrams (partial -remainder division) + drawings. \bigskip
+
+\section*{NEWPAGE} \\
+SRT $4$ division: computer $2$ bits of quotient per iteration minimally redundant symmetric digit set $S=\{-2,-1,0,1,2\}$. \\
+
+$\frac{r_{i+1}}{b}=4\cdot \frac{r_i}{b}-q_i$. (Here radix 4 is missing). \\
+
+1. If $|r_i/b|\le 1 \implies |\frac{r_{i+1}}{b}|\le 2\implies|\frac{r_{i+2}}{b}| \le 4$\\
+requires an extra bit for rem. per iteration, remainder becomes larger & larger \implies correction of quotient via successive bits is generally impossible!\\
+2. If $|r_i/b|\le \frac{3}{4}\implies |\frac{r_{i+1}}{b}|\le 1\implies$ case 1!\\
+3. If $|r_i/b|\le \frac{1}{2} \implies $?\\
+\implies $$
+4\cdot \frac{r_i}{b} \in
+\begin{cases}
+(\frac{3}{2},2], & \text{\implies } q_{n-(i+1)}=2\\
+(\frac{1}{3},\frac{3}{2}], & \text{\implies } q=1\\
+[-\frac{1}{2},\frac{1}{2}], & \text{\implies } q=0\\
+[-\frac{3}{2},-\frac{1}{2}), & \text{\implies } q=-1\\
+[-2,-\frac{3}{2}), & \text{\implies } q=-2
+\end{cases}
+$$
+to ensure $|\frac{r_{i+1}}{b}|\le \frac{1}{2}$ also, etc. \\
+
+(?) No overlap of these ranges \implies requires exact division $\frac{r_i}{b}$, \implies no fast quotient selection, no table (?).\\
+
+4. If $|\frac{r_{i}}{b}|\le \frac{2}{3} \implies |\frac{r_{i+1}}{b}|\le |\frac{2}{3}-2|\le (?)$ \\
+
+\implies best choice with maximal ovelap. + drawing \\
+
+$4$ overlap regions of length $\frac{1}{12}$ each! \\
+Assume that $5$ bits of $r$ and $4$ bis of $b$ are used for quotient digit selection: \\
+\bigskip
+
+\section*{NEWPAGE}\\
+In general, we could compute the largest diameter of any uncertainty interval and compare it with the length of the overlap regions (\frac{1}{12} in our case). \\
+
+$r: 6$ bits (including sign) \\
+$|r|\in [\frac{k}{32},\frac{k+1}{32})$, for $k=0,1,..,32$ \smallskip
+
+$b: 4$ bits (normalised) \\
+$b\in [\frac{m-1}{16},\frac{m}{16})$, for $m=9,..,16$ \\
+(This is supposed to be in a table).
+
+$|\frac{r}{b}|\in (\frac{k}{2m},\frac{k+1}{2(m-1)}):=I_{k,m}$ $\forall k=0,..,31, \forall m=9,..,16$. \\
+
+$\diam(I_{k,m})=\frac{k+1}{2(m-1)}-\frac{k}{2m}=\frac{1}{2}(\frac{m\cdot (k+1)-(m-1)\cdot k}{m(m-1)})$ \\
+\implies $\diam (I_{k,m})=\frac{m+k}{2m(m-1)}$. \\
+
+Maximum diameter attained for $m=9$ and $k=31$. \\
+
+$\max \diam(I_{k,m})=\diam(I_{1,9})=\frac{9+31}{2\cdot 9\cdot 8}=\frac{40}{144}=\frac{5}{18}$.  (Here m,k under max is missing). \\
+
+Each overlap region has length $\frac{1}{12}$; the one with largest absolute values $[\frac{1}{3},\frac{5}{12}]$. \\
+
+Since $b$ is normalized, $\frac{1}{2}\le b<1$. \\
+Also $|\frac{r}{b}|\le \frac{2}{3}$, so if $b=\frac{1}{2}$, then $|r|\le \frac{1}{3}$ and in any case $[\forall b\in [\frac{1}{2},1)]$, $|r|\le \frac{2}{3}$. \\
+
+If $b=\frac{1}{2}$, then $m=9 \implies |r|\le \frac{1}{3}<\frac{11}{32}$ \implies largest possible $k=10$. \\
+
+So if $b=\frac{1}{2}$, $\max \diam (I_{k,m})=\diam(I_{10,9})=\frac{19}{144}$, which is $>\frac{1}{12}$, but far from any overlap region.  \\
+
+Overlap region $[\frac{1}{3}, \frac{5}{12}]: $ assume $|\frac{r}{b}|\le \frac{5}{12} \implies |r|\le \frac{5}{12}\cdot b\in [\frac{5}{24}, \frac{5}{12})$. \\
+
+smallest $b(=\frac{1}{2}), m=9\implies |r|\le \frac{5}{24}<\frac{7}{32}\implies$ largest $k=6$: \\
+
+$\diam(I_{b,9})=\frac{15}{144}=\frac{5}{48}[>\frac{1}{12}]$ \\
+
+Uncertainty interval\\
+$I_{6,9}: \frac{6}{32}\cdot \frac{16}{9}=\frac{1}{3}<\frac{r}{b}<\frac{7}{16}=\frac{7}{32}\cdot \frac{2}{1}>\frac{5}{12}!$ \\
+Here the brackets under are missing . \\
+
+for $k=6, m=10 b=0.1001..._2$: \\
+$I_{6,10}: \frac{6}{32}\cdot \frac{16}{10}=\frac{3}{10}<\frac{r}{b}<\frac{7}{18}=\frac{7}{32}\cdot \frac{16}{9}<\frac{5}{12}$.\bigskip
+
+\section*{NEWPAGE}
+\begin{itemize}
+    \item $k=7: \frac{7}{32}\le |r|<\frac{1}{4}, b=\frac{12}{5}\cdot |r| \implies \frac{21}{40}\le b<\frac{3}{5} \implies m=9 $ or $10$. \item $m=9: I_{7,9}: \frac{7}{32}\cdot \frac{16}{9}=\frac{7}{18}<\frac{r}{b}<\frac{1}{2}=\frac{1}{4}\cdot \frac{2}{1}$ \\
+    $\diam(I_{7,9})=\frac{16}{144}=\frac{1}{9}>\frac{1}{12}$, but OK! (arrow missing).
+   
+    \item $m=10: I_{7,10}: \frac{7}{32}\cdot \frac{8}{5}=\frac{7}{20}<\frac{r}{b}<\frac{4}{9}=\frac{1}{4}\cdot \frac{16}{9}>\frac{5}{12}$ \\
+    $\diam(I_{7,10})=\frac{17}{180}>\frac{1}{12}$, but OK! (arrow missing).
+   
+    \item $m=11: I_{7,11}: \frac{7}{32}\cdot \frac{16}{11}=\frac{7}{22}<\frac{r}{b}<\frac{2}{5}=\frac{1}{4}\cdot \frac{8}{5}<\frac{5}{12}$ \\
+    $\diam(I_{7,11})=\frac{18}{220}<\frac{1}{12}$, so always OK! (arrow missing).
+    \end{itemize}
+    for longer $m\ge 11$, $\diam(I_{7,m})<\frac{1}{12}$ always! $=\frac{7+m}{2m(m-1)}$. \\
+    etc. other (?) less critical! \\
+    For $6$ bits of $r$ and $3$ bits of $b$ (leading bit always $=1$) we need a lookup table with $2^6\times 2^3=64\times 8=512$ (?) (at most). +table $\to$do{missing}
+   
+    \section*{NEWPAGE} \\
+    $\to$do{Just 2 tables.}
+    \bigskip
+   
+    \section*{NEWPAGE} \\
+    $\to$do{graph +} \\
+   
+    Radix $\beta$ SRT division:\\
+    Given $\beta$ (even radix usually a power of $2$) and given s (largest absolute value of (?) digit) and digit set $S:=\{-s,-s+1,..,s-1,(?)\}$ [symmetric & redundant], we assume that $\frac{\beta}{2}\le \beta-1$. \\
+   
+    If we use $|\frac{r_i}{b}|\le x$, then $|\frac{r_{i+1}}{b}|\leqls
+     \beta \cdot |\frac{r_i}{b}|-s\le \beta\cdot x-s = (?) $ (Here the arrows are missing). \\
+     
+     \implies $s=(\beta-1)\cdot x\implies x=\frac{s}{\beta-1}$ const. (?)\\
+     This is also our measure of redundance. \\
+     It is contained in $(\frac{1}{2},1]$. \\
+     For minimal $s=\frac{1}{2}: |\frac{r_i}{b}|\le \frac{\beta}{2(\beta-1)}\implies (?)$ \\
+     
+     $\beta=4: |\frac{r_i}{b}|\le \frac{4}{2\cdot 3}=\frac{2}{3}$;\\
+     $\beta=8: |\frac{r_i}{b}|\le $(?);\\
+     
+     For maximal $s=\beta-1: |\frac{r_i}{b}|\le 1\implies$ large (?).\bigskip
+     
+     \section*{NEWPAGE}\\
+     
+     Counterexample: $r=+0.00011 ..._2$ \\
+     $b=+0.1001..._2$ \\
+     $\frac{3}{16}\le r<\frac{1}{4}$ \\
+     \implies $0.00011\le r<0.001 \iff \frac{3}{32}\le r<\frac{1}{8}$ (here the line over the 0 is missing). \\
+     
+     $0.1001\le b<0.101 \iff \frac{9}{16}\le b<\frac{5}{8}$ \\
+     
+     $\frac{3}{18}\cdot \frac{8}{5}=\frac{3}{10}<\frac{r}{b}<\frac{4}{9}=\frac{1}{4}\cdot \frac{16}{9}=0.3<\frac{1}{3}$\\
+     
+     $0.444...>\frac{5}{12}=0.41666...$ \\
+     
+     \implies overlap region $[\frac{1}{3},\frac{5}{12}]\subset [\frac{3}{10},\frac{4}{9}]$ \\
+     \implies we cannot decide wheather to use $q_{n-1}=+1$ or $+2$!??? \\
+     would have required lookup table of $32\times 8$ entries.  \\
+     
+     Assume we use $b$ bits of $r$ (and still $4$ of $b$): \\
+     \implies for case above we now have $2$ cases:
+     \begin{enumerate}
+         \item $r=0.00110..._2$: $\frac{3}{16}\le r<\frac{7}{32} $ \\
+         $\frac{3}{16}\cdot \frac{8}{5}=\frac{3}{10}<\frac{r}{b}<\frac{7}{18}=\frac{7}{32}\cdot \frac{16}{9}$\\
+         $\frac{9}{10}<\frac{1}{3}$, $0.3888..<\frac{5}{12}=0.416$ (dash over 6). \\
+         
+         \item $r=0.00111..._2$: $\frac{7}{32}\le r<\frac{1}{4} $ \\
+         $\frac{7}{32}\cdot \frac{8}{5}=\frac{7}{20}<\frac{r}{b}<\frac{4}{9}=\frac{1}{(?)}\cdot \frac{16}{9}$\\
+         $\frac{1}{2}<0.35$, $\frac{5}{(?)}=\frac{4}{(?)}$ \\
+         
+         \end{enumerate}

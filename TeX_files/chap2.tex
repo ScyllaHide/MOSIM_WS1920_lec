@@ -1,5 +1,5 @@
 % !TeX spellcheck = en_US
-\textbf{28.10.2019}\\
+\subsection*{28.10.2019}
 A floating point number is 
 \begin{align*}
 	x = \begin{cases}
@@ -20,7 +20,7 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
   \item normalized FPN $x\neq 1$: has as first mantissa digit $m_1\neq 0$ $(b=2 \implies m_1=1!)$
   \item unnormalized FPN $x\neq0$ has $m_1=0$
   \item Normalization of a FPN $x \neq 0$: mantissa digits to push for $k$ digits to the left ($k =$  number of leading 0-digits) and subtracting $k$ from $e_x$. $e_{x_neu}=e_x-k$.
-  \newline Normalization is only possible if $e_{xneu} = e_x-k \geqslant e$
+   Normalization is only possible if $e_{xneu} = e_x-k \ge e$
   \item denormalized FPN: $e_x = e$ and mantissa not normalized or can not be normalized
   \item number line is symmetrical to zero! Here its supposed to be the line.
   \item \begriff{\person{Wilkinson}-epsilon}
@@ -75,39 +75,39 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
 		\begin{align*}
 			z:=((z^*+z^{n-1})\mod2^n)-2^{n-1}\in I_n
 		\end{align*}
-		\item for normal mantissa $m_x$ it holds: $\frac{1}{b}\leqslant m_x<1$
-		\item  for normal mantissa $m_x$ it holds: $0\leqslant m_x<\frac{1}{b}$
+		\item for normal mantissa $m_x$ it holds: $\frac{1}{b}\le m_x<1$
+		\item  for normal mantissa $m_x$ it holds: $0\le m_x<\frac{1}{b}$
 	\end{itemize}
 
 \begin{itemize}
     \item 2 equivalent display possibilities for FPN $x\neq 0:$
     \begin{align*}
     	x=(-1)^{S_x}\cdot m_x\cdot b^{e_x}=(-1)^{S_x}\cdot M_x\cdot b^{e_x-l}\\
-        M_x=m_x\cdot b^l \in \N \with b^{l-1}\leqslant M_x<b^l
+        M_x=m_x\cdot b^l \in \N \with b^{l-1}\le M_x<b^l
     \end{align*}
     Optionally one could also add $M_x \implies \abs{M_x}<b^l$, $M_x\in \Z$\\
     $\implies$ Every FPN $x$ is an integer multiple of its $\ulp$`s.
     \item $\ulp(1)=\epsilon$, since $1=0,10\dots0\cdot b^1$ and $\epsilon=b^{1-l}=\ulp(1)$ $x\not =0, x\in R \leftarrow$ grid: 
     \begin{itemize}
-        \item $\success(x)\leqslant x(1+\epsilon)=x(1+\ulp(1= = 1\cdot \succ(1)$
-        \item $\success(x)\geqslant x(1-\epsilon)=x(1-\ulp(1)=x\cdot \pred(1)$
+        \item $\success(x)\le x(1+\epsilon)=x(1+\ulp(1= = 1\cdot \succ(1)$
+        \item $\success(x)\ge x(1-\epsilon)=x(1-\ulp(1)=x\cdot \pred(1)$
     \end{itemize}
     \item relative distance between 2 neighboring FPN:
-    %TODO add graph 
+    \todo[inline]{TODO add graph} 
    \end{itemize}
-    \begin{definition}[Rounding]
+    \begin{*definition}[Rounding]
     	Rounding is a map $o:\R\to R $ FP-grid with the following properties
     	\begin{defenum}
     		\item ($R1$) $ox=x, \forall x\in R$ (projection) \label{def_rounding_1}
-    		\item ($R2$) $x,y \in R: x\leqslant y \implies ox\leqslant oy$ (monotonicity) \label{def_rounding_2}
+    		\item ($R2$) $x,y \in R: x\le y \implies ox\le oy$ (monotonicity) \label{def_rounding_2}
     		\item ($R3$) $o(-x)=-ox, \forall x\in R$ \label{def_rounding_3}
     	\end{defenum}
-    \end{definition}
-	%TODO add graph!
-	\begin{remark}
+    \end{*definition}
+	\todo[inline]{TODO add graph!}
+	\begin{*remark}
 		An antisymmetric rounding i guess additionally satisfies also \ref{def_rounding_3}.
-	\end{remark}
-	\begin{example}
+	\end{*remark}
+	\begin{*example}
 		Established rounding possibilities are:
 		\begin{itemize}
 			\item $\square x$: \i to nearest floating point number $\to$
@@ -147,13 +147,13 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
 				\end{align*}
 			\end{itemize}
 		\end{itemize}
-	\end{example}
+	\end{*example}
 \subsection*{Intervals}
 	\begin{itemize}
 		\item $I\R \set{X=[\minval{x},\maxval{x}] \mid \minval{x}\le \maxval{x}\nd \minval{x},\maxval{x} \in \R}$ , i.e. set of the bounded, closed, real intervals
 		\item Floating-point intervals: $IR =  \set{X=[\minval{x},\maxval{x}] \mid \minval{x}\le \maxval{x}; \minval{x},\maxval{x} \in R}$ intervals with floating point boundaries
 	\end{itemize}
-\begin{definition}
+\begin{*definition}
 	Interval rounding as map 
 	\begin{align*}
 		\rndinterval \colon \R \to R \with X=[\rndup x, \rnddown x]\subseteq X=[\minval{x},\maxval{x}]
@@ -171,10 +171,8 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
 	X - Y &= [\minval{x} - \maxval{y}, \maxval{x} - \minval{y}]
 	\end{matrix} \quad \diam(X\pm Y) = \diam X + \diam Y
 	\end{align*}
-\end{definition}
-% % % % % % % % % % % % % % % compling until here without problems
-
-\textbf{11.11.19}
+\end{*definition}
+\subsection*{11.11.19}
 \begin{itemize}
 	\item Interval arithmetics $(A,B,C,X\in IR)$
 	\begin{itemize}
@@ -205,13 +203,11 @@ with sign bit (Vorzeichen-bit) $S_x\in \{0,1\}$, mantissa $m_x=0.m_1m_2..m_l$ an
 		\end{itemize} 
 		\item Implementation of interval functions, Monotonicity is eventually piecewise necessary\\
 		some examples: $e^X=[e^{\minval{x}},e^{\maxval{x}}]$, $\log_b x=[\log_b \minval{x}, \log_b \maxval{x}]$, $\square(x)=[\square(\minval{x}),\square(\maxval{x})]$ and other (e.g. trigonometric functions) functions: local minimums /maximums
-		%TODO graph
+		\todo[inline]{TODO graph}
 	\end{itemize}
 \end{itemize}
-\textbf{12.11.19}\\
-
+\subsection*{12.11.19}
 Our goal is a reliable arithmetic (and also standard-function) for usual space of numerical computation.
-
 \begin{itemize}
 	\item $\Z\supset \Z_8\supset \Z_4 \supset \Z_2 \gets$ formally with 2 with operations $+,-, \cdot, /$ and division with reminder
 	\item $\R \supset R_10 \supset R_8 \supset R_4 \supset R_2$ with operations $+,-, \cdot, /$
@@ -225,7 +221,7 @@ Our goal is a reliable arithmetic (and also standard-function) for usual space o
 	But rather: horizontal definition of arithmetic, separately for each plane/ layer (with optimal rounding), this is called \begriff{semimorphic arithmetic}, for each unit operation $O \in \set{+,-, \cdot,/,\scaProd{\cdot}{\cdot}}$, where $\scaProd{\cdot}{\cdot}$ is a scalar product.\\
 	The result should be calculated in the following way: as if the mathematical exact result was calculated, and then (with the actual rounding mode ) was rounded. ($O \in \set{\square, \sqcap, \sqcup, \rndup, \rnddown, \dots}$).\\
 	$\forall x,y\in N$ (where $N$ is the \begriff{nummerical space}) it has to hold $x\compop{\cdot} y:= O(x \bullet y)$, where $O$ is an operation rounding (computer operation) and $\bullet$ is an exact operation.
-	%TODO find out whats the error here?!
+	\todo[inline]{TODO find out whats the error here?!}
 \end{itemize}
 \subsection*{Interval spaces}
 	\begin{itemize}
@@ -239,12 +235,12 @@ Our goal is a reliable arithmetic (and also standard-function) for usual space o
 	\item representation of complex intervals:
 	\begin{itemize}
 		\item $+$ either: rectangles in $C$:
-		$C=[\minval{c},\maxval{c}]:=\{c\in \C\mid \Re(\minval{c})\le \Re(c)\le \Re(\maxval{c}) \land \Im(\minval{c})\le \Im(c)\le \Im(\maxval{c}) \with \minval{c},\maxval{c}\in C\}, \minval{c}\leqslant \maxval{c}$
+		$C=[\minval{c},\maxval{c}]:=\{c\in \C\mid \Re(\minval{c})\le \Re(c)\le \Re(\maxval{c}) \land \Im(\minval{c})\le \Im(c)\le \Im(\maxval{c}) \with \minval{c},\maxval{c}\in C\}, \minval{c}\le \maxval{c}$
 		\begin{align*}
-					[\minval{c},\maxval{c}&=[(\minval{a},\minval{b}),(\maxval{a},\maxval{b})]=\text{ pair complex intervals }\\
+					[\minval{c},\maxval{c}]&=[(\minval{a},\minval{b}),(\maxval{a},\maxval{b})]=\text{ pair complex intervals }\\
 			&=([\minval{a},\maxval{a}],[\minval{a},\maxval{b}])=\text{ pair real intervals }
 		\end{align*}
-		%TODO graph here to do!!!
+		\todo[inline]{graph here to do!!!}
 		\item $+$ as complex "circles" or even ellipse
 		\item In general the result of every operation (or function)
 		\begin{align*}
@@ -255,11 +251,11 @@ Our goal is a reliable arithmetic (and also standard-function) for usual space o
 	\end{itemize}
 	\item Algebraic properties (in $I\R$)
 	\begin{itemize}
-		\item $+,\cdot$ are commutative, associative and there exist neutral elements: $\zero=[0,0], \one=[1,1]$. but in general not inverse elements! such that holds:
+		\item $+,\cdot$ are commutative, associative and there exist neutral elements: $\zero=[0,0], \one=[1,1]$. but in \emph{general not inverse elements} such that holds:
 		\begin{itemize}
 			\item $A+X=0, A+X=1$ not solvable, if $\diam(A)>0$.
 			\item Note: $A-A \ni \zero$, but $A-A \neq \zero$ if $\diam(A)>0$ and $A\setminus A\ni 1$, but $A \setminus A\neq \one$ if $\diam(A)>0$\\
-			Distributive law does not hold, but the subdistributivity: $(A\cdot(B+C))\subseteq A\cdot B+A\cdot C$
+			Distributive law does not hold, but the sub-distributivity: $(A\cdot(B+C))\subseteq A\cdot B+A\cdot C$
 			\begin{*example}
 				\begin{align*}
 					[0,1]\cdot([1,1]+[1,1])&=[0,0]=0\\
@@ -274,12 +270,12 @@ Our goal is a reliable arithmetic (and also standard-function) for usual space o
 	\item Algebraic properties in $I\C$:
 	\begin{itemize}
 		\item Associative law does not hold!
-		\begin{*example}
+		\begin{*example} Let us set $A=[2,4]+\ii[0,0] \nd B=[1,1]+\ii[1,1]=C$, then
 			\begin{align*}
-				A=[2,4]+i[0,0], B=[1,1]+\ii[1,1]=C\\
-				(A\cdot B)\cdot C =([2,4]+\ii[2,4])\cdot C=[-2,2]+\ii[4,8]\\ A\cdot (B\cdot C)=A\cdot ([0,0]+\ii[2,2])=[0,0]+\ii[4,8]\\
-				\implies [-2,2]+i[4,8]\neq[0,0]+i[4,8]
+				(A\cdot B)\cdot C =([2,4]+\ii[2,4])\cdot C=[-2,2]+\ii[4,8]\\ 
+				A\cdot (B\cdot C)=A\cdot ([0,0]+\ii[2,2])=[0,0]+\ii[4,8]
 			\end{align*}
+			Then we get $[-2,2]+\ii[4,8]\neq[0,0]+\ii[4,8]$.
 		\end{*example}
 		\item Inclusion property:
 		\begin{itemize}
@@ -288,616 +284,676 @@ Our goal is a reliable arithmetic (and also standard-function) for usual space o
 		\end{itemize}
 	\item In composition of operations and functions to mathematical formulas and calculation rules, this property will remain valid. Since only inclusions for the solution are calculated.
 	\begin{*example} Calculate $(X-2)^2-4$ for $X=[1,4]$
-		\begin{align*} %TODO check which operations have which symbols for u!
-			(X-2)^2-4&=[-1,2]^2-4=[0,4]-4=[-4,0]\\
-			(X-2) O (X-2)-4&=[-1,2]\cdot[-1,2]-4=[-2,3]-4=[-6,0]\\
-			X*(X-4)&=[1,4]\cdot[-3,0]=[-12,0]\\
-			X*X-X*4&=[1,16]-[4,16]=[-15,12]\\
-			\implies [-4,0]\subseteq [-6,0] \subseteq [-12,0] \subseteq [-15,12]
+		\begin{align*} 
+			(X-2)^2-4=[-1,2]^2-4=[0,4]-4=[-4,0]\\
+			(X-2) O (X-2)-4=[-1,2]\cdot[-1,2]-4\\
+			=[-2,3]-4=[-6,0]\\
+			X*(X-4)=[1,4]\cdot[-3,0]=[-12,0]\\
+			X*X-X*4=[1,16]-[4,16]=[-15,12]\\
 		\end{align*}
+		Then we get $[-4,0]\subseteq [-6,0] \subseteq [-12,0] \subseteq [-15,12]$ \todo[inline]{check which operations have which symbols for u!}
 	\end{*example}
 	\end{itemize}
 \end{itemize} 
+\subsection*{18.11.19}
+\begin{itemize}
+	\item $A\circ B:=$ intervals $\{a\circ b| a\in A, b\in B\}=[$minSo, maxSo$]$, with So$=\{a\circ b,a\circ b,a\circ b,a\circ b\}$
+	\item In general $\not \exists $inverse:
+	 If $\diam(A)=a-a>0, $i.e. $a<a$:
+	\begin{enumerate}
+		\item $A+X=[0,0]=0 \iff a+x=0 \land a+x=0 \implies x=-a>-a=x$, i.e. $x>x$ is prohibited
+		\item $A*X=[1,1]=1 \iff a\cdot x=1 \land a\cdot x=1 \implies x=\frac{1}{a}>\frac{1}{a}=x$ \todo[inline]{Here the sign at the end is missing}
+	\end{enumerate}
+	\item cancelation law %Kürzungsregel (in english?)
+	\begin{enumerate}
+		\item $A+X=B+X \iff A=B$
+		\item $A*X=B*X \iff A=B$ it holds $\forall X\in IR$ with $0\not \in X$
+	\end{enumerate}
+	\begin{*example}
+		Let $X=[-1,+1]: A=-1,B=+1: A*X=X=B*X=[-1,a]*X=[b,+1]*X, \forall a\in X, b\in X$, then we get $X=[0,1]: [0,2]*X=[1,2]*X=[2,2]*X=[0,2]$
+	\end{*example}
+	\begin{*example}
+		\begin{enumerate}
+			\item A Calculation example: \todo[inline]{this needs better idea, its a whole calculation, but right now in itemize :(}
+			\begin{itemize}
+				\item $A=[-3,1], B=[2,4]$
+				\item $A+B=[-1,5]$ (and $\diam(A+B)=$$\diam(A)+$$\diam(B)$)
+				\item $A-B=[-7,-1]$ (and $\diam(A-B)=$$\diam(A)-$$\diam(B)$)
+				\item $B-A=[1,7]=-(A-B)$
+				\item $A-A=[-4,+4]$
+				\item $B-B=[-2,+2]$
+				\item $A*B=[-12,+4]$, S$_*=\{-6,-12,2,4\}$
+				\item $A*A=[-3,+9]$, S$_*=\{+9,1,-3,-3\}$
+				\item $B*B=B^2=[4,16]$
+				\item $A^2=[0,+9]$
+				\item $A/B=[-3/2,+1/2]$, S$_/=\set{-3/2,-3/4,1/2,1/4}$ \todo[inline]{What is $S$ here?}
+				\item $A*1/B=[-3,1]*[1/b,1/b]=[-3/2,1/2]$
+				\item $B/A=$ prohibited, since $0\in A$
+				\item $B/B=[2/4,4/2]*[1/2,2]$, S$_/=\{1,2/4,4/2,1\}$
+				\item The value range of a function over an interval $X=[x,x]$ $W_f(X)=\{f(x)|x\in X\} \to $ interval hulls take hull(W$_f(X)$)$\in IR$
+			\end{itemize}
+		\item An example: $X=[0,\pi/6]$
+			\begin{enumerate}
+				\item $f(x)=\sin(x)$, $\sin([0,\pi/6])=[0,\frac{1}{2}]$
+				\item $f(x)=\cos(x)$, $\cos([0,\pi/6])=[\sqrt{3}/2,1]$
+				\item $f(x)=\tan(x)$, $\tan([0,\pi/6])=[0,1/sqrt{3}] \neq\frac{\sin(x)}{\cos(x)}$, here "in general" is missing 
+				\item $f(x)=\cot(x)$, $\cot([0,\pi/6])=[\sqrt{3}, \infty]$
+				\item $f(y)=e^y$, $e^y=[e^y, e^y]$ \todo[inline]{ here the line above/below $y$ is missing!}
+			\end{enumerate}
+		\end{enumerate}
+	\end{*example}
+	 
+	\item Interval evaluation (Interval-extension) of a function $f$ over an interval $X\in IR$.\\
+	Is obtained by substituting $X$ (as a set of real numbers) in each occurrence of the variable $x$ in the calculation rule.\\
+	$f(X)\supseteq $W$_f(X)$, usually with overestimation of the range (WB).\\
+	Especially if $x$ occurs multiple times in the calculation rule
+	\begin{*example}
+		Here is an example, which illustrates:
+		 $+$ $f(x)=x-x \iff g(x)=0$
+		 $f(X)=[-$$\diam(X),+$$\diam(X)], q(X)=[0,0]$
+		 $+$ $f(x)=x*x \iff g(x)=x^2$
+		 $F(X)$ contains also negative values, if $x<0$ and $x>0$, 
+		 $g(X)=[-,($max$\{|x|,|x|\})^2]$
+		 $+$ $f(x)=sin^2x+cos^2x \iff g(x)=1$
+		 $f([0,\frac{\pi}{6}])=[0,\frac{1}{4}]+[\frac{3}{4}.1]=[\frac{3}{4},\frac{5}{4}]\ni \one$, $g([0,\frac{\pi}{6}])=[1,1]$
+	\end{*example}
+	\item Solving the equality $A*X=B$ with $A,B,X\in IR, A\neq[0,0]$
+	 Help-function: 
+	 \begin{align*}
+	 		h(A):= \begin{cases}
+	 			a/a, & \text{if} \le\abs{a}\\
+	 			a/a, & \text{else }
+	 		\end{cases}
+	 \end{align*}
+	\begin{proposition}[\person{Ratschek}]
+		\begin{enumerate}
+			\item $AX=B$ has a (algebraic) solution $X\in IR$ iff $h(A)\ge h(B)$.
+			\item If $h(A)=h(B)\le 0$, then the solution is not unique.
+		\end{enumerate}
+	\end{proposition}
+	\begin{*example}
+			\begin{enumerate}
+				\item $A=[1,2], B=[-1,3]$, so: $[1,2]\ast[x,x]=[-1,3] \implies X_{\text{general}}=[-1/2,3/2]$ is unique, since $h(A)=1/2, h(B)=-1/3 \implies h(A)\ast h(B) \to \exists$ uniqueness
+				\todo{Here the sign between $h(A)$ and $h(B)$ is missing}
+				BUT: the set of all point solutions for the equations $ax=b$ with $a\in A, b\in B $ is:
+				\todo{fix brackets or small fractions}
+				\begin{align*}
+					X_{set}=\{x=\frac{a}{b}| a\in A, b\in B\}=\frac{B}{A}=\frac{[-1,+3]}{[1,2]}=[-1,3]\supseteq X_{general}=[-\frac{1}{2},\frac{3}{2}]
+				\end{align*}
+				 $\square$ In general, it holds: the set of all point-solutions $X_{\text{set}}=\frac{B}{A}\supseteq X_{general}$ (algebraic solutions)
+				 If $AX=B $ with $0\not \in A$ has the algebraic solution $X\in IR$, then $X_{general}\subseteq B/A$, since $\forall x\in X_{general}$ it holds $\forall a\in A: a\cdot x=b \in B$, while $X_{set}=B/A:=\{x=b/a| b\in B, a\in A\}$.
+				\item $A=[-1/3,1], B=[-1,2]$ so $[-1/3,1]\cdot X=[-1,2] \implies x=[-1,2]$ is a unique solution\\
+				$h(A)=-\frac{1}{3}, h(B)=-\frac{1}{2} \implies h(A)(?)h(B) \implies \exists$ unique solution! \todo{Here also its missing the sign between $h(A)$ and $h(B)$}
+				 BUT:
+				 The set of the point-solutions yields $R$ since $\frac{B}{A}$ is a division through null-interval. 
+			\end{enumerate}
+		
+	\end{*example}
+\end{itemize} 
+
+\begin{*definition}
+	For $A\in IR$ the diameter is defined by $\diam(A):=a-a= \max_{x,y\in A}\abs{x-y}$ \todo[inline]{max and min a's in definition?}
+	\begin{itemize}
+		\item is the radius $\rad(A):=\frac{a-a}{2}=\frac{\diam(A)}{2}$
+		\item is the midpoint: $\mid(A)=a:=\frac{a+a}{2}=a+\rad(A)=a-\rad(A)$
+	\end{itemize}
+\end{*definition}
 %
-%\newline \textbf{18.11.19}
-%\begin{itemize}
-%	\item $A\circ B:=$ intervals $\{a\circ b| a\in A, b\in B\}=[$minSo, maxSo$]$, with So$=\{a\circ b,a\circ b,a\circ b,a\circ b\}$
-%	\item In general $\nexists $inverse:
-%	\newline If diam$(A)=a-a>0, $i.e. $a<a$:
-%	\begin{enumerate}
-%		\item $A+X=[0,0]=0 \iff a+x=0 \land a+x=0 \implies x=-a>-a=x$, i.e. $x>x$ is prohibited
-%		\item $A*X=[1,1]=1 \iff a\cdot x=1 \land a\cdot x=1 \implies x=\frac{1}{a}>\frac{1}{a}=x$ (Here the sign at the end is missing)
-%	\end{enumerate}
-%	\item Kürzungsregel (in english?)
-%	\begin{enumerate}
-%		\item $A+X=B+X \iff A=B$
-%		\item $A*X=B*X \iff A=B$ it holds $\forall X\in IR$ with $0\not \in X$
-%	\end{enumerate}
-%	\newline An example:
-%	\newline $X=[-1,+1]: A=-1,B=+1: A*X=X=B*X=[-1,a]*X=[b,+1]*X, \forall a\in X, b\in X$
-%	\newline $X=[0,1]: [0,2]*X=[1,2]*X=[2,2]*X=[0,2]$
-%	\item Calculation example:
-%	\newline $A=[-3,1], B=[2,4]$
-%	\newline $A+B=[-1,5]$ (and diam$(A+B)=$diam$(A)+$diam$(B)$)
-%	\newline $A-B=[-7,-1]$ (and diam$(A-B)=$diam$(A)-$diam$(B)$)
-%	\newline $B-A=[1,7]=-(A-B)$
-%	\newline $A-A=[-4,+4]$
-%	\newline $B-B=[-2,+2]$
-%	\newline $A*B=[-12,+4]$, S$_*=\{-6,-12,2,4\}$
-%	\newline $A*A=[-3,+9]$, S$_*=\{+9,1,-3,-3\}$
-%	\newline $B*B=B^2=[4,16]$
-%	\newline $A^2=[0,+9]$
-%	\newline $A/B=[-3/2,+1/2]$, S$_/=\{-3/2,-3/4,1/2,1/4\}$
-%	\newline $A*1/B=[-3,1]*[1/b,1/b]=[-3/2,1/2]$
-%	\newline $B/A=$ prohibited, since $0\in A$
-%	\newline $B/B=[2/4,4/2]*[1/2,2]$, S$_/=\{1,2/4,4/2,1\}$
-%	\item The value range of a function over an interval $X=[x,x]$
-%	\newlie W$_f(X)=\{f(x)|x\in X\}$ \to interval hulls take hull(W$_f(X)$)$\in IR$
-%	\newline An example: $X=[0,\pi/6]$
-%	\begin{enumerate}
-%		\item $f(x)=sin(x)$, $sin([0,\pi/6])=[0,\frac{1}{2}]$
-%		\item $f(x)=cos(x)$, $cos([0,\pi/6])=[\sqrt{3}/2,1]$
-%		\item $f(x)=tan(x)$, $tan([0,\pi/6])=[0,1/sqrt{3}] \not = \frac{sin(x)}{cos(x)}$, here "in general" is missing 
-%		\item $f(x)=cot(x)$, $cot([0,\pi/6])=[\sqrt{3}, \infty]$
-%		\item $f(y)=e^y$, $e^y=[e^y, e^y]$, here the line above/below $y$ is missing
-%	\end{enumerate}
-%	\item Interval evaluation (Interval-extension) of a function $f$ over an interval $X\in IR$
-%	\newline Is obtained by substituting $X$ (as a set of real numbers) in each occurrence of the variable $x$ in the calculation rule
-%	\newline $f(X)\supseteq $W$_f(X)$, usually with overestimation of the WB(?)
-%	\newline Especially if $x$ occurs multiple times in the calculation rule
-%	\newline An example 
-%	\newline $+$ $f(x)=x-x \iff g(x)=0$
-%	\newline $f(X)=[-$diam$(X),+$diam$(X)], q(X)=[0,0]$
-%	\newline $+$ $f(x)=x*x \iff g(x)=x^2$
-%	\newline $F(X)$ contains also negative values, if $x<0$ and $x>0$, 
-%	\newline $g(X)=[-,($max$\{|x|,|x|\})^2]$
-%	\newline $+$ $f(x)=sin^2x+cos^2x \iff g(x)=1$
-%	\newline $f([0,\frac{\pi}{6}])=[0,\frac{1}{4}]+[\frac{3}{4}.1]=[\frac{3}{4},\frac{5}{4}]\ni 1$, $g([0,\frac{\pi}{6}])=[1,1]$
-%	\item Solving the equality $A*X=B$ with $A,B,X\in IR, A\not =[0,0]$
-%	\newline Help-function: 
-%	$$
-%	h(A):=
-%	\begin{cases}
-%	a/a, & \text{if } |a|\leqslant|a|\\
-%	a/a, & \text{otherwise } \\
-%	\end{cases}
-%	$$
-%	\newline SATZ(Ratschek):
-%	\newline $AX=B$ has a (algebraic) solution $X\in IR$ if and only if $h(A)\geqslant h(B)$
-%	\newline If $h(A)=h(B)\leqslant 0$, then the solution is not unique 
-%	\newline An example
-%	\begin{enumerate}
-%		\item $A=[1,2], B=[-1,3]$, so: $[1,2]*[x,x]=[-1,3] \implies X_{general}=[-1/2,3/2]$ is unique, since $h(A)=1/2, h(B)=-1/3 \implies h(A)(?)h(B)$ \to $\exists$ uniqueness
-%		\newline Here the sign between $h(A)$ and $h(B)$ is missing
-%	\end{enumerate}
-%	\newline BUT: the set of all point solutions for the equations $ax=b$ with $a\in A, b\in B $ is:
-%	\newline $X_{set}=\{x=\frac{a}{b}| a\in A, b\in B\}=\frac{B}{A}=\frac{[-1,+3]}{[1,2]}=[-1,3]\supseteq X_{general}=[-\frac{1}{2},\frac{3}{2}]$
-%	\newline \square In general, it holds: the set of all point-solutions $X_{set}=\frac{B}{A}\supseteq X_{general}$ (algebraic solutions)
-%	\newline If $AX=B $ with $0\not \in A$ has the algebraic solution $X\in IR$, then $X_{general}\subseteq B/A$, since $\forall x\in X_{general}$ it holds $\forall a\in A: a\cdot x=b \in B$, while $X_{set}=B/A:=\{x=b/a| b\in B, a\in A\}$.
-%	\newline An example 2)
-%	\newline $A=[-1/3,1], B=[-1,2]$ so $[-1/3,1]\cdot X=[-1,2]$ \implies $x=[-1,2]$ is a unique solution
-%	\newline $h(A)=-\frac{1}{3}, h(B)=-\frac{1}{2} \implies h(A)(?)h(B) \implies \exists$ a unique solution!
-%	\newline (Here also its missing the sign between the $h(A)$ and $h(B)$.
-%	\newline BUT:
-%	\newline The set of the point-solutions yields $R$ since $\frac{B}{A}$ is a division through a null-interval. 
-%\end{itemize} 
-%
-%%Definition: For $A\in IR$ the diameter is diam$(A):=a-a= \max\limits_{x,y\in A}|x-y|$
-%%\newline .. is the radius $rad(A):=\frac{a-a{2}=\frac{diam(A)}{2}$
-%%\newline .. is the midpoint: $mid(A)=a:=\frac{a+a}{2}=a+rad(A)=a-rad(A)$
-%
-%\textbf{25.11.2019} \\
-%Definition: For $A\in IR$ the diameter is $diam(A):=a-a=\max\limits_{x,y\in A}|x-y|$ \\
-%... the radius is: $rad(A):=\frac{a-a}{2}=\frac{diam(A)}{2}$ \\
-%... the midpoint is: $mid(A)=a:=\frac{a+a}{2}=a+rad(A)=a-rad(A)$ \\
-%... is the maximum of the absolute value \\
-%$|A|:=\max\limits_{a\in A}|a|=max\{|a|,|a|\}$ \\
-%... is the minimum of the absolute value:
-%$$
-%<A>=\min\limits_{a\in A}|a|=
-%\begin{cases}
-%min\{|a|,|a|\}, & \text{if } 0\not \in A\\
-%0, & \text{if } 0\in A \\
-%\end{cases}
-%$$ \\
-%(An alternative definition of the absolute value of an interval: $|A|^*\[<A>,|A|]$) \\
-%
-%Definition: The distance between two intervalss $A,B\in IR$ is $d(A,B):=max\{|a-b},|a-b|\}$ \\
-%
-%Note: For point-intervalss $A=[a,a], B=[b,b]$ this is a real distance $d(A,B)=d(a,b)=|a-b|$ \\
-%
-%Definition: (Alternative definition): $d(A,B):=max\{\sup\limits_{a\in A}\{d(a,B)\}, \sup\limits_{b\in B}\{d(b,A)\}\}$, with $\sup\limits_{a\in A}\{d(a,B)\}:=\sup\limits_{a\in A}\inf\limits_{b\in B}\}$ \\
-%
-%Definition (further alternative definition) 
-%\begin{itemize}
-%\item $d(A,B):=|mid(A)-mid(B)|+|rad(A)-rad(B)|$
-%\item $d(A,B):=\inf\{q\in R_0^+| A\subseteq B+[-q,+q] \land B\subseteq A+[-q,+q]\}$
-%\implies in every definition $d(A,B)$ is a metric. \\
-%We use the first definition \\
-%\cdot $d(A,B)\geqslant 0$ \\
-%$d(A,B)= 0 \iff a=b \land a=b \iff A=B$ \\
-%$d(A,B)\leqslant d(A,C)+d(B,C) \to (*)$ \\
-%$d(A,B)=d(B,A)$ \\
-%(*): $d(A,C)+d(B,C)= \max\{|a-c|,|a-c|\}+\max\{|b-c|,|b-c|\} \geqslant \max\{|a-c|+|b-c|,|a-c|,|b-c|\} \geqslant \max\{|a-b|,|a-b|\}= d(A,B)$ \\
-%\end{itemize}
-%
-%$IR$ is with this metrix a complete metric space, i.e. every cauchy-sequence $(x_n)$ in $IR$ converges towards an interval $X\in IR$. \\
-%
-%$\forall \epsilon>0 \exists N_{\epsilon}\in N: d(X_n,X_m)<\epsilon \forall n,m \geqslant N_{\epsilon}$, then it holds \\ $\lim_{n\to\infty} x_n=x$ for a $X\in IR$ with $X=[x,x]$ \\
-%$\lim_{n\to\infty} x_n=x \iff \lim_{n\to\infty} d(x_n,x)=0 \iff $(\lim_{n\to\infty} x_n=x \land \lim_{n\to\infty} x_n=x$). \\
-%
-%Important special cases for cauchy sequences (nested intervals): \\
-%Every sequence of interleaved intervals $(A_k)$ with $A_0\supseteq A_1\supseteq A_2 \supseteq ... $ converges towards $A=\bigcap_k^\infty A_{k} $ \\
-%
-%Consequence: all (?) basic operations (and usual standard functions) are (piece-wise) continuous in $IR$. \\
-%
-%To conduct the proof on the lower-/upper boundaries of the intervals. \\
-%
-%Consequences\\
-%\begin{itemize}
-%\item $|A|=d(A,[0,0])=\max\{|a|,|a|\}=max\{\sup\limits_{a\in A}\{d(a,0)\}=max\{\sup\limits_{a\in A}\{|a|}\}$
-%\item $A\subseteq B \implies |A|\leqslant |B|$
-%\end{itemize} \\
-%
-%Properties of the distance: \\
-%\begin{enumerate}
-%\item $d(A+B,A+C)=d(B,C)$ 
-%\item $d(A+B,C+D)\leqslant d(A,C)+ d(B,D)$
-%\item $d(a\cdot B, a\cdot C)=|A|\cdot d(B,C)$
-%\item $d(AB,AC)\leqslant |A|\cdot d(B,C)$
-%\end{enumerate} \\
-%
-%Properties of the diameter: \\
-%\begin{enumerate}
-%\item diam$(A)=a-a\geqslant 0$
-%\item defined point interval $X$ through diam$(X)=0 \iff x=x$
-%\item $A\subseteq B \implies $diam$(A)\leqslant$ diam$(B)$
-%\item diam$(A+- B)=$diam$(A)+$diam$(B)$ 
-%%Here the signs +, - should be above each other
-%\item diam$(AB)\leqslant $diam$(A)\cdot|B|+$diam$(B)\cdot|A|$
-%\item diam$(AB)\geqslant $diam$(A)\cdot|B|+$diam$(B)\cdot|A|$
-%\item diam$(a\cdot B)=|a|\cdot$ diam$(B)$
-%\item diam$(A^n)\leqslant n\cdot$diam$(A)\cdot |A|^{n-1}, (n\in N), (A^n:=A\cdot A\cdot ...)$ (*)
-%\item diam$((A-x)^n)\leqslant($diam$(X))^n, \forall x\in X$ (#)
-%\item $|C|\leqslant$diam$(C)\leqslant2\cdot |C|$, with $O\in C$ (?) Is this O?
-%\end{enumerate}
-%
-%Proof for (*) \\
-%$n=1 \implies$ diam$(A^1)=$diam$(A)\leqslant 1\cdot |A|^0\cdot$diam$(A)$ \\
-%Induction hypothesis: The claim holds for $n, n>1$ \\
-%Induction step: diam$(A^{n+1})=$diam$(A^n\cdot A)\leqslant$ diam$(A^n)\cdot|A|\cdot$diam$(A)\cdot|A^n|$ \\
-%(?)$\leqslant n\cdot |A|^{n-1}\cdot$diam$(A)\cdot|A|+|A^n|\cdot$diam$(A)$ \\
-%$=(n+1)\cdot|A^n|\cdot$diam$(A)$ \\
-%\\
-%Further properties: $A,B\in IR$ \\
-%\begin{enumerate}
-%\item diam$(A)=|A-A|$ 
-%\item $A\subseteq B \implies \frac{1}{2}\cdot$diam$(B)\cdot$diam$(A))\leqslant d(A,B)\leqslant diam(B)\cdot diam(A)$
-%\item $A \subseteq B\iff b\leqslant a\leqslant a\leqslant b$ \\
-%$\implies d(A,B)=\max\{|a-b|,|a-b|\}=\max\{a-b,b-a\}$ \\
-%$\leqslantb-a+a-b=b-b-(a-a)=diam(B)-diam(A)$ \\
-%$\implies d(A,B)=\max\{a-b,b-a\}\geqslant \frac{1}{2}(a-b+b-a)$ \\
-%$=\frac{1}{2}\cdot(diam(B)-diam(A))$ \\
-%\\
-%\end{enumerate}
-%Further operations in $IR$ \\
-%Definition: Intersection(set): precondition is: $A,B\in IR$ are not disjoint. Then: \\
-%$A\cupB:=\{c|c\in A \land c\in B\}=[\max\{a,b},\min\{a,b\}]$ \\
-%Property: (inclusion monotonicity) $A\subseteq C, B\subseteq D \implies (A\cup B)\subseteq(C\cup D)$ \\
-%Definition: Interval hull: (in $IR$ convex hull) \\
-%$A\cup B:=[\min\{a,b\},\max\{a,b\}]$ \\
-%(?) Here i dont know how to write the sign between A and B \\
-%\\
-%
-%\textbf{26.11.19} \\
-%Proof for (#) \\
-%$c\leqslant 0\leqslant c \implies diam(C)=c-c=|c|+|c|\geqslant \max\{c,c\}=|c|$ (?) Im not sure if here its big or small C \\
-%and $diam(C)=|c|+|c|\leqslant 2\cdot \mac\{|c|,|c|\}=2|c|$ \\
-%\\
-%Properties with a symmetric interval $A=-A=[-a,a]$ \\
-%\begin{itemize}
-%\item $A\cdot B=|B|\cdot A$
-%\item $diam(A,B)=|B|\cdot diam(A)$ 
-%\end{itemize} \\
-%
-%\begin{itemize}
-%\item Subdistributivity (distributivity) \\
-%In $IR$ the subdistributivity holds $A*(B+C)\leqslant A*B+A*C$ \\
-%The distributivity holds, if either a) or b) hold: \\
-%a) $A=[a,a]$ is a point interval\\
-%b) $B*C\geqslant 0$, i.e. either: $(B\geqslant 0 \land C\geqslant 0)$ or $(B\leqslant 0 \land C\leqslant 0)$ \\
-%\\
-%Proof for a): \\
-%$a\cdot (B+C):=\{a*(b+c)| b\in B, c\in C\}$ \\
-%$a\cdot B+ac\dot C:=\{ab| b\in B\} \cup \{ac|c\in C\}=\{ab+ac| b\in B,c\in C\}$ \\
-%\implies $a\cdot (B+C)=a\cdot B+ac\dot C$ \\
-%\\
-%Proof for b): \\
-%If $B\geqslant 0 \land C\geqslant 0: B+C\geqslant 0, B*C\geqslant 0$ (products are $\geqslant 0$) \\
-%1st case: $A\geqslant 0 \iff a\geqslant 0$: \\
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
-%$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
-%\implies $A*(B+C)=A*B+A*C$ \\
-%
-%2nd case: $A\leqslant 0 \iff a\leqslant 0 $ (all products $\leqslant 0$) \\
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
-%$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
-%\implies $A*(B+C)=A*B+A*C$ \\
-%
-%3rd case: $a\cdot a<0 \iff a<0<a \iff 0\in A \from int(A)$ \\
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
-%$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
-%\implies $A*(B+C)=A*B+A*C$ \\
-%
-%\\
-%\\
-%If $B\leqslant 0 \land C\leqslant 0: B+C\leqslant 0, B*C\geqslant 0$ \\
-%1st case: $A\geqslant 0 \iff a\geqslant 0$: \\
-%analogously to the 1st case from above, with switching all boundaries \\
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$, (products $\leqslant 0$) \\
-%
-%2nd case: $A\leqslant 0 \iff a\leqslant 0 $ \\
-%analgously to the 1st case from above with switching the boundaries
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$, (products $\geqslant 0$) \\
-%
-%3rd case: $A\ni 0:$ analogously to case 3 from above with switching the boundaries (ALL) \\
-%$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
-%
-%\item Interval vectors (interval boxes) \\
-%$IR^n =$ set of vectors with $n$ components in $IR$ ($IC^n$ analogously) \\
-%$V\in IR^n: V=\begin{bmatrix}v_1 \\ . \\ . \\ .\\ v_n\end{bmatrix}= \begin{bmatrix} [v_1,v_1] \\ . \\ . \\ .\\ [v_n,v_n]\end{bmatrix}$, i.e. $V_i=[v_i,v_i] \in IR$ \\
-%alternative portrayal as pair of point vectors with components being all lower boundaries, i.e. all upper boundaries $(V_1,V_2 \in R^n)$ \\
-%$V=[V,V]=[V_1,V_2]=[\begin{bmatrix}v_1 \\ . \\ . \\ .\\ v_n\end{bmatrix}-\begin{bmatrix}v_1 \\ . \\ . \\ .\\ v_n\end{bmatrix}]$ \\
-%Geometrically we also work with achsis (?) quaders with $Z^n$ edge points $\in \{v=(v_1,..,v_n)^t\in R^n$ with $V_i\in\{v_i,v_i\}, \forall i=1,..,n\}$ \\
-%
-%\item Important properties of the interval arithmetics 
-%\begin{enumerate}
-%\item Inclusion property
-%\begin{enumerate}
-%\item arithmetic operations \\
-%$\circ \in\{+,-,*,/\}: A\subseteq A^\prime, B\subseteq B^\prime \implies A\circ B\subseteq A^\prime \circ B^\prime $ \\
-%\item elementary standard functions \\
-%$i \in \{sin, cos, tan, exp, log, sqrt{},..\}:A\subseteq A^\prime \implies f(A)\subseteq f(A^\prime) $
-%\item also for arbitrary functions which are given with calculation rules (formulas) (\to composition of the basic operations and functions) \to computational graph; \\
-%Input: parameter values \to output: function values \\
-%Graph: (Here comes the graph) \\
-%\implies the inclusion property is through everz computational graph propagandized \\
-%\implies inclusion property \implies guaranteed inclusion of the solution(set). \\
-%\end{enumerate}
-%\item Overestimation of the solution set: \\
-%occurs mainly as a consequence  of the fact that the same variable   occurs repeatedly in a Ber(?)-graph because everytime through the set based definition of the interval arithmetics, the elements are seen decoupled from one another in a variable interval. \\
-%\begin{enumerate}
-%\item An example: $X-X=[-diam(X),+diam(X)]\to$ strech as much as possible, and replace through O?
-%\item \implies Recommendation: To keep the number of (?) of each variable in the calculation rule as much as possible. For example, by factoring out common subexpression (example: distributive law). \\
-%\item further countermeasures \\
-%interval subdivision of parameter intervalls and individual evaluation of the individual sub-intervals, to take interval hull of this enclosure \\
-%\item use of smoothness characteristic of the calculation rule, ie use of derivatives (mind $f^\prime$) and estimation of the value range (?)
-%\end{enumerate}
-%\item Wrapping-effect (in multidimensional, $IR^n$) \\
-%An example: $f:R^2 \xrightarrow{} R^2$, rotation around the angle $\phi$ \\
-%$f(X)=A\phi\cdot X$ with $A=\begin{bmatrix}cos(\phi) sin(\phi)\\ -sin(\phi) cos(\phi) \end{bmatrix}$ \\
-%repeated use: $X_{i+1}:= f(X_i)=A\phi\cdot X_i=A\phi\cdot x_i$ \\
-%$=A\phi\cdot A\phi\cdot X_{i-1} = .. = A\phi^{(i+1)}\cdot x_0$ \\
-%$=\begin{bmatrix}cos(i \phi) sin(i \phi)\\ -sin(i \phi) cos(i \phi) \end{bmatrix} \cdot x_0$ \\
-%In $IR: $ square $X_0:=\begin{bmatrix}[-\epsilon, +\epsilon]\\ [-\epsilon, +\epsilon] \end{bmatrix}, \epsilon>0 $ \\
-%$X_1=begin{bmatrix}[-\epsilon, +\epsilon]\cdot cos(\phi) [-\epsilon, +\epsilon]\cdot sin(\phi)\\ [-\epsilon, +\epsilon]\cdot (-sin(\phi)) [-\epsilon, +\epsilon]\cdot cos(\phi) \end{bmatrix}$ \\
-%$=\begin{bmatrix}|sin(\phi)|+|cos(\phi)|\end{bmatrix} \cdot \begin{bmatrix} [-\epsilon,+\epsilon] \\[-\epsilon,+\epsilon] \end{bmatrix}$ \\
-%\\
-%$X_n= (|sin(\phi)|+|cos(\phi)|)^n \cdot X_0$ the diameter grows exponentially! \\
-%\\
-%Here comes the graph \\
-%\end{enumerate}
-%\end{itemize}\\
-%
-%\textbf{2.12.19} 
-%\begin{itemize}
-%\item Extension of the number field $R$ \\
-%$\Omega:=\{-\infty, +\infty\}$, $R^*:=R \cup \Omega$ \\
-%$IR:=\{[x,y]|x\leqslant y, x,y\in R\}$ \\
-%$IR^*:=IR\cup \{(-\infty,y]|y\in R\}\cup \{[x,+\infty)|x\in R\} \cup \{(-\infty, +\infty)\}$, \\
-%where \\
-%$(-\infty,y]:=\{a\in R|a\leqslant y\}$ \\
-%$[x,+\infty):=\{a\in R|a\geqslant y\}$ \\
-%\item extended interval division $X/Y$ with $0\in Y$ \\
-%$Y=Y_1\cup \{0\}\cup Y_2$ with $Y_1=[y,0)$ and $Y_2=(0,y]$ \\
-%$X/Y:=X/Y_1 \cup X/Y_2 =\{x/y|x\in X, y\i Y_1\} \cup \{x/y| x\in X, y\in Y_2\}$ \\
-%Here the things under $X/Y_1 \cup X/Y_2$ are missing! \\
-%
-%\\
-%$1/Z=1/Z_1 \cup 1/Z_2\cup \{0\}=[-\frac{1}{4},0)\cup (0,\frac{1}{2}]\cup \{0\}=Y/X$ \\
-%
-%For $0\in Y: $ \\
-%$$
-%X/Y=
-%\begin{cases}
-%(-\infty,+\infty), & \text{if } X=0 \text{or } 0\in X \text{or } Y=0\\
-%(-\infty, x/y]\cup [x/y,+\infty), & \text{if } X\leqslant0 \text{and } y\leqslant y=0 \\
-%(-\infty, x/y], & \text{if } X\leqslant0 \text{and } 0=y< y 
-%\end{cases}
-%$$ \\ 
-%Here just the circle above the $X$ is missing in the first case \\
-%$$
-%X/Y=
-%\begin{cases}
-%(-\infty,X/Y]\cup[X/Y,+\infty), & \text{if } 0\leqslant X \text{and } 0\in Y \\
-%(-\infty, x/y], & \text{if } 0\leqslantx \text{and } y<y=0 \\
-%[x/y,+\infty), & \text{if } 0\leqslantx \text{and } 0=y<y 
-%\end{cases}
-%$$ \\
-%Here the circle above $Y$ in the first case is missing \\
-%For $0\not \in Y: 1/y=[\frac{1}{y},\frac{1}{y}]$ \\
-%For $0\in Y: 1/y=(-\infty,\frac{1}{y}]\cup [\frac{1}{y},+\infty)$\\
-%$\frac{1}{1/y}=[\frac{1}{1/y})\cup \{0\}\cup (0,\frac{1}{1/y}]=[y,y]=Y$\\
-%\item $W_i(X)\subseteqf(X)$ \\
-%Assumption: $f:J\xrightarrow{}R, J=[a,b]\subset R, f\in C^1(J)$ \\
-%For arbitrary intervalls $x\subseteq J$ it holds: \\
-%For a $z\in X$ (here a circle above $X$) (eg. $z=x=mid(X)$)per mean value theorem there is a point $\xi\in X$ $\forall x\in X$ with: \\
-%$f(x)=f(z)+f^\prime(\xi)(x-z) \in f(z)+f^\prime(X)(X-z)=:f_m(X)$ \\
-%$f_m$ is called a mean value form or centered form. \\
-%Note: If $\cup_{k=1}^n X_k=X\subseteq J$ a decomposition of $X$ in part-intervalls , then there are constants $c_1,c_2 \in R_+$ which are only dependant of $f$ and $J$, so that the distance \\
-%$d_1:=d(W_f(X), \cup_{k=1}^n f(X_k))\leqslant c_1\cdot max_k (diam(X_k))$ \\
-%while the distance \\
-%$d_2:=d(W_f(X),\cup_{k=1}^nf_m(X_k))\leqslant c_2\cdot max_k(diam^2(X_k))$ \\
-%$d_1\implies $ overestimation decreases linearly \\
-%$d_2\implies$ overestimation decreases quadratically$. \\
-%
-%\item Classic Newton-method: \\
-%$f\in C^1(\xi)$, start point/- approximation $X_0$ \\
-%$X_{n+1}=X_n-\frac{f(X_n)}{f^\prime(X_n)}, n=0,1,2,..$ \\
-%local linearisatin of the function $f$ at point $(x_0,f(x_0))$ \\
-%In general the Newton's method is not convergent. \\
-%If it converges (towards a zero of the function, which is a eventually non near the starting point x_0 lying point), then the convergence rate is quadratic, i.e. the error is squared in each iteration, i.e. the number of correct points is doubled. \\
-%\item Interval- Newton- method \\
-%$f\in C^1(J), J=[a,b]\subseteq R$ start-/searchinterval $X_0=[x_0,x_0]$ \\
-%Wanted: Zero(s) of $f$ in $X_0$, i.e. $x^*\in X_0$ with $f(x^*)=0$ \\
-%For every $x\in X_0, x\not = x^* \exists \xi \in X_0$ (between $x$ and $x^*$), with: \\
-%$f(x^*)-f(x)=f^\prime(\xi)\cdot (x^*-x)$ \\
-%$0=f(x^*)=f(x)+f^\prime(\xi)\cdot (x^*-x)$ \\
-%$x^*=x-\frac{f(x)}{f^\prime(\xi)} \in x-\frac{f(X)}{f^\prime(X)}$ \\
-%\\
-%Interval-Newton Operator: \\
-%$N(f,x,X):=x-\frac{f(x)}{f^\prime(X)} \implies $ Interval -Newton Iteration \implies Interval nesting \\
-%with $x\in X$ (Here signs above both $x$) \\
-%\\
-%$X_{n+1}:=N(f,x_n,X_n)\cup X_n\leqslant X_n$ \\
-%\\
-%Note: 
-%\begin{enumerate}
-%\item Every zero of $f$ in $X$ has to be in $N(f,x,X)$ for $x\in X$ 
-%\item One obtains interval nesting through $\cup X_n$ \\
-%\implies convergence towards the zero (assumption: $0\not \in f^\prime(X)$) 
-%\item If $x$ is chosen to be a midpoint of $X$, then the convergence is better than the bisection method \\
-%Here comes the graph \\
-%One can show that the convergence ( as in the classic Newton-method) is quadratic. ($0\not \in f^\prime(X_0)$). \\
-%\\
-%3 cases: (occur in the iteration) with $0\not \in f^\prime(X)$ \\
-%\begin{enumerate}
-%\item $N(f,x,X)\subseteq X \implies \exists! $ zero of $f\in N(f,x,X)\subseteq X\subseteq X_0$ 
-%\item The intersection is empty: $N(f,x,X)\cup X= \empty$ \\
-%\implies there does not exist a zero in the start interval $X_0$
-%\item Otherwise: the iteration has to be continued until case 1 or case 2 occurs. 
-%\end{enumerate}
-%% In practice, this results in the typical interval methods result, ie, a fining intervals is numerically impossible and 1) or 2) have not been met \implies outlay: zero possible, but not verified.
-%%Check
-%\end{enumerate}
-%\item Transition to floating-point: $IR$ to $IR$ \\
-%$IR:=\{X=[x,x]|x\leqslant x, x,x\in R =$ floating point (?) $\}$
-%
-%\item Interval rounding: $\bDiamond : IR \xrightarrow{} IR, \bDiamond X:=[\nablax, \triangle x] \supseteq X$ \\
-%Properties: \\
-%$\bDiamond X=X, \forall X\in R$ (R1) \\
-%$X<Y \implies \bDiamond X\leqslant \bDiamond Y$ for $X,Y\in IR$ (R2) \\
-%$\bDiamond(-X)=-\bDiamond X \forall X\in IR$ (R3) \\
-%Proof for (R3): \\
-%With (R4) with the directed roundings $\triangle(-x)=-\nabla x$ \\
-%$\bDiamond(-X)=\bDiamond (-[x,x])=\bDiamond[-x,-x]=[\nalba(-x),\triangle(-x)]=[-\triangle x,-\nabla x]=-[\nabla x,\triangle x]=-\bDiamond X$ \\
-%\item Properties of the floating point interval arithmetics: \\
-%$+,*$ are commutative, but not associative! \\
-%Example: $\epsilon:=$ Wilkinson$-\epsilon=b^{1-l}$ \\
-%([-\frac{\epsilon}{2},\frac{\epsilon}{2}]\bDiamond[-\frac{\epsilon}{2},\frac{\epsilon}{2}])\bDiamond \frac{3}{2}=[-\epsilon,+\epsilon] \bDiamond \frac{3}{2} =[\frac{3}{2}-\epsilon, \frac{3}{2}+\epsilon] \\
-%\\
-%$[-\frac{\epsilon}{2},\frac{\epsilon}{2}]\bDiamond([-\frac{\epsilon}{2},-\frac{\epsilon}{2}]\bDiamond \frac{3}{2})=[-\frac{\epsilon}{2},\frac{\epsilon}{2}]\bDiamond [\frac{3}{2}-\epsilon , \frac{3}{2}+\epsilon]= [\frac{3}{2}-2\epsilon, \frac{3}{2}+2\epsilon]$ (rounding!)  \\
-%\\
-%$\exists$ neutral elements $0=[0,0], 1=[1,1]$ with $x+0=0+x=x, 1*x=x*1=x$ \\
-%In general there does not exist inverse elements (as already in $IR$) \\
-%\\
-%Subdistributivity applies almost always, factoring out common subexpressions should be, however, always put in practice by reducing the (?) \\ 
-%
-%I dont understand the next sentence \\
-%\\
-%\item Floating point numbers:  \\
-%ulp$:=b^{e_x-l}$ with $x=(-1)^{S_x}\cdot m_x \cdot b^e_x$ \\
-%with $l=$length of the mantissa $=$ number of digits to a base $b$ \\
-%succ$(1)=1+ulp(1)=1+\epsilon$, since $1=(-1)^0\cdot 0.100...0\cdot b^1$ and $\epsilon =ulp(1)=b^{1-l}$ \\
-%\\
-%Sometimes it is more practical to write floating point numbers in another form, namely as a integer multiple of ulp(x): \\
-%$x=(-1)^{S_x}\cdot m_x\cdot b^{e_x}=(-1)^{S_x}\cdot M_x\cdot b^{e_x-l}=(-1)^{S_x}\cdot M_x\cdot ulp(x)$ \\
-%
-%If $x$ is normalized, then it holds $\frac{1}{b}\leqslant m_x<1$, i.e. $b^{l-1}\leqslant M_x\leqslant b^l-1, M_x\in N$ \\
-%\\
-%If we involve the sign in the mantissa $M_x$ and additionally allow the zero and the denormalized FPN then it holds: \\
-%$x=M_x\cdot ulp(x)$ with $M_x\in Z, |M_x|\leqslant b^l-1$ \\
-%
-%In the following the exponent range is initially to be looked as unlimited) i.e. eventually occurring under or overflow is recognized at the very end, after rounding. \\
-%
-%\item $4$ basic calculation ways in FPN (semimorph (?) computer arithmetic) \\
-%\\
-%Here comes the graph \\
-%\\
-%Semimorph C-arithmetics: $\circ\in \{+,-,*,/\}, \bigcirc\in \{\square,\triangle, \nabla, ..\}$ Here some signs are missing \\
-%
-%Then \\
-%$x(?)y:=\bigcirc(x\circ y), \forall x,y\in R$ (floating point (?)) \\
-%
-%Additional rounding for general basis $b\in \{2,3,4,..\}$ \\
-%\\
-%\\ 
-%Here Im just going to write everything, you can just copy-paste it in the brackets as needed  \\
-%\\
-%Defined help-function: $x\in R, x>0 $ \\
-%$S_\mu(x):=\nabla x+\frac{\triangle x-\nabla x}{b}\cdot \mu $, \\
-%for $x\in R: S_\mu(x):= \nabla x+ulp(x)\cdot \frac{\mu}{b}$ 
-%\\
-%\\
-%
-%with $\mu\in \{1,2,..,b-1\}$ \\
-%for $\mu=0$ ... Here write \\
-%for $\mu=b$ ... Here write \\
-%,i.e. ... Here write \\
-%
-%
-%$$
-%\square \mu(x):=
-%\begin{cases}
-%0, & \text{if } x\in [0,x_{min})=[0,b^{e-1})\\
-%\nabla x,  & \text{if } x\in [\nabla x, S_\mu(x)), x>0\\
-%\triangle x,  & \text{if } x\in [s_\mu(x), \triangle x), x>0\\
-%-\square \mu(-x),  & \text{if } x<0 \text{(antisymmetric)}  
-%\end{cases}
-%$$ \\
-%
-%An example: \\
-%$b=10, l=4: \square_(?) (0.5739; 5)=0.5739$ \\
-%$\square_(?) (0.5739; 6)=0.5740$ \\
-%
-%\item 5 steps for a arithmetic floating- point operation: \\
-%\begin{enumerate}
-%\item decomposition of the operands  \\
-%$x\to (S_x,m_x,e_x)=(M_xl,e_x-l)$ \\
-%\item $y\to (S_y,m_y,e_y)=(M_y,e_y-l)$ \\
-%where, $M_x, M_y$ is favoured in 2er-complement 
-%\item Computation of a (approximated) intermediate result  \\
-%$z:=z\circ y \approx x\circ y = z$ \\
-%(with accuracy requirement that $Oz=Oz=$ result 
-%\item Normalising: \\
-%Adjust To eliminate the leading zero digits in the mantissa through L(left)-Shift_k\from (by k positions) and adjust the exponent (substract k) \\
-%
-%or: AR-Shift_1, if a leading 1 has come as a carry before the mantissa. 
-%
-%\item Rounding: \\
-%$z=x\circ y=Oz=Z(x\circ y)=O(x\circ y)$ \\
-%In rare cases (if the mantissa results in $m_z=1.00...0$) the result of the rounding must be normalized again, i.e. ARShift_1 yields $0.100...0$ and increase the exponent $+1$.
-%
-%\item composition $(M_z, ex-l)\to (s_z,m_z,l_z)\to z$ \\
-%4 basic operations (arithmetically) \\
-%\begin{enumerate}
-%\item multiplication: $z=x\circ y$ \\
-%Case 1: $x=0 \lor y=0 \implies z=0$ \\
-%Case 2: $x\not = 0 \land y\not =0: $\\
-%$z=(-1)^{S_x+S_y}\cdot m_x\cdot m_y\cdot b^{e_x+e_y} $ \\
-%$=(-1)^{S_x+S_y}\cdot M_x\cdot M_y\cdot b^{e_x+e_y-2l} $ \\
-%$ =(-1)^{S_x+S_y}\cdot M_x\cdot M_y\cdot ulp(x)\cdot ulp(y) $ \\
-%\\
-%If $x,y$ are normalized: $B^{2l-2}\leqslant M_x\cdot M_y< b^{2l}$ \\
-%\implies $M_x\cdot M_y$ need $2l-1$ or $2l$ digits \\
-%\\
-%Computation of the exact double-long product is necessary, so that one can round always correctly! \\
-%
-%Case 1: $M_x\cdot M_y=b^{2l-1} (\implies 2l$ digits $)\implies ez:=ex+ey$ \\
-%Case 2: $M_x\cdot M_y<b^{2l-1} (\implies 2l-1$ digits $)$, then $m_x\cdot m_y<b^{-1}$ is not normalized \implies LShift_1, i.e. $m_z=m_xm_y\cdot b$ (rounding) and $ez:=ex+ey-1$//
-%//
-%Note: AR_Shift = arithmetics (?) Shift
-%
-%\begin{itemize}
-%	\item Rounding is always based on the first digit, which doesn not fit in the mantissa anymore (ie $l + 1$ significant digit plus information whether after that something else comes, which is not zero (ie rest from $l + 2$, digits $\not = 0$)
-%	
-%	\item Round digit = $l+1$ significant digit
-%	
-%	\item sticky bit $s=V_{i=l+2}m_i =$
-%	$$
-%	s=V_{i=l+2}m_i =
-%	\begin{cases}
-%	0, & \text{if rest}=0\\
-%	1,  & \text{otherwise}
-%	\end{cases}
-%	$$ \\
-%	$0.m_1m_2 \cdot \cdot \cdot m_l $
-%	\\ Here idk how to write this.
-%	
-%	\\
-%	This holds especially for our roundings :
-%	(write the roundings?)\\
-%\end{itemize}
-%\item Division: $z=x/y$ with $y\not=0$ [otherwise\to error] \\
-%Case 1: $x=0 \implies z=0$ \\
-%Case 2: $x\not = 0 (y\not =0):$ \\
-%$z=x/y-(-1)^{S_x+S_y}\cdot \frac{m_x}{m_y}\cdot b^{e_x-e_y}=(-1)^{S_z}\cdot \frac{M_x}{M_y}\cdot b^{e_x-e_y}$, with $S_z:=MOD(S_x+S_y,Z)$ and here the approximation is missing 
-%\\
-%$1/b<m_z^*<b$ with normal $x$ and $y$.\\
-%\\
-%\begin{itemize}
-%	\item If $m_x\geqslant m_y \iff m_z^*\geqslant 1$, then the result has to be shifted with AR-Shift_1 (or to write the (HW?) of the first digits on the "correct" position of the mantissa and to increase it by 1 \implies normalisation is not necessary
-%	\item If $m_x<m_y \implies m_z^*<1$, then adjusts the position of the digits 
-%\end{itemize}
-%\\
-%
-%\end{enumerate}
-%Implementation of the mantissa division manually: \\
-%with $x>0, y>0:$ \\
-%0. accumulator: $A:=x$ \\
-%1. for $i=1,..,l+1$
-%\begin{itemize}
-%%\item Compute the quotient digit $q_i$ from left to right. In addition to that one has to ... the maximal multiple of $y$ by disconnecting the multiples of, that can be pulled off yet from the accumulator A.
-%\item $A:=A-q_i\cdot y\cdot b^{-i}$ 
-%\end{itemize}
-%2. Quotient $z=0.q_1q_2...q_l|q_{l+1} \from m_z^*$ with rest $R=A_{l+1}$ (last akku-content) \\
-%3. Rounding: with rounding digits $r=q_{l+1}$ and sticky bit \\
-%$$
-%s =
-%\begin{cases}
-%0, & \text{if R}=0\\
-%1,  & \text{if R}\not= 0
-%\end{cases}
-%$$ \\
-%
-%\item Addition and substraction (4) $z=x+-y$ \\
-%substraction: build 2er complement of $y$ and add\\
-%assumption: $e_x\geqslant e_y$ and $x\not=0$ and $y\not=0$ (or stricter: $|x|\geqslant |y|$) \\
-%special cases are not going to be considered separately \\
-%\\
-%$e_x\geqslant e_y$ if this doesnt hold, then switch $x$ and $y$ \\
-%
-%\\
-%Mantissa obtaine here also the sign \\
-%(2er complement/ $b-$complement kochierung?) \\
-%- exact result: $z=x+y$\\
-%- intermediate result: $z=z+y$ (enough for correct rounding, so that the floating point result: $z:=O(z)=O(z)$ ...? \\
-%\\
-%General assumption $x\not=0, y\not=0, |x|>|y|$ \\
-%Algorithm with long accumulator: with $(2l+1)$ digits (to a base $b$) and $1$ carry-out-bit. (Here comes the drawing) \\
-%\\
-%Case 1: Exponent difference $d:=e_x-e_y\geqslant l+2$ \\
-%$b=10, l=6$ \\
-%DRAWING\\
-%\\
-%Rounding: \\
-%a) $\square\mu (\mu\in \{1,..,b-1\})$ + drawing \\
-%b) the signs, $m_z=b^{-(l+2)}\cdot (b^{l+1}\cdot m_x+sign(y)$, where 
-%
-%$$
-%sign(y) =
-%\begin{cases}
-%1, & \text{if } y>0\\
-%0,  & \text{if} y=0\\
-%-1,  & \text{if} y<0
-%\end{cases}
-%$$ \\
-%$z=x+b^{-2}\cdot ulp(x)\cdot sign(y)$ \\
-%rounding yields $prod(x)$ or $x$ or $succ(x)$\\
-%
-%\\
-%Case 2: $d=e_x-e_y=l+1$ \\
-%DRAWING \\
-%\\
-%Rounding: \nabla, $\square \mu (\mu=6,..,10)$, result + drawing \\
-%$\square, \square_{IEEE}, \triangle, \square\mu(\mu=0,..,5)$, result + drawing \\ 
-%b) DRAWING \\
-%Rounding: $\square, \square_{IEEE}, \nabla, \square\mu(\mu=5,..,10), \triangle, \square\mu (\mu=0,..,4)$, result + drawing $ \\
-%\\
-%$\implies$ Idea: short accumulator with $1$ bit $+l z_i+1\cdot z_i+1\cdot z_i+1$bit \\
-%\\ here the things under the line are missing \\
-%\implies $l+2$ digits $+2$ bit \\
-%(for $b=2$ i.e. $l+4$ bit) \\
-%\\
-%\end{enumerate}
-%\end{itemize} \bigskip
+\subsection*{25.11.2019}
+\begin{*definition}
+	For $A\in IR$ the diameter is $diam(A):=a-a=\max\limits_{x,y\in A}\abs{x-y}$
+	\begin{itemize}
+		\item the radius is: $\rad(A):=\frac{a-a}{2}=\frac{diam(A)}{2}$
+		\item the midpoint is: $mid(A)=a:=\frac{a+a}{2}=a+\rad(A)=a-\rad(A)$
+		\item  is the maximum of the absolute value 
+		\begin{align*}
+			|A|:=\max\limits_{a\in A}|a|=\max\set{|a|,|a|}
+		\end{align*}
+		\item is the minimum of the absolute value:
+		\begin{align*}
+			\langle=\min\limits_{a\in A}|a|=
+			\begin{cases}
+			\min{|a|,|a|}, & \text{if } 0\not \in A\\
+			0, & \text{if } 0\in A \\
+			\end{cases}
+		\end{align*}
+	\end{itemize}
+(An alternative definition of the absolute value of an interval: $\abs{A}^{\ast} [\langle A \rangle,\abs{A}]$).
+\end{*definition}
+\begin{*definition}
+	The distance function takes the distance between two intervals $A,B\in IR$, and is defined by
+	\begin{align*}
+		d(A,B):=\max\set{\abs{a-b},\abs{a-b}}
+	\end{align*}
+	\todo[inline]{is this alright or typo?!}
+\end{*definition}
+\begin{*remark}
+	For point-intervals $A=[a,a], B=[b,b]$ this is a real distance $d(A,B)=d(a,b)=\abs{a-b}$.
+\end{*remark}
+\begin{*definition}[Alternative definition]
+	$d(A,B):=\max\{\sup\limits_{a\in A}\{d(a,B)\}, \sup\limits_{b\in B}\{d(b,A)\}\}$, with $\sup\limits_{a\in A}\{d(a,B)\}:=\sup\limits_{a\in A}\inf\limits_{b\in B}\}$
+\end{*definition}
+\begin{definition}[alternative definition]
+	\begin{itemize}
+		\item $d(A,B):=\abs{mid(A)-mid(B)}+\abs{\rad(A)-\rad(B)}$
+		\item $d(A,B):=\inf\set{q\in R_0^+\mid A\subseteq B+[-q,+q] \land B\subseteq A+[-q,+q]}$
+\end{itemize}
+	In every definition $d(A,B)$ is a metric.
+\end{definition}
+\begin{proof}\todo[inline]{is this really a proof? But of which claim?!}
+	We use the first definition \todo[inline]{Which definition?} 
+	$\cdot d(A,B)\ge 0$
+	$d(A,B)= 0 \iff a=b \land a=b \iff A=B$\\
+	$d(A,B)\le d(A,C)+d(B,C) \to (*)$ \\
+	$d(A,B)=d(B,A)$ \\
+	(*)\todo{set reference}: $d(A,C)+d(B,C)= \max\{|a-c|,|a-c|\}+\max\{|b-c|,|b-c|\} \ge \max\{|a-c|+|b-c|,|a-c|,|b-c|\} \ge \max\{|a-b|,|a-b|\}= d(A,B)$.
+\end{proof}
+$IR$ is with this metric a complete metric space, i.e. every cauchy-sequence $(x_n)$ in $IR$ converges towards an interval $X\in IR$. \\
+$\forall \epsilon>0 \exists N_{\epsilon}\in N: d(X_n,X_m)<\epsilon \forall n,m \ge N_{\epsilon}$, then it holds \\ $\lim_{n\to\infty} x_n=x$ for a $X\in IR$ with $X=[x,x]$ \\
+$\lim_{n\to\infty} x_n=x \iff \lim_{n\to\infty} d(x_n,x)=0 \iff (\lim_{n\to\infty} x_n=x \land \lim_{n\to\infty} x_n=x$). \\
+Important special cases for Cauchy sequences (nested intervals): \\
+Every sequence of interleaved intervals $(A_k)$ with $A_0\supseteq A_1\supseteq A_2 \supseteq ... $ converges towards $A=\bigcap_k^\infty A_{k} $\\
+Consequence: all (?) basic operations (and usual standard functions) are (piece-wise) continuous in $IR$. \todo[inline]{define a good symbol as palceholder for all operations?}
+To conduct the proof on lower-/upper boundaries of the intervals.
+Consequences
+\begin{itemize}
+	\item $\abs{A}=d(A,[0,0])=\max{\abs{a},\abs{a}}=max\{\sup\limits_{a\in A}\{d(a,0)\}=\max\{\sup\limits_{a\in A}\{\abs{a}\}$ \todo[inline]{again min and max for $a$?}
+	\item $A\subseteq B \implies \abs{A}\le \abs{B}$
+\end{itemize}
+\begin{proposition}
+	Properties of the distance:
+	\begin{enumerate}
+		\item $d(A+B,A+C)=d(B,C)$ 
+		\item $d(A+B,C+D)\le d(A,C)+ d(B,D)$
+		\item $d(a\cdot B, a\cdot C)=\abs{A}\cdot d(B,C)$
+		\item $d(AB,AC)\le \abs{A}\cdot d(B,C)$
+	\end{enumerate}
+\end{proposition}
+\begin{proposition}
+	Properties of the diameter:
+	\begin{enumerate}
+		\item $\diam(A)=a-a\ge 0$
+		\item defined point interval $X$ through $\diam(X)=0 \iff x=x$
+		\item $A\subseteq B \implies \diam(A)\le \diam(B)$
+		\item $\diam(A\pm B)=\diam(A)+\diam(B)$ 
+		\todo{Here the signs +, - should be above each other}
+		\item $\diam(AB)\le \diam(A)\cdot\abs{B}+\diam(B)\cdot\abs{A}$
+		\item $\diam(AB)\ge \diam(A)\cdot\abs{B}+\diam(B)\cdot\abs{A}$
+		\item $\diam(a\cdot B)=\abs{a}\cdot \diam(B)$
+		\item \begin{align*}
+			\diam(A^n)\le n\cdot\diam(A)\cdot \abs{A}^{n-1}, (n\in N), (A^n:=A\cdot A\cdot ...) \tag{$\ast$}\label{eq_prop_diam}
+		\end{align*}
+		\item
+		\begin{align*}
+			\diam((A-x)^n)\le(\diam(X))^n, \forall x\in X
+			\tag{$\#$}\label{eq_prop_diam2}	
+		\end{align*}
+		\item $\abs{C}\le\diam(C)\le 2\cdot , \with O\in C$ \todo[inline]{Is this really a $O$ here?}
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item We prove \eqref{eq_prop_diam2} and have $A,B\in IR$:\\
+		$n=1 \implies \diam(A^1)=\diam(A)\le 1\cdot \abs{A}^0\cdot\diam(A)$ \\
+		Induction hypothesis: The claim holds for $n, n>1$ \\
+		Induction step: $\diam(A^{n+1})=\diam(A^n\cdot A)\le \diam(A^n)\cdot\abs{A}\cdot\diam(A)\cdot\abs{A^n}$ \\
+		(?)$\le n\cdot$ \todo[inline]{What is missing here for the?} $\abs{A}^{n-1}\cdot\diam(A)\cdot|A|+|A^n|\cdot\diam(A)$ \\
+		$=(n+1)\cdot|A^n|\cdot\diam(A)$ \\
+		\item $\diam(A)=\abs{A-A}$
+		\item $A\subseteq B \implies \frac{1}{2}\cdot \diam(B)\cdot\diam(A))\le d(A,B)\le diam(B)\cdot diam(A)$
+		\item  $A \subseteq B\iff b\le a\le a\le b$ \\
+		$\implies d(A,B)=\max\{|a-b|,|a-b|\}=\max\{a-b,b-a\}$ \\
+		$\le b-a+a-b=b-b-(a-a)=diam(B)-diam(A)$ \\
+		$\implies d(A,B)=\max\{a-b,b-a\}\ge \frac{1}{2}(a-b+b-a)$ \\
+		$=\frac{1}{2}\cdot(diam(B)-diam(A))$
+	\end{itemize}
+\end{proof}
+Further operations in $IR$ \\
+\begin{*definition}[set-intersection]
+	The Precondition is: $A,B\in IR$ are \emph{not disjoint}. Then
+	\begin{align*}
+		A\cup B:=\{c \mid c\in A \land c\in B\}=[\max{a,b},\min{a,b}]
+	\end{align*}
+\end{*definition}
+\begin{proposition}[inclusion monotonicity property]
+	We have 
+	\begin{align*}
+		A\subseteq C, B\subseteq D \implies (A\cup B)\subseteq(C\cup D)
+	\end{align*}
+\end{proposition}
+\begin{proof}
+	Without proof.
+\end{proof}
+\begin{definition}[interval hull]
+	(in $IR$ convex hull)
+	\begin{align*}
+		A\cup B:=[\min\{a,b\},\max\{a,b\}]
+	\end{align*}
+	(?) \todo[inline]{Here i dont know how to write the sign between A and B}
+\end{definition}
+
+\subsection*{26.11.19}
+Proof for ($\#$) \todo{Fix references}
+\begin{align*}
+	c\le 0\le c \implies \diam(C)=c-c=|c|+|c|\ge \max\set{c,c}=|c|
+	\intertext{(?)\todo{?} Im not sure if here its big or small C and}
+	\diam(C)=|c|+|c|\le 2\cdot \max\set{|c|,|c|}=2|c|
+\end{align*}
+Properties with a symmetric interval $A=-A=[-a,a]$
+\begin{itemize}
+	\item $A\cdot B=|B|\cdot A$
+	\item $diam(A,B)=|B|\cdot diam(A)$ 
+\end{itemize}
+\begin{itemize}
+\item Subdistributivity (distributivity) \\
+In $IR$ the subdistributivity holds $A*(B+C)\le A*B+A*C$ \\
+The distributivity holds, if either a) or b) hold: \\
+\begin{enumerate}
+	\item $A=[a,a]$ is a point interval\\
+	\item $B*C\ge 0$, i.e. either: $(B\ge 0 \land C\ge 0)$ or $(B\le 0 \land C\le 0)$
+\end{enumerate}
+\begin{proof}
+	\begin{enumerate}
+		\item $a\cdot (B+C):=\{a*(b+c)| b\in B, c\in C\}$\\
+		$a\cdot B+ac\dot C:=\{ab| b\in B\} \cup \{ac|c\in C\}=\{ab+ac| b\in B,c\in C\}$ \\
+		$\implies a\cdot (B+C)=a\cdot B+ac\dot C$
+		\item If $B\ge 0 \land C\ge 0: B+C\ge 0, B*C\ge 0$ (products are $\ge 0$)
+		\begin{itemize}
+			\item 1st case: $A\ge 0 \iff a\ge 0$: \\
+			$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
+			$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
+			$\implies A*(B+C)=A*B+A*C$
+			\item 2nd case: $A\le 0 \iff a\le 0 $ (all products $\le 0$) \\
+			$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
+			$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
+			$\implies A*(B+C)=A*B+A*C$
+			\item 3rd case: $a\cdot a<0 \iff a<0<a \iff 0\in A \to \int(A)$ \\
+			$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$ \\
+			$A*B+A*C=[a\cdot b+a\cdot c,a\cdot b+a\cdot c]$ \\
+			$\implies A*(B+C)=A*B+A*C$ \\
+			If $B\le 0 \land C\le 0: B+C\le 0, B*C\ge 0$
+			\begin{itemize}
+				\item 1st case: $A\ge 0 \iff a\ge 0$: \\
+				analogously to the 1st case from above, with switching all boundaries \\
+				$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$, (products $\le 0$) 
+				\item 2nd case: $A\le 0 \iff a\le 0$
+				analgously to the 1st case from above with switching the boundaries
+				$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$, (products $\ge 0$)
+				\item 3rd case: $A\ni 0:$ analogously to case 3 from above with switching the boundaries (ALL) \\
+				$A*(B+C)=[a\cdot(b+c),a\cdot(b+c)]$
+			\end{itemize}
+		\end{itemize} 
+	\end{enumerate}
+\end{proof}
+
+\item Interval vectors (interval boxes) \\
+$IR^n =$ set of vectors with $n$ components in $IR$ ($IC^n$ analogously)
+\begin{align*}
+V\in IR^n: V=
+	\begin{bmatrix}
+		v_1 \\
+		. \\
+		. \\
+		.\\
+		v_n
+	\end{bmatrix}= 
+	\begin{bmatrix}
+		[v_1,v_1] \\
+		. \\
+		. \\
+		.\\
+		[v_n,v_n]
+	\end{bmatrix} \quad \text{i.e. } V_i=[v_i,v_i] \in IR.
+\end{align*}
+alternative portrayal as pair of point vectors with components being all lower boundaries, i.e. all upper boundaries
+\begin{align*}
+	(V_1,V_2 \in R^n \\
+	V=[V,V]=[V_1,V_2]=\sqbrackets{
+	\begin{bmatrix}
+		v_1 \\
+		 . \\
+		  . \\
+		   .\\
+		    v_n
+	 \end{bmatrix}-
+	 \begin{bmatrix}
+	 v_1 \\
+	  . \\
+	   . \\
+	    .\\
+	     v_n
+	 \end{bmatrix}}
+\end{align*}
+Geometrically we also work with achsis (?)\todo{?} quaders with $Z^n$ edge points $\in \{v=(v_1,..,v_n)^t\in R^n$ with $V_i\in\{v_i,v_i\}, \forall i=1,..,n\}$ \\
+
+Important properties of the interval arithmetics 
+\begin{enumerate}
+\item Inclusion property
+\begin{enumerate}
+	\item arithmetic operations
+		\begin{align*}
+			\circ \in\{+,-,*,/\}: A\subseteq A', B\subseteq B' \implies A\circ B\subseteq A' \circ B'
+		\end{align*}
+	\item elementary standard functions
+		\begin{align*}
+			i \in \{\sin, \cos, \tan, \exp, \log, \sqrt{},..\}:A\subseteq A' \implies f(A)\subseteq f(A')
+		\end{align*}
+	\item also for arbitrary functions which are given with calculation rules (formulas) ($\to$ composition of the basic operations and functions) $\to$ computational graph; \\
+	Input: parameter values $\to$ output: function values \\
+	Graph: (Here comes the graph) \\
+	$\implies$ the inclusion property is through everz computational graph propagandized \\
+	$\implies$ inclusion property $\implies$ guaranteed inclusion of the solution(set). 
+\end{enumerate}
+\item Overestimation of the solution set: occurs mainly as a consequence  of the fact that the same variable   occurs repeatedly in a \todo{?}Ber(?)-graph because everytime through the set based definition of the interval arithmetics, the elements are seen decoupled from one another in a variable interval.
+\begin{enumerate}
+	\item An example: $X-X=[-diam(X),+diam(X)]\to$ strech as much as possible, and replace through O?
+	$\implies$ Recommendation: To keep the number of (?)\todo{?} of each variable in the calculation rule as much as possible. For example, by factoring out common subexpression (example: distributive law).
+	\item further countermeasures: interval subdivision of parameter intervalls and individual evaluation of the individual sub-intervals, to take interval hull of this enclosure
+	\item use of smoothness characteristic of the calculation rule, ie use of derivatives (mind $f'$) and estimation of the value range (?)\todo{(?)}
+\end{enumerate}
+\item Wrapping-effect (in multidimensional, $IR^n$) \\
+An example: $f:R^2 \to R^2$, rotation around the angle $\phi$ \\
+$f(X)=A\phi\cdot X$ with $A=\begin{bmatrix}\cos(\phi) \sin(\phi)\\ -\sin(\phi) \cos(\phi) \end{bmatrix}$ \\
+repeated use: $X_{i+1}:= f(X_i)=A\phi\cdot X_i=A\phi\cdot x_i$ \\
+$=A\phi\cdot A\phi\cdot X_{i-1} = \to = A\phi^{(i+1)}\cdot x_0$ \\
+$=\begin{bmatrix}\cos(\ii \phi) &\sin(\ii \phi)\\ -\sin(\ii \phi) &\cos(\ii \phi) \end{bmatrix} \cdot x_0$ \\
+In $IR: $ square $X_0:=\begin{bmatrix}[-\epsilon, +\epsilon]\\ [-\epsilon, +\epsilon] \end{bmatrix}, \epsilon>0 $ \\
+$X_1=
+\begin{bmatrix}[-\epsilon, +\epsilon]\cdot \cos(\phi) &[-\epsilon, +\epsilon]\cdot \sin(\phi)\\ 
+[-\epsilon, +\epsilon]\cdot (-\sin(\phi))& [-\epsilon, +\epsilon]\cdot \cos(\phi) \end{bmatrix}$ \\
+$=(|\sin(\phi)|+|\cos(\phi)|)\cdot ([-\epsilon,+\epsilon],[-\epsilon,+\epsilon])^T$ \\
+\\
+$X_n= (|\sin(\phi)|+|\cos(\phi)|)^n \cdot X_0$ the diameter grows exponentially!
+\todo{Here comes the graph}
+\end{enumerate}
+\end{itemize}
+
+\subsection*{2.12.19} 
+\begin{itemize}
+\item Extension of the number field $R$ \\
+$\Omega:=\{-\infty, +\infty\}$, $R^*:=R \cup \Omega$ \\
+$IR:=\{[x,y]|x\le y, x,y\in R\}$ \\
+$IR^*:=IR\cup \{(-\infty,y]|y\in R\}\cup \{[x,+\infty)|x\in R\} \cup \{(-\infty, +\infty)\}$, \\
+where \\
+$(-\infty,y]:=\{a\in R|a\le y\}$ \\
+$[x,+\infty):=\{a\in R|a\ge y\}$ \\
+\item extended interval division $X/Y$ with $0\in Y$ \\
+$Y=Y_1\cup \{0\}\cup Y_2$ with $Y_1=[y,0)$ and $Y_2=(0,y]$ \\
+$X/Y:=X/Y_1 \cup X/Y_2 =\{x/y|x\in X, y\i Y_1\} \cup \{x/y| x\in X, y\in Y_2\}$ \\
+\todo{Here the things under $X/Y_1 \cup X/Y_2$ are missing!}
+\begin{align*}
+1/Z=1/Z_1 \cup 1/Z_2\cup \{0\}=[-\frac{1}{4},0)\cup (0,\frac{1}{2}]\cup \{0\}=Y/X
+\end{align*}
+For $0\in Y: $ \\
+\[
+	X/Y=
+	\begin{cases}
+		(-\infty,+\infty) & \text{if } X=0 \vee 0\in X \vee Y=0\\
+		(-\infty, x/y]\cup [x/y,+\infty) & \text{if } X\le 0 \wedge y\le y=0 \\
+		(-\infty, x/y] & \text{if } X\le 0 \nd 0=y< y 
+	\end{cases}
+\]
+Here just the circle above the $X$ is missing in the first case \\
+\[
+	X/Y=
+	\begin{cases}
+		(-\infty,X/Y]\cup[X/Y,+\infty), & \text{if } 0\le X \nd 0\in Y \\
+		(-\infty, x/y], & \text{if } 0\le x \text{ and } y<y=0 \\
+		[x/y,+\infty), & \text{if } 0\le x \text{ and } 0=y<y 
+	\end{cases}
+\]
+Here the circle above $Y$ in the first case is missing \\
+For $0\not \in Y: 1/y=[\frac{1}{y},\frac{1}{y}]$ \\
+For $0\in Y: 1/y=(-\infty,\frac{1}{y}]\cup [\frac{1}{y},+\infty)$\\
+$\frac{1}{1/y}=[\frac{1}{1/y})\cup \{0\}\cup (0,\frac{1}{1/y}]=[y,y]=Y$\\
+\item $W_i(X)\subseteq f(X)$ \\
+Assumption: $f:J\to R, J=[a,b]\subset R, f\in C^1(J)$ \\
+For arbitrary intervals $x\subseteq J$ it holds: \\
+For a $z\in X$ (here a circle above $X$) (eg. $z=x=\mid(X)$)per mean value theorem there is a point $\xi\in X$ $\forall x\in X$ with: \\
+$f(x)=f(z)+f'(\xi)(x-z) \in f(z)+f'(X)(X-z)=:f_m(X)$ \\
+$f_m$ is called a mean value form or centered form. \\
+Note: If $\cup_{k=1}^n X_k=X\subseteq J$ a decomposition of $X$ in part-intervalls , then there are constants $c_1,c_2 \in R_+$ which are only dependant of $f$ and $J$, so that the distance \\
+$d_1:=d(W_f(X), \cup_{k=1}^n f(X_k))\le c_1\cdot max_k (\diam(X_k))$ \\
+while the distance \\
+$d_2:=d(W_f(X),\cup_{k=1}^nf_m(X_k))\le c_2\cdot max_k(\diam^2(X_k))$ \\
+$d_1\implies $ overestimation decreases linearly \\
+$d_2\implies$ overestimation decreases quadratically.
+\item Classic Newton-method:
+$f\in C^1(\xi)$, start point/- approximation $X_0$ \\
+$X_{n+1}=X_n-\frac{f(X_n)}{f^\prime(X_n)}, n=0,1,2,..$ \\
+local linearisatin of the function $f$ at point $(x_0,f(x_0))$ \\
+In general the Newton's method is not convergent. \\
+If it converges (towards a zero of the function, which is a eventually non near the starting point $x_0$ lying point), then the convergence rate is quadratic, i.e. the error is squared in each iteration, i.e. the number of correct points is doubled.
+\item Interval- Newton- method:
+$f\in C^1(J), J=[a,b]\subseteq R$ start-/search interval $X_0=[x_0,x_0]$ \\
+Wanted: Zero(s) of $f$ in $X_0$, i.e. $x^*\in X_0$ with $f(x^*)=0$ \\
+For every $x\in X_0, x\not = x^* \exists \xi \in X_0$ (between $x$ and $x^*$), with: \\
+$f(x^*)-f(x)=f^\prime(\xi)\cdot (x^*-x)$ \\
+$0=f(x^*)=f(x)+f^\prime(\xi)\cdot (x^*-x)$ \\
+$x^*=x-\frac{f(x)}{f^\prime(\xi)} \in x-\frac{f(X)}{f^\prime(X)}$ \\
+\\
+Interval-Newton Operator: \\
+$N(f,x,X):=x-\frac{f(x)}{f'(X)} \implies $ Interval -Newton Iteration $\implies$ Interval nesting \\
+with $x\in X$ (Here signs above both $x$) \\
+\\
+$X_{n+1}:=N(f,x_n,X_n)\cup X_n\le X_n$ \\
+\\
+Note: 
+\begin{enumerate}
+\item Every zero of $f$ in $X$ has to be in $N(f,x,X)$ for $x\in X$ 
+\item One obtains interval nesting through $\cup X_n$ \\
+$\implies$ convergence towards the zero (assumption: $0\notin f'(X)$) 
+\item If $x$ is chosen to be a midpoint of $X$, then the convergence is better than the bisection method \\
+Here comes the graph \\
+One can show that the convergence ( as in the classic Newton-method) is quadratic. ($0 \notin f'(X_0)$). \\
+\\
+3 cases: (occur in the iteration) with $0\not \in f'(X)$
+\begin{enumerate}
+\item $N(f,x,X)\subseteq X \implies \exists!$ zero of $f\in N(f,x,X)\subseteq X\subseteq X_0$ 
+\item The intersection is empty: $N(f,x,X)\cup X= \empty$ \\
+$\implies$ there does not exist a zero in the start interval $X_0$
+\item Otherwise: the iteration has to be continued until case 1 or case 2 occurs. 
+\end{enumerate}
+%\todo{In practice, this results in the typical interval methods result, ie, a fining intervals is numerically impossible and 1) or 2) have not been met $\implies$ outlay: zero possible, but not verified.}
+\end{enumerate}
+\item Transition to floating-point: $IR$ to $IR$
+	\begin{align*}
+		IR:=set{X=[x,x]\mid x\le x, x,x\in R =\text{  floating point (?)}}
+	\end{align*}
+	\todo{missing!}
+\item Interval rounding: $\Diamond : IR \to IR, \Diamond X:=[\nabla x, \triangle x] \supseteq X$ \\
+Properties: \\
+$\Diamond X=X, \forall X\in R$ (R1) \\
+$X<Y \implies \Diamond X\le \Diamond Y$ for $X,Y\in IR$ (R2) \\
+$\Diamond(-X)=-\Diamond X \forall X\in IR$ (R3) \\
+Proof for (R3): \\
+With (R4) with the directed roundings $\triangle(-x)=-\nabla x$ \\
+$\Diamond(-X)=\Diamond (-[x,x])=\Diamond[-x,-x]=[\nabla(-x),\triangle(-x)]=[-\triangle x,-\nabla x]=-[\nabla x,\triangle x]=-\Diamond X$
+\item Properties of the floating point interval arithmetics: \\
+$+,\ast$ are commutative, but not associative! \\
+Example: $\epsilon:=$ \person{Wilkinson}-$\epsilon=b^{1-l}$
+\begin{align*}
+	([-\frac{\epsilon}{2},\frac{\epsilon}{2}]\Diamond[-\frac{\epsilon}{2},\frac{\epsilon}{2}])\Diamond \frac{3}{2}=[-\epsilon,+\epsilon] \Diamond \frac{3}{2} =[\frac{3}{2}-\epsilon, \frac{3}{2}+\epsilon]
+\end{align*}
+\begin{align*}
+	[-\frac{\epsilon}{2},\frac{\epsilon}{2}]\Diamond([-\frac{\epsilon}{2},-\frac{\epsilon}{2}]\Diamond \frac{3}{2})=[-\frac{\epsilon}{2},\frac{\epsilon}{2}]\Diamond [\frac{3}{2}-\epsilon , \frac{3}{2}+\epsilon]= [\frac{3}{2}-2\epsilon, \frac{3}{2}+2\epsilon]
+\end{align*}
+(rounding!)
+\\
+$\exists$ neutral elements $0=[0,0], 1=[1,1]$ with $x+0=0+x=x, 1*x=x*1=x$ \\
+In general there does not exist inverse elements (as already in $IR$) \\
+\\
+Subdistributivity applies almost always, factoring out common subexpressions should be, however, always put in practice by reducing the (?) \\ 
+\todo{I dont understand the next sentence}
+\\
+\item Floating point numbers:  \\
+$\ulp:=b^{e_x-l}$ with $x=(-1)^{S_x}\cdot m_x \cdot b^e_x$ \\
+with $l=$length of the mantissa $=$ number of digits to a base $b$ \\
+succ$(1)=1+ulp(1)=1+\epsilon$, since $1=(-1)^0\cdot 0.100...0\cdot b^1$ and $\epsilon =ulp(1)=b^{1-l}$ \\
+\\
+Sometimes it is more practical to write floating point numbers in another form, namely as a integer multiple of ulp(x): \\
+$x=(-1)^{S_x}\cdot m_x\cdot b^{e_x}=(-1)^{S_x}\cdot M_x\cdot b^{e_x-l}=(-1)^{S_x}\cdot M_x\cdot \ulp(x)$ \\
+
+If $x$ is normalized, then it holds $\frac{1}{b}\le m_x<1$, i.e. $b^{l-1}\le M_x\le b^l-1, M_x\in N$ \\
+\\
+If we involve the sign in the mantissa $M_x$ and additionally allow the zero and the denormalized FPN then it holds: \\
+$x=M_x\cdot \ulp(x)$ with $M_x\in Z, |M_x|\le b^l-1$ \\
+In the following the exponent range is initially to be looked as unlimited) i.e. eventually occurring under or overflow is recognized at the very end, after rounding.
+\item $4$ basic calculation ways in FPN (semimorph (?) computer arithmetic) \todo{something missing for ?}\\
+\\
+\todo{Here comes the graph}
+\\
+Semimorph C-arithmetics: $\circ\in \{+,-,*,/\}, \bigcirc\in \{\square,\triangle, \nabla, ..\}$ Here some signs are missing \\
+Then \\
+$x(?)y:=\bigcirc(x\circ y), \forall x,y\in R$ (floating point (?))\todo{find symbol}
+Additional rounding for general basis $b\in set{2,3,4,..}$ \\
+Here Im just going to write everything, you can just copy-paste it in the brackets as needed
+Defined help-function: $x\in R, x>0 $ \\
+$S_\mu(x):=\nabla x+\frac{\triangle x-\nabla x}{b}\cdot \mu $, \\
+for $x\in R: S_\mu(x):= \nabla x+ulp(x)\cdot \frac{\mu}{b}$ 
+\\
+\todo{Is here something missing?}
+with $\mu\in \{1,2,..,b-1\}$ \\
+for $\mu=0$ ... Here write \\
+for $\mu=b$ ... Here write \\
+,i.e. ... Here write \\
+\[
+\square \mu(x):=
+	\begin{cases}
+		0, & \text{if } x\in [0,x_{min})=[0,b^{e-1})\\
+		\nabla x,  & \text{if } x\in [\nabla x, S_\mu(x)), x>0\\
+		\triangle x,  & \text{if } x\in [s_\mu(x), \triangle x), x>0\\
+		-\square \mu(-x),  & \text{if } x<0 \text{(antisymmetric)}  
+	\end{cases}
+\]
+An example: \\
+$b=10, l=4: \square_(?) (0.5739; 5)=0.5739$ \\
+$\square_(?) (0.5739; 6)=0.5740$ \\
+
+\item 5 steps for a arithmetic floating- point operation:
+\begin{enumerate}
+\item decomposition of the operands  \\
+$x\to (S_x,m_x,e_x)=(M_xl,e_x-l)$ \\
+\item $y\to (S_y,m_y,e_y)=(M_y,e_y-l)$ \\
+where, $M_x, M_y$ is favoured in 2er-complement 
+\item Computation of a (approximated) intermediate result  \\
+$z:=z\circ y \approx x\circ y = z$ \\
+(with accuracy requirement that $Oz=Oz=$ result 
+\item Normalising: \\
+Adjust To eliminate the leading zero digits in the mantissa through $L(left)-Shift_k$ $\to$ (by k positions) and adjust the exponent (substract k) \\
+or: $AR-Shift_1$, if a leading 1 has come as a carry before the mantissa. 
+\item Rounding: \\
+$z=x\circ y=Oz=Z(x\circ y)=O(x\circ y)$ \\
+In rare cases (if the mantissa results in $m_z=1.00...0$) the result of the rounding must be normalized again, i.e. $ARShift_1$ yields $0.100...0$ and increase the exponent $+1$.
+\item composition $(M_z, ex-l)\to (s_z,m_z,l_z)\to z$ \\
+4 basic operations (arithmetically) \\
+\begin{enumerate}
+\item multiplication: $z=x\circ y$ \\
+Case 1: $x=0 \lor y=0 \implies z=0$ \\
+Case 2: $x\not = 0 \land y\not =0: $\\
+$z=(-1)^{S_x+S_y}\cdot m_x\cdot m_y\cdot b^{e_x+e_y} $ \\
+$=(-1)^{S_x+S_y}\cdot M_x\cdot M_y\cdot b^{e_x+e_y-2l} $ \\
+$ =(-1)^{S_x+S_y}\cdot M_x\cdot M_y\cdot ulp(x)\cdot ulp(y) $ \\
+\\
+If $x,y$ are normalized: $B^{2l-2}\le M_x\cdot M_y< b^{2l}$ \\
+$\implies$ $M_x\cdot M_y$ need $2l-1$ or $2l$ digits \\
+Computation of the exact double-long product is necessary, so that one can round always correctly! \\
+\todo{add itemize}
+Case 1: $M_x\cdot M_y=b^{2l-1} (\implies 2l$ digits $)\implies ez:=ex+ey$ \\
+Case 2: $M_x\cdot M_y<b^{2l-1} (\implies 2l-1$ digits $)$, then $m_x\cdot m_y<b^{-1}$ is not normalized $\implies$ $LShift_1$, i.e. $m_z=m_xm_y\cdot b$ (rounding) and $ez:=ex+ey-1$\\
+Note: $AR_Shift =$ arithmetics (?) Shift \todo{? missing}
+\begin{itemize}
+	\item Rounding is always based on the first digit, which doesn not fit in the mantissa anymore (ie $l + 1$ significant digit plus information whether after that something else comes, which is not zero (ie rest from $l + 2$, digits $\not = 0$)
+	\item Round digit = $l+1$ significant digit
+	\item sticky bit $s=V_{i=l+2}m_i =$
+	\begin{align*}
+		s=V_{i=l+2}m_i =
+		\begin{cases}
+			0, & \text{if rest}=0\\
+			1,  & \text{otherwise}
+		\end{cases}
+	\end{align*}
+	$0.m_1m_2 \cdot \cdot \cdot m_l $\\ 
+	\todo{Here idk how to write this.}
+	This holds especially for our roundings :
+	\todo{write the roundings?}
+\end{itemize}
+\item Division: $z=x/y$ with $y\not=0$ [otherwise$\to$ error] \\
+Case 1: $x=0 \implies z=0$ \\
+Case 2: $x\not = 0 (y\not =0):$ \\
+$z=x/y-(-1)^{S_x+S_y}\cdot \frac{m_x}{m_y}\cdot b^{e_x-e_y}=(-1)^{S_z}\cdot \frac{M_x}{M_y}\cdot b^{e_x-e_y}$, with $S_z:=MOD(S_x+S_y,Z)$ and here the approximation is missing 
+\\
+$1/b<m_z^*<b$ with normal $x$ and $y$.\\
+\begin{itemize}
+	\item If $m_x\ge m_y \iff m_z^*\ge 1$, then the result has to be shifted with $AR-Shift_1$ (or to write the (HW?) of the first digits on the "correct" position of the mantissa and to increase it by 1 $\implies$ normalisation is not necessary
+	\item If $m_x<m_y \implies m_z^*<1$, then adjusts the position of the digits 
+\end{itemize}
+\end{enumerate}
+Implementation of the mantissa division manually: \\
+with $x>0, y>0:$ \\
+0. accumulator: $A:=x$ \\
+1. for $i=1,..,l+1$
+\begin{itemize}
+	\item Compute the quotient digit $q_i$ from left to right. In addition to that one has to ... the maximal multiple of $y$ by disconnecting the multiples of, that can be pulled off yet from the accumulator A.
+	\item $A:=A-q_i\cdot y\cdot b^{-i}$ 
+\end{itemize}
+2. Quotient $z=0.q_1q_2...q_l \mid q_{l+1} \to m_z^*$ with rest $R=A_{l+1}$ (last akku-content) \\
+3. Rounding: with rounding digits $r=q_{l+1}$ and sticky bit \\
+\begin{align*}
+	s =
+	\begin{cases}
+		0, & \text{if R}=0\\
+		1,  & \text{if R}\not= 0
+	\end{cases}
+\end{align*}
+
+\item Addition and substraction (4) $z=x+-y$ \\
+substraction: build 2er complement of $y$ and add\\
+assumption: $e_x\ge e_y$ and $x\neq 0$ and $y\neq 0$ (or stricter: $|x|\ge |y|$) \\
+special cases are not going to be considered separately \\
+\\
+$e_x\ge e_y$ if this doesnt hold, then switch $x$ and $y$ \\
+
+\\
+Mantissa obtain here also the sign (2er complement/ $b-$complement konchierung?) \\
+- exact result: $z=x+y$\\
+- intermediate result: $z=z+y$ (enough for correct rounding, so that the floating point result: $z:=O(z)=O(z)$ ...? \\
+\\
+General assumption $x\not=0, y\not=0, |x|>|y|$ \\
+Algorithm with long accumulator: with $(2l+1)$ digits (to a base $b$) and $1$ carry-out-bit. (Here comes the drawing) \\
+\\
+Case 1: Exponent difference $d:=e_x-e_y\ge l+2$ \\
+$b=10, l=6$ \\
+\todo{DRAWING}
+\\
+Rounding: \\
+a) $\square\mu (\mu\in \{1,..,b-1\})$ + drawing \\
+b) the signs, $m_z=b^{-(l+2)}\cdot (b^{l+1}\cdot m_x+sign(y)$, where 
+
+\begin{align*}
+	sign(y) =
+	\begin{cases}
+		1, & \text{if } y>0\\
+		0,  & \text{if} y=0\\
+		-1,  & \text{if} y<0
+	\end{cases}
+\end{align*}
+$z=x+b^{-2}\cdot \ulp(x)\cdot sign(y)$ \\
+rounding yields $\pred(x)$ or $x$ or $\succ(x)$\\
+
+\\
+Case 2: $d=e_x-e_y=l+1$ \\
+\todo{DRAWING} \\
+\\
+Rounding: $\nabla$, $\square \mu (\mu=6,..,10)$, result + drawing \\
+$\square, \square_{IEEE}, \triangle, \square\mu(\mu=0,..,5)$, result + drawing \\ 
+b) \todo{DRAWING} \\
+Rounding: $\square, \square_{IEEE}, \nabla, \square\mu(\mu=5,..,10), \triangle, \square\mu (\mu=0,..,4)$, result + drawing \\
+\\
+$\implies$ Idea: short accumulator with $1$ bit $+l z_i+1\cdot z_i+1\cdot z_i+1$bit \\
+\\ here the things under the line are missing \\
+$\implies$ $l+2$ digits $+2$ bit \\
+(for $b=2$ i.e. $l+4$ bit) \\
+\end{enumerate}
+\end{itemize}
+
