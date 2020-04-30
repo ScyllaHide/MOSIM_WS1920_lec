@@ -1,0 +1,22 @@
+% !TeX spellcheck = en_US
+  \begin{landscape}
+  	\newcolumntype{Y}{>{\centering\arraybackslash}X} % centering for X-cols
+%    \thispagestyle{empty} % probably to not use the predefined page style.
+    \begin{tabularx}{\linewidth}{|c|c|Y|c|Y|Y|} %{\textwidth}{@{}llYlYl@{}} this part was for centering a few cols, but wasnt working
+      \hline
+      method & $n$ & weights & $\sum$ & error $E$ & degree of accuracy \\
+      \hline
+      Trapez & 1 & 1,1 & 2 & $-1/12 h_1^3 f''(\xi)$ & 1\\
+      \person{Simpson} (\person{Kepler}) & 2 & 1,4,1 & 6 & $-1/30 h_3^5 f^(4)(\xi)$ & 3\\
+      3/8 rule & 3 & 1,3,3,1 & 8 & $-1/80 h_3^5 f^(4)(\xi)$ & 3\\
+      \person{Milne} & 4 & 7,32,12,32,7 & 90 & $-8/945 h_4^7 f^(6)(\xi)$ & 5\\
+      \person{Milne} & 5 & 19,75,51,51,75,19 & 288 & $-275/12096 h_5^7 f^(6)(\xi)$ & 5\\
+      \person{Weedle} & 6 & 41,216,27,27,216,41 & 288 & $-9/1400 h_5^9 f^(8)(\xi)$ & 7\\ \hline
+    \end{tabularx}
+	\begin{*remark}
+		For $n \ge 8$ we get negative weights, numerical instability (loss of significance). The Newton-Cotes formulas will be used in general with orders $n=1,2$ (\person{Simpson}!) or order 4. So we use also \emph{summed variants} (split interval and use different orders). Open NCF use midpoints with sub intervals (von $[a,b]$) $\to$ $n$ base points.
+	\end{*remark}
+	\begin{*example}[\person{Runge}]
+		\input{tikz/runge} % tikz picture does compile very long!
+	\end{*example}
+  \end{landscape}

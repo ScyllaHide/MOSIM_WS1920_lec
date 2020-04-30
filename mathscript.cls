@@ -96,6 +96,7 @@
 \RequirePackage[title,titletoc]{appendix}
 
 \RequirePackage{environ}
+\usepackage{pdflscape}						 %landscape
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Math related packages
