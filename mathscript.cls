@@ -9,6 +9,7 @@
 \RequirePackage{calc}
 \RequirePackage{xstring}
 \RequirePackage{xkeyval}
+\RequirePackage{todonotes}						% add todo notes
 
 %possible values: firstnumber, firstname
 \def\theoremheader@order@val{firstnumber}
@@ -121,9 +122,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Graphics-related packages
-\RequirePackage[table,dvipsnames]{xcolor}
-\RequirePackage{graphicx}
-\RequirePackage{tcolorbox}
+%\RequirePackage[table,dvipsnames]{xcolor}
+%\RequirePackage{graphicx}
+%\RequirePackage{tcolorbox}
 
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.10}
@@ -358,6 +359,13 @@
 	skipabove=5pt,%
 	innerleftmargin=10pt,%
 ]{*remark}{\hspace*{-10pt}$\blacktriangleright$\hspace*{\dimexpr 10pt - \blacktrianglewidth\relax}Bemerkung}
+
+\newmdtheoremenv[%
+hidealllines=true,%
+frametitlefont=\normalfont\bfseries\color{black},%
+skipabove=5pt,%
+innerleftmargin=10pt,%
+]{*notation}{\hspace*{-10pt}$\blacktriangleright$\hspace*{\dimexpr 10pt - \blacktrianglewidth\relax}Notation}
 
 \newmdtheoremenv[%
 	hidealllines=true,%
